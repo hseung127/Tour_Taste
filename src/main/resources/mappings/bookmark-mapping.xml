@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappings.bookmark-mapping">
+
+	<!-- 메인페이지 관리자 추천 관광지를 로그인 한 id의 즐겨찾기에 추가(이미 추가되어있으면 추가안함)-->
+	<insert id="insertM1tBookmark" parameterType="bookmark" >
+		INSERT INTO bookmark(bseq, id, m1tseq) 
+		    SELECT bookmark_seq.nextval,#{id},#{m1tseq} FROM DUAL
+		    WHERE NOT EXISTS (SELECT ID, m1tseq
+		                         FROM bookmark
+		                       WHERE m1tseq = #{m1tseq} AND id = #{id})
+	</insert>
+
+
+	<!-- 메인페이지 관리자 추천 맛집 즐겨찾기에 추가-->
+	<insert id="insertM1rBookmark" parameterType="bookmark" >
+		INSERT INTO bookmark(bseq, id, m1rseq) 
+		    SELECT bookmark_seq.nextval,#{id},#{m1rseq} FROM DUAL
+		    WHERE NOT EXISTS (SELECT ID, m1rseq
+		                         FROM bookmark
+		                       WHERE m1rseq = #{m1rseq} AND id = #{id})
+	</insert>
+	
+	
+	<!-- 메인페이지 회원 추천 맛집 즐겨찾기에 추가-->
+	<insert id="insertM0rBookmark" parameterType="bookmark" >
+		INSERT INTO bookmark(bseq, id, m0rseq) 
+		    SELECT bookmark_seq.nextval,#{id},#{m0rseq} FROM DUAL
+		    WHERE NOT EXISTS (SELECT ID, m0rseq
+		                         FROM bookmark
+		                       WHERE m0rseq = #{m0rseq} AND id = #{id})
+	</insert>
+	
+	
+	<!-- 메인페이지 m1tseq별 즐겨찾기 개수 가져오기 -->
+	<select id="countM1tBookmark"  resultType="bookmark">
+		SELECT NVL(COUNT(m1tseq),0) AS m1tCount 
+		    FROM bookmark RIGHT OUTER JOIN DUAL
+            ON m1tseq = #{m1tseq}
+		    GROUP BY m1tseq
+		    ORDER BY m1tCount DESC
+	</select>
+	
+	<!-- 메인페이지 m1rseq별 즐겨찾기 개수 가져오기 -->
+	<select id="countM1rBookmark"  resultType="bookmark">
+		SELECT NVL(COUNT(m1rseq),0) AS m1rCount 
+		    FROM bookmark RIGHT OUTER JOIN DUAL
+            ON m1rseq = #{m1rseq}
+		    GROUP BY m1rseq
+		    ORDER BY m1rCount DESC
+	</select>
+	
+	<!-- 메인페이지 m0rseq별 즐겨찾기 개수 가져오기 -->
+	<select id="countM0rBookmark"  resultType="bookmark">
+		SELECT NVL(COUNT(m0rseq),0) AS m0rCount
+		    FROM bookmark RIGHT OUTER JOIN DUAL
+            ON m0rseq = #{m0rseq}
+		    GROUP BY m0rseq
+		    ORDER BY m0rCount DESC
+	</select>
+	
+	
+	
+	<!-- 메인페이지 id의 m1rseq 북마크 여부 -->
+	<select id="M1rBookmarkyn" resultType="bookmark">
+		SELECT NVL(COUNT(m1rseq),0) AS m1rBookmarkyn 
+		    FROM bookmark
+		    where m1rseq = #{m1rseq} AND id = #{id}
+    </select>
+	
+	
+	
+</mapper>

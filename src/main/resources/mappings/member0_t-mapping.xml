@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappings.member0_t-mapping">
+
+	<!-- 회원 여행지 검색 3개 -->
+	<select id="getSearchMember0_tList" parameterType="String" resultType="member0_t">
+		<![CDATA[
+		SELECT m0tseq,subject,image1,content
+		    FROM (SELECT row_number() OVER(ORDER BY regdate) row_num,m0tseq,subject,image1,content
+	            FROM member0_tboard
+	            WHERE subject LIKE '%'||#{key}||'%' 
+	            OR content LIKE '%'||#{key}||'%'
+	            ORDER BY regdate DESC)
+			WHERE row_num <=3
+		]]>
+	</select>
+	
+	<!-- 회원 여행지 검색 총 개수 -->
+	<select id="countSearchMember0_tList" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		    FROM (SELECT row_number() OVER(ORDER BY regdate) row_num,m0tseq,subject,image1,content
+	            FROM member0_tboard
+	            WHERE subject LIKE '%'||#{key}||'%' 
+	            OR content LIKE '%'||#{key}||'%'
+	            ORDER BY regdate DESC)
+	</select>
+
+
+	<!-- 페이지별 여행지 검색 조회 -->
+	<select id="listWithPaging" resultType="member0_t">
+	<![CDATA[
+		SELECT m0tseq,subject,image1,content
+	      FROM (SELECT row_number() OVER(ORDER BY regdate) row_num,m0tseq,subject,image1,content
+		      FROM member0_tboard
+		      WHERE subject LIKE '%'||#{key}||'%' 
+		      OR content LIKE '%'||#{key}||'%'
+		      ORDER BY regdate DESC)
+	      WHERE row_num <= #{criteria.pageNum} * #{criteria.rowsPerPage} 
+	      	AND row_num > (#{criteria.pageNum}-1) * #{criteria.rowsPerPage}
+    ]]>
+	</select>
+	
+	<!-- 글 작성 -->
+	<insert id="insertMember0_t">
+		INSERT INTO member0_tboard(m0tseq, subject, name, area, content)
+		VALUES(member0_tboard_seq.NEXTVAL, #{subject}, #{name}, #{area}, #{content})
+	</insert>
+	
+	<!-- 목록 갯수 -->
+	<select id="countMember0_tList" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM member0_tboard
+		<if test = "area != null and area != '전체'">  		 
+	  		 WHERE AREA = #{area}
+  		</if>
+	</select>
+	
+	<!-- 페이지별 목록 -->
+	<select id="getM0_tListPaging" parameterType="hashMap" resultType="member0_t">		
+		SELECT m0tseq, subject, name, regdate
+		  FROM(SELECT row_number() over(ORDER BY m0tseq DESC) rn, m0tseq, subject, name, regdate
+		  		 FROM member0_tboard
+			<if test = "vo.area != null and vo.area != '전체'">  		 
+		  		 WHERE AREA = #{vo.area}
+	  		</if>
+	  		)
+  		 <![CDATA[	
+		WHERE rn <= #{criteria.pageNum} * #{criteria.rowsPerPage} 
+		  AND rn > (#{criteria.pageNum}-1) * #{criteria.rowsPerPage}
+		]]>
+	</select> 
+	
+	<!-- 상세 조회 -->
+	<select id="getM0_tDetail" resultType="member0_t">
+		SELECT * FROM member0_tboard WHERE m0tseq=#{m0tseq}
+	</select>
+</mapper>
