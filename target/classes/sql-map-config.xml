@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.green.tnt.dto.BookmarkVO" alias="bookmark" />
+		<typeAlias type="com.green.tnt.dto.MemberVO" alias="member" />
+		<typeAlias type="com.green.tnt.dto.NewsVO" alias="news"/>
+		<typeAlias type="com.green.tnt.dto.EventVO" alias="event"/>
+		<typeAlias type="com.green.tnt.dto.SeasonVO" alias="season"/>
+		<typeAlias type="com.green.tnt.dto.Member1_tVO" alias="member1_t"/>
+		<typeAlias type="com.green.tnt.dto.Member1_rVO" alias="member1_r"/>
+		<typeAlias type="com.green.tnt.dto.Member0_tVO" alias="member0_t"/>
+		<typeAlias type="com.green.tnt.dto.Member0_rVO" alias="member0_r"/>
+		<typeAlias type="com.green.tnt.dto.CommentsVO" alias="comments"/>
+		
+		<!--  -->
+		
+		<typeAlias type="com.green.tnt.dto.NewsboardVO" alias="newsboard"/>
+		<typeAlias type="com.green.tnt.dto.EventboardVO" alias="eventboard"/>
+		<typeAlias type="com.green.tnt.dto.SeasonboardVO" alias="seasonboard"/>
+		<typeAlias type="com.green.tnt.dto.Member1_tboardVO" alias="member1_tboard"/>
+		<typeAlias type="com.green.tnt.dto.Member1_rboardVO" alias="member1_rboard"/>
+		<typeAlias type="com.green.tnt.dto.Member0_tboardVO" alias="member0_tboard"/>
+		<typeAlias type="com.green.tnt.dto.Member0_rboardVO" alias="member0_rboard"/>
+	</typeAliases>
+	
+	<!--  SQL 매핑파일 등록 -->
+	<mappers>
+		<mapper resource="mappings/member-mapping.xml" />
+		<mapper resource="mappings/news-mapping.xml"/>
+		<mapper resource="mappings/event-mapping.xml"/>
+		<mapper resource="mappings/season-mapping.xml"/>
+		<mapper resource="mappings/member1_t-mapping.xml"/>
+		<mapper resource="mappings/member1_r-mapping.xml"/>
+		<mapper resource="mappings/member0_t-mapping.xml"/>
+		<mapper resource="mappings/member0_r-mapping.xml"/>
+		<mapper resource="mappings/bookmark-mapping.xml"/>
+		
+		
+		<!--  -->
+		<mapper resource="mappings/member-mapping.xml" />
+		<mapper resource="mappings/admin-mapping.xml" />
+		<mapper resource="mappings/newsboard-mapping.xml" />
+		<mapper resource="mappings/member0_rboard-mapping.xml" />
+		<mapper resource="mappings/member0_tboard-mapping.xml" />
+		<mapper resource="mappings/member1_rboard-mapping.xml" />
+		<mapper resource="mappings/member1_tboard-mapping.xml" />
+		<mapper resource="mappings/seasonboard-mapping.xml" />
+		<mapper resource="mappings/eventboard-mapping.xml" />
+		<mapper resource="mappings/comments-mapping.xml" />
+	</mappers>
+	
+
+</configuration>
+
+
+
+
+
+
+
+
+
+

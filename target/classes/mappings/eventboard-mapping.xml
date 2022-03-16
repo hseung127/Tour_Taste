@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappings.eventboard-mapping">
+
+<!--  상세 조회 -->
+	<select id="getEventboard" resultType="eventboard">
+		SELECT * FROM eventboard
+		WHERE eseq=#{eseq}
+	</select>
+
+<!-- 조회한 총  갯수 -->
+	<select id="countEventboardList" parameterType="String"
+		resultType="int">
+		SELECT COUNT(*) FROM eventboard
+		WHERE name LIKE '%'||#{subject}||'%'
+	</select>
+
+	<!--  목록 조회 -->
+	<select id="listEventboard" parameterType="String"
+		resultType="eventboard">
+		SELECT eseq, subject, name, regdate
+		FROM eventboard
+		WHERE subject LIKE '%'||#{subject}||'%'
+		ORDER BY eseq DESC
+	</select>
+
+	<!-- 페이지별 목록 조회 -->
+	<select id="listWithPaging" parameterType="hashMap"
+		resultType="eventboard">
+	<![CDATA[
+	SELECT eseq, subject, name, regdate
+	  FROM (SELECT row_number() over(ORDER BY eseq DESC) rn, eseq, subject, name,regdate
+		  FROM eventboard
+		 WHERE subject LIKE '%'||#{subject}||'%')	 
+	 WHERE rn <=#{criteria.pageNum} * #{criteria.rowsPerPage} 
+	   AND rn> (#{criteria.pageNum}-1) * #{criteria.rowsPerPage}]]>
+	</select>
+	<!-- 추가 -->
+	<insert id="insertEventboard">
+		INSERT INTO eventboard(eseq,subject, content, image1, image2, image3, image4, image5)
+		VALUES(event_seq.NEXTVAL,#{subject}, #{content}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5})
+	</insert>
+
+	<!-- 정보 수정 -->
+	<update id="updateEventboard">
+		UPDATE eventboard
+		SET subject=#{subject}, content=#{content}, image1=#{image1},image2=#{image2},image3=#{image3},image4=#{image4},image5=#{image5}
+		WHERE eseq=#{eseq}
+	</update>
+	<!-- 삭제 -->
+	<delete id="deleteEventboard">
+		delete
+			eventboard
+		where eseq=#{eseq}
+	</delete>
+</mapper>

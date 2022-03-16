@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappings.member0_rboard-mapping">
+
+<!--  상세 조회 -->
+	<select id="getMember0_rboard" resultType="member0_rboard">
+		SELECT * FROM member0_rboard
+		WHERE m0rseq=#{m0rseq}
+	</select>
+
+<!-- 조회한 총  갯수 -->
+	<select id="countMember0_rboardList" parameterType="String"
+		resultType="int">
+		SELECT COUNT(*) FROM member0_rboard
+		WHERE name LIKE '%'||#{subject}||'%'
+	</select>
+
+	<!-- 목록 조회 -->
+	<select id="listMember0_rboard" parameterType="String"
+		resultType="member0_rboard">
+		SELECT m0rseq, subject, name, regdate
+		FROM Member0_rboard
+		WHERE subject LIKE '%'||#{subject}||'%'
+		ORDER BY m0rseq DESC
+	</select>
+
+	<!-- 페이지별 목록 조회 -->
+	<select id="listWithPaging" resultType="member0_rboard">
+	<![CDATA[
+	SELECT m0rseq, subject, name, regdate
+	  FROM (SELECT row_number() over(ORDER BY m0rseq DESC) rn, m0rseq, subject, name,regdate
+		  FROM member0_rboard
+		 WHERE subject LIKE '%'||#{subject}||'%')	 
+	 WHERE rn <=#{criteria.pageNum} * #{criteria.rowsPerPage} 
+	   AND rn> (#{criteria.pageNum}-1) * #{criteria.rowsPerPage}]]>
+	</select>
+
+	<!-- 삭제 -->
+	<delete id="deletemember0_rboard">
+		delete
+			member0_rboard
+		where m0rseq=#{m0rseq}
+	</delete>
+</mapper>

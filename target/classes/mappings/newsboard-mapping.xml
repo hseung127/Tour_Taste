@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappings.newsboard-mapping">
+	<!-- 상세 조회 -->
+	<select id="getNewsboard" resultType="newsboard">
+		SELECT * FROM newsboard
+		WHERE nseq=#{nseq}
+	</select>
+
+
+	<!-- 조회한 총  갯수 -->
+	<select id="countNewsboardList" resultType="int">
+	
+		SELECT COUNT(*) FROM newsboard
+		
+		<if test="keyword != null">
+		
+            where subject like '%'||#{keyword}||'%'
+            
+        </if>
+        
+	</select>
+
+	<!-- 목록 조회 -->
+	<select id="listNewsboard" parameterType="String"
+		resultType="newsboard">
+		SELECT nseq, subject, name, regdate,hit
+		FROM newsboard
+		WHERE subject LIKE '%'||#{subject}||'%'
+		ORDER BY nseq DESC
+	</select>
+
+	<!-- 페이지별 목록 조회 -->
+	<select id="listWithPaging" parameterType="hashMap"
+		resultType="newsboard">
+	<![CDATA[
+	SELECT nseq, subject, name, regdate,content,hit
+	  FROM (SELECT row_number() over(ORDER BY nseq DESC)as rn, nseq, subject, name,regdate,content,hit
+		  FROM newsboard	 
+		  	WHERE 
+		  	 ]]>         
+            <if test="keyword != null">
+                subject like '%'||#{keyword}||'%' and
+            </if>
+            
+    <![CDATA[        
+		  		rownum <=#{pageNum} * #{rowsPerPage}
+		  	)
+		  	where rn > (#{pageNum}-1) * #{rowsPerPage}
+		  ]]>
+	</select>
+	<!-- 게시판 조회수 -->
+	<update id="newsboardHit" parameterType="newsboard">
+
+		UPDATE newsboard SET
+		hit = hit+1
+		where nseq = #{nseq}
+
+	</update>
+	<!-- 추가 -->
+	<insert id="insertNewsboard">
+		INSERT INTO newsboard(nseq,subject, content, image)
+		VALUES(news_seq.NEXTVAL,#{subject}, #{content}, #{image})
+	</insert>
+
+	<!-- 정보 수정 -->
+	<update id="updateNewsboard">
+		UPDATE newsboard
+		SET subject=#{subject}, content=#{content}, image=#{image}
+		WHERE nseq=#{nseq}
+	</update>
+	<!-- 삭제 -->
+	<delete id="deleteNewsboard" parameterType="int">
+		delete from
+			newsboard
+		where nseq=#{nseq}
+	</delete>
+	
+	
+
+
+
+</mapper>

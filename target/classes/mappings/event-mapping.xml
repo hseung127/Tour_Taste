@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappings.event-mapping">
+	<select id="getHomeEventList" resultType="event">
+		SELECT * FROM home_event_view
+	</select>
+	
+	
+	<select id="getBigHomeEventList" resultType="event">
+		SELECT * FROM big_home_event_view
+	</select>
+	
+	
+	
+	<!-- 조회한 총 이벤트의 갯수 -->
+	<select id="countEventList" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM eventboard
+	</select>
+	
+	
+	
+	<!-- 페이지별 상품목록 조회 -->
+	<select id="listWithPaging" parameterType="hashMap" resultType="event">
+	<![CDATA[
+	SELECT eseq, subject, TO_CHAR(start_date,'YYYY.MM.DD')AS start_date, TO_CHAR(end_date,'YYYY.MM.DD')AS end_date, image1, regdate
+      FROM  (SELECT row_number() over(ORDER BY name) row_num, eseq, subject, start_date, end_date, image1, regdate
+		       FROM eventboard
+		       ORDER BY regdate DESC)
+     WHERE row_num <= #{criteria.pageNum} * #{criteria.rowsPerPage} 
+       AND row_num > (#{criteria.pageNum}-1) * #{criteria.rowsPerPage}
+    ]]>
+	</select>
+	
+	
+	
+	<select id="selectEventDetail" resultType="event">
+		SELECT * FROM event_detail_view
+    		WHERE eseq = #{eseq}
+	</select>
+	
+	
+	
+	<update id="eventViewCount">
+		UPDATE
+			eventboard
+		SET
+			view_count = view_count + 1
+		WHERE
+			eseq = #{eseq}
+	</update>
+	
+</mapper>
