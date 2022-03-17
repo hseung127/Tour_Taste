@@ -54,5 +54,35 @@ public class BookmarkServiceImpl implements BookmarkService {
 		return bDao.M1rBookmarkyn(vo);
 	}
 
+	@Override
+	public void insertM1tBM(BookmarkVO vo) {
+		
+		bDao.insertM1tBM(vo);
+	}
+
+	@Override
+	public void insertM1rBM(BookmarkVO vo) {
+
+		bDao.insertM1rBM(vo);
+	}
+
+	@Override
+	public void insertM0tBM(BookmarkVO vo) {
+		
+		bDao.insertM0tBM(vo);
+	}
+
+	@Override
+	public void insertM0rBM(BookmarkVO vo) {
+		
+		bDao.insertM0rBM(vo);
+	}
+
+	@Override
+	public void deleteBM(BookmarkVO vo) {
+		
+		bDao.deleteBM(vo);
+	}
+
 
 }

@@ -18,6 +18,10 @@ public interface Member0_tService {
 	
 	public void insertMember0_t(Member0_tVO vo);
 	
+	public void updateMember0_t(Member0_tVO vo);
+	
+	public void deleteMember0_t(Member0_tVO vo);
+	
 	public int countMember0_tList(Member0_tVO vo);
 	
 	public List<Member0_tVO> getM0_tListPaging(Criteria criteria, Member0_tVO vo);

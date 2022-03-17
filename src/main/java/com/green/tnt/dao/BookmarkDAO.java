@@ -20,52 +20,78 @@ public class BookmarkDAO {
 	
 	@Autowired
 	private SqlSessionTemplate mybatis;
-	// ¸ŞÀÎÆäÀÌÁö °ü¸®ÀÚ ÃßÃµ °ü±¤Áö Áñ°ÜÃ£±â¿¡ Ãß°¡
+	// ë©”ì¸í˜ì´ì§€ ê´€ë¦¬ì ì¶”ì²œ ê´€ê´‘ì§€ ì¦ê²¨ì°¾ê¸°ì— ì¶”ê°€
 		public void insertM1tBookmark(BookmarkVO vo) {
 		
 			mybatis.insert("mappings.bookmark-mapping.insertM1tBookmark", vo);
 		}
 		
 	
-	// ¸ŞÀÎÆäÀÌÁö °ü¸®ÀÚ ÃßÃµ ¸ÀÁı Áñ°ÜÃ£±â¿¡ Ãß°¡
+	// ë©”ì¸í˜ì´ì§€ ê´€ë¦¬ì ì¶”ì²œ ë§›ì§‘ ì¦ê²¨ì°¾ê¸°ì— ì¶”ê°€
 	public void insertM1rBookmark(BookmarkVO vo) {
 	
 		mybatis.insert("mappings.bookmark-mapping.insertM1rBookmark", vo);
 	}
 	
 	
-	// ¸ŞÀÎÆäÀÌÁö È¸¿ø ÃßÃµ ¸ÀÁı Áñ°ÜÃ£±â¿¡ Ãß°¡
+	// ë©”ì¸í˜ì´ì§€ íšŒì› ì¶”ì²œ ë§›ì§‘ ì¦ê²¨ì°¾ê¸°ì— ì¶”ê°€
 	public void insertM0rBookmark(BookmarkVO vo) {
 	
 		mybatis.insert("mappings.bookmark-mapping.insertM0rBookmark", vo);
 	}
 	
 	
-	// m1tseqº° Áñ°ÜÃ£±â °³¼ö
+	// m1tseqë³„ ì¦ê²¨ì°¾ê¸° ê°œìˆ˜
 	public List<BookmarkVO> getCountM1tBookmark(BookmarkVO vo) {	
 		return mybatis.selectList("mappings.bookmark-mapping.countM1tBookmark",vo);
 	}
 	
-	// m1rseqº° Áñ°ÜÃ£±â °³¼ö
+	// m1rseqë³„ ì¦ê²¨ì°¾ê¸° ê°œìˆ˜
 	public List<BookmarkVO> getCountM1rBookmark(BookmarkVO vo) {	
 		return mybatis.selectList("mappings.bookmark-mapping.countM1rBookmark",vo);
 	}
 		
-	// m1trseqº° Áñ°ÜÃ£±â °³¼ö
+	// m1trseqë³„ ì¦ê²¨ì°¾ê¸° ê°œìˆ˜
 	public List<BookmarkVO> getCountM0rBookmark(BookmarkVO vo) {	
 		return mybatis.selectList("mappings.bookmark-mapping.countM0rBookmark",vo);
 	}
 	
 	
-	// idº° M1rÁñ°ÜÃ£±â ¿©ºÎ
+	// idë³„ M1rì¦ê²¨ì°¾ê¸° ì—¬ë¶€
 	public List<BookmarkVO> M1rBookmarkyn(BookmarkVO vo) {	
 		//HashMap<String, Object> map = new HashMap<>();
 		//map.put("bvo", bvo);
-		//System.out.println("dao¿¡¼­"+map);
+		//System.out.println("daoì—ì„œ"+map);
 		//map.put("BookmarkVO", vo);
 		//map.put("key", key);
 		return mybatis.selectList("mappings.bookmark-mapping.M1rBookmarkyn",vo);
 	}
+	
+	public void insertM1tBM(BookmarkVO vo) {
+		
+		mybatis.insert("mappings.bookmark-mapping.insertM1tBM", vo);
+	}
+
+	public void insertM1rBM(BookmarkVO vo) {
+		
+		mybatis.insert("mappings.bookmark-mapping.insertM1rBM", vo);
+	}
+	
+	public void insertM0tBM(BookmarkVO vo) {
+		
+		mybatis.insert("mappings.bookmark-mapping.insertM0tBM", vo);
+	}
+	
+	public void insertM0rBM(BookmarkVO vo) {
+		
+		mybatis.insert("mappings.bookmark-mapping.insertM0rBM", vo);
+	}
+	
+	public void deleteBM(BookmarkVO vo) {
+		
+		mybatis.insert("mappings.bookmark-mapping.deleteBM", vo);
+	}
+	
 	
 	
 

@@ -24,5 +24,5 @@ public class Member0_rVO {
 	private String name;
 	private Timestamp regdate;
 
-	private String staravg; //¸ŞÀÎÆäÀÌÁö¿ë º°Á¡ Æò±Õ 
+	private String staravg; //ë©”ì¸í˜ì´ì§€ìš© ë³„ì  í‰ê·  
 }

@@ -51,6 +51,17 @@ public class Member0_rServiceImpl implements Member0_rService {
 		m0rDao.insertMember0_r(vo);
 	}
 
+	@Override
+	public void updateMember0_r(Member0_rVO vo) {
+
+		m0rDao.updateMember0_r(vo);
+	}
+
+	@Override
+	public void deleteMember0_r(Member0_rVO vo) {
+		
+		m0rDao.deleteMember0_r(vo);
+	}
 
 	@Override
 	public int countMember0_rList(Member0_rVO vo) {
