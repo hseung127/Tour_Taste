@@ -42,9 +42,21 @@
 	
 	<!-- 글 작성 -->
 	<insert id="insertMember0_t">
-		INSERT INTO member0_tboard(m0tseq, subject, name, area, content)
-		VALUES(member0_tboard_seq.NEXTVAL, #{subject}, #{name}, #{area}, #{content})
+		INSERT INTO member0_tboard(m0tseq, subject, id, name, area, content)
+		VALUES(member0_tboard_seq.NEXTVAL, #{subject}, #{id}, #{name}, #{area}, #{content})
 	</insert>
+	
+	<!-- 글 수정 -->
+	<update id="updateMember0_t">
+		UPDATE member0_tboard
+			SET subject=#{subject}, area=#{area}, content=#{content}
+		WHERE m0tseq=#{m0tseq}
+	</update>
+	
+	<!-- 글 삭제 -->
+	<delete id="deleteMember0_t">
+		DELETE member0_tboard WHERE m0tseq=#{m0tseq}
+	</delete>
 	
 	<!-- 목록 갯수 -->
 	<select id="countMember0_tList" parameterType="String" resultType="int">

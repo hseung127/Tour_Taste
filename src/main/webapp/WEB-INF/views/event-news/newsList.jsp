@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
- 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
  
  
 <div class="wrap_contView marTnon clfix">
@@ -30,12 +30,12 @@
 		            <li class="bdr_nor">
 			            <div class="area_txt">    
 				                    
-				            <a class="news-list-tit" href="#">	
+				            <a class="news-list-tit" href="news_detail?nseq=${newsVO.nseq}">	
 				            	<strong class="tit">${newsVO.subject} </strong> 
 				           	</a>    
 				       
 				            <div class="date">        
-				            	<span>${newsVO.regdate}</span>    
+				            	<span><fmt:formatDate value="${newsVO.regdate}" pattern="yyyy.MM.dd"/></span>
 				            </div>
 				            
 			            </div>

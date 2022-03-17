@@ -41,12 +41,9 @@
 	
 	
 	<update id="eventViewCount">
-		UPDATE
-			eventboard
-		SET
-			view_count = view_count + 1
-		WHERE
-			eseq = #{eseq}
+		UPDATE eventboard
+			SET view_count = view_count + 1
+		WHERE eseq = #{eseq}
 	</update>
 	
 </mapper>

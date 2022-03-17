@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="js/event.js"></script>
     <script type="text/javascript" src="js/search.js"></script>
     <script type="text/javascript" src="js/bookmark.js"></script>
+    <script type="text/javascript" src="js/event-slide.js"></script>
 
 	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <!-- Stylesheets-->	
@@ -119,7 +120,7 @@
                       </li>
                       <li class="rd-nav-item"><a class="rd-nav-link" href="area">지역</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="event-news">소식&이벤트</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="event-news?tabNum=1">이벤트&소식</a>
                       </li>
                     </ul>
                 

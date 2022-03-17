@@ -10,8 +10,7 @@
 		                         FROM bookmark
 		                       WHERE m1tseq = #{m1tseq} AND id = #{id})
 	</insert>
-
-
+	
 	<!-- 메인페이지 관리자 추천 맛집 즐겨찾기에 추가-->
 	<insert id="insertM1rBookmark" parameterType="bookmark" >
 		INSERT INTO bookmark(bseq, id, m1rseq) 
@@ -68,6 +67,30 @@
 		    where m1rseq = #{m1rseq} AND id = #{id}
     </select>
 	
+	<insert id="insertM1tBM">
+		INSERT INTO bookmark(bseq, id, m1tseq)
+		VALUES(bookmark_seq.nextval, #{id}, #{m1tseq})
+	</insert>
+	
+	<insert id="insertM1rBM">
+		INSERT INTO bookmark(bseq, id, m1rseq)
+		VALUES(bookmark_seq.nextval, #{id}, #{m1rseq})
+	</insert>
+	
+	
+	<insert id="insertM0tBM">
+		INSERT INTO bookmark(bseq, id, m0tseq)
+		VALUES(bookmark_seq.nextval, #{id}, #{m0tseq})
+	</insert>
+	
+	<insert id="insertM0rBM">
+		INSERT INTO bookmark(bseq, id, m0rseq)
+		VALUES(bookmark_seq.nextval, #{id}, #{m0rseq})
+	</insert>
+	
+	<delete id="deleteBM">
+		DELETE bookmark WHERE bseq=#{bseq}
+	</delete>
 	
 	
 </mapper>

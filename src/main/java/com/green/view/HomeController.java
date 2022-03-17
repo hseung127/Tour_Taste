@@ -58,59 +58,55 @@ public class HomeController {
 		
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
 		
-		// �����׸� ���
+		// 메인페이지 시즌테마
 		List<SeasonVO> homeSeasonList =  seasonService.getHomeSeasonList();
 		model.addAttribute("homeSeasonList", homeSeasonList);
 
 		//System.out.println(homeSeasonList.toString());
 
-		// ������ ������ ��õ  
+		// 메인페이지 관리자 추천 관광지 
 		List<Member1_tVO> homeMember1_tList =  m1tService.getHomeMember1_tList();
 		model.addAttribute("homeM1tList", homeMember1_tList);
 
 		//System.out.println(homeMember1_tList.toString());
 		
-		// ������ ���� ��õ  
+		// 메인페이지 관리자 추천 맛집
 		List<Member1_rVO> homeMember1_rList =  m1rService.getHomeMember1_rList();
 		model.addAttribute("homeM1rList", homeMember1_rList);
-		//������ ���� ��õ ���ã��(���ƿ�) ���� 
-		/*
-		 * List<BookmarkVO> homeCountM1rBookmark =
-		 * bookmarkService.getCountM1rBookmark(); model.addAttribute("m1rCountBookmark",
-		 * homeCountM1rBookmark); System.out.println("ī���"+homeCountM1rBookmark);
-		 */
+		
+		
 		int[] homeM1rSeq = new int[4];
 		int[] homeM1rCountBookmark = new int [4];
 		int[] homeM1rBookmarkyn = new int[4];
-		/** 수정해야함 오류뜸
+		int bookmarkLoginCheck = 0; 
+		/** 수정해야함 오류뜸*/
 		for(int i=0; i<=3; i++) {
 			Member1_rVO homeM1rBVO = homeMember1_rList.get(i);
-			homeM1rSeq[i] = homeM1rBVO.getM1rseq(); //������������ �ԽõǴ� seq 4�� 
+			homeM1rSeq[i] = homeM1rBVO.getM1rseq(); 
 			vo.setM1rseq(homeM1rSeq[i]);
 			
-			//����(seq)�� ��� �ϸ�ũ�� �ִ��� 
+			
 			 List<BookmarkVO> homeCountM1rBookmark = bookmarkService.getCountM1rBookmark(vo);
-			 System.out.println("ī��Ʈ����Ʈ"+homeCountM1rBookmark);
+			 //System.out.println("ī��Ʈ����Ʈ"+homeCountM1rBookmark);
 			 BookmarkVO homeM1rCountBookmarkBVO = homeCountM1rBookmark.get(0);
-			 homeM1rCountBookmark[i] = homeM1rCountBookmarkBVO.getM1rCount(); //������������ �ԽõǴ�  �ϸ�Ʈ
-			 System.out.println("��Ʈ"+homeM1rCountBookmark[i]);
+			 homeM1rCountBookmark[i] = homeM1rCountBookmarkBVO.getM1rCount(); 
+			 //System.out.println("��Ʈ"+homeM1rCountBookmark[i]);
 			
 		}
-		*/
-		//System.out.println("anjanjanajdfs:"+homeCountM1rBookmark.get(0).getM1rseq());
+		
 		
 		if (loginUser != null) {  
-			//List<BookmarkVO> homeCountM1rBookmark = bookmarkService.getCountM1rBookmark();
+			
 			for(int i=0; i<=3; i++) {
-				// ���ã�� ����
-				vo.setId(loginUser.getId()); //id�� vo �� ����
+				
+				vo.setId(loginUser.getId()); 
 				System.out.println(loginUser.getId());
-				vo.setM1rseq(homeM1rSeq[i]); //seq 1����  vo �� ���� 
+				vo.setM1rseq(homeM1rSeq[i]); 
 				System.out.println("vo"+vo);
-				// �״����� �� vo �� select�ؿ� ���ã�� ����
+				
 				
 				 List<BookmarkVO> M1rbookmarkyn = bookmarkService.M1rBookmarkyn(vo);
-				 //System.out.println("M1rbookmarkyn"+M1rbookmarkyn); //seq & id�� �ϸ�Ʈ ����
+				
 				
 				 BookmarkVO M1rbookmarkynBVO = M1rbookmarkyn.get(0);
 				 homeM1rBookmarkyn[i] = M1rbookmarkynBVO.getM1rBookmarkyn(); 
@@ -119,7 +115,7 @@ public class HomeController {
 				
 			}
 			
-			
+			bookmarkLoginCheck = 1;
 			
 			
 		}else {
@@ -129,37 +125,37 @@ public class HomeController {
 				//System.out.println("yn"+homeM1rBookmarkyn[i]); 
 			}
 			 
-		
+			bookmarkLoginCheck = 0;
 		}
 		
 
 		model.addAttribute("homeM1rBookmarkyn", homeM1rBookmarkyn); 
-		model.addAttribute("homeM1rCountBookmark", homeM1rCountBookmark); //���ã�� ����
-		
+		model.addAttribute("homeM1rCountBookmark", homeM1rCountBookmark); 
+		model.addAttribute("bookmarkLoginCheck", bookmarkLoginCheck);
 			 
 		
 		
 		
-		// ȸ�� ���� ��õ  
+		//메인페이지 회원 추천 맛집
 		List<Member0_rVO> homeMember0_rList =  m0rService.getHomeMember0_rList();
 		model.addAttribute("homeM0rList", homeMember0_rList);
 		
 		System.out.println(homeMember0_rList.toString());
 		
-		// �̺�Ʈ ����
+		// 메인페이지 이벤트
 		List<EventVO> homeEventList = eventService.getHomeEventList();
 		model.addAttribute("homeEventList", homeEventList);
 		
 		//System.out.println(homeEventList.toString());
 		
-		// ū������ �̺�Ʈ ����
+		// 메인페이지 큰 이벤트
 		List<EventVO> bigHomeEventList = eventService.getBigHomeEventList();
 		model.addAttribute("bigHomeEventList", bigHomeEventList);
 		
 		//System.out.println(bigHomeEventList.toString());
 		
 		
-		// �ҽ� ����
+		// 메인페이지 소식
 		List<NewsVO> homeNewsList = newsService.getHomeNewsList();
 		model.addAttribute("homeNewsList", homeNewsList);
 		
@@ -169,27 +165,27 @@ public class HomeController {
 	}
 	
 	
-	//�̺�Ʈ&�ҽ�
+	//메인페이지 이벤트-소식
 	@GetMapping(value="/event-news")
-	public String eventNewsAction(Model model) {
+	public String eventNewsAction(Model model, @RequestParam(value="tabNum") String tabNum) {
 		
-	
+		model.addAttribute("tabNum", tabNum);
+		
 		return "event-news/event-news";
 	}
 	
 	
 	
 	/*
-	 * ���ã�� �߰� ��û ó��
+	 * 메인페이지 관리자 추천 맛집 북마크
 	 */
 	@PostMapping(value="/insert_bookmark_m1r")
 	public String insertM1rBookmark(BookmarkVO vo, Model model, HttpSession session, @RequestParam(value="m1rseq") String m1rseq, @RequestParam(value="index") String index) {
 		
-		// (1) ���ǿ� ����� ����� ������ �о� �´�.
+
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
 		
-		// (2) �α����� �ȵǾ� ������ �α���, 
-		//     �α��� �Ǿ� �ְ�, ���ã�� ���� �������� ���ã�� �� �׸� ����
+	
 		if (loginUser == null) {  
 			return null;//"member/login";
 		} else {
@@ -199,7 +195,7 @@ public class HomeController {
 			
 			
 			int idx = Integer.parseInt(index);
-			//���ã�� ���� ��Ʈ���� ǥ��
+	
 			List<BookmarkVO> countBookmark = bookmarkService.getCountM1rBookmark(vo);
 			model.addAttribute("m1rCountBookmark", countBookmark);
 			System.out.println("ī���"+countBookmark);
@@ -208,17 +204,17 @@ public class HomeController {
 			int count1 = arrCount1.getM1rCount();
 			
 			
-			//���ã�� �߰�
+		
 			System.out.println("�߰�"+vo.getId()+vo.getM1rseq());
 			bookmarkService.insertM1rBookmark(vo);
 			
 			model.addAttribute("m1rCountBookmark", countBookmark);
 			
-			//������Ʈ �� ���ƿ� ����
+		
 			List<BookmarkVO> countBookmarkUpdate = bookmarkService.getCountM1rBookmark(vo);
 			model.addAttribute("m1rCountBookmarkUpdate", countBookmarkUpdate);
 			
-			//System.out.println("ī���2"+countBookmarkUpdate);
+
 			BookmarkVO arrCount2 = countBookmarkUpdate.get(0);
 			int count2 = arrCount2.getM1rCount();
 			
@@ -226,12 +222,10 @@ public class HomeController {
 			//System.out.println(count2);
 			
 			if(count1 == count2) { 
-				//System.out.println("��");
+				
 				return null;
 			}else {
-				//System.out.println("�ϸ�ũ�ǴϽ�");
-				//System.out.println("idx=>"+idx);
-				//String sendIdx="["+idx+"]";
+				
 				model.addAttribute("idx", idx);
 				
 				return "bookmark/bookmarkFinish";
@@ -244,13 +238,15 @@ public class HomeController {
 
 	}
 	
-
+	
 	@GetMapping(value="/area")
 	public String goarea(Model model) {
 		
 	
 		return "area";
 	}
+	
+
 	
 	
 	

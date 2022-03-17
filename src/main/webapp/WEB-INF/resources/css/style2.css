@@ -653,6 +653,7 @@ div.tab-item input[type="radio"]:checked ~ .tab-content {
     font-size: 1em;
     color: #8b8b8b;
     margin-bottom: 50px;
+    font-weight: bold;
 }
 
 
@@ -715,4 +716,84 @@ div.tab-item input[type="radio"]:checked ~ .tab-content {
     background: #f7f7f7;
     font-size: 0.85em;
     margin-bottom: 42px;
+}
+
+
+
+/*이벤트&소식 첫화면 체크*/
+.tab-num {
+    display: none;
+}
+
+/*메인페이지 더보기*/
+.home_btn_more_news{
+	float: right;
+    font-size: 0.6em;
+    padding-top: 7px;
+    font-weight: 100;
+}
+
+.home_btn_more_m1t{
+	float: right;
+    font-size: 1.0em;
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    top: -14px;
+}
+
+.home_btn_more_m1r{
+	float: right;
+    font-size: 0.9em;
+    position: relative;
+    top: -13px;
+}
+
+.home_btn_more_m0r{
+	float: right;
+    font-size: 0.9em;
+    position: relative;
+    top: 13px;
+}
+
+
+/* .home-m1r-title-wrap{
+	position: relative;
+    top: 3px;
+}
+
+.home-m0r-title-wrap{
+	position: relative;
+    top: -18px;
+} */
+
+/*메인 페이지 추천 맛집*/
+.row-m1r{
+	display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    top: -29px;
+    position: relative;
+}
+
+.row-m0r{
+	display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    top: -3px;
+    position: relative;
+}
+
+/*메인페이지 관리자 추천 관광지*/
+.home-title-wrap-m1t{
+	position: relative;
+    bottom: -21px;
+}
+
+
+.blank-m0r{
+	position: relative;
+    height: 51px;
 }

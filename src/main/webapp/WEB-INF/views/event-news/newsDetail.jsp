@@ -20,32 +20,33 @@
 			<div class="allWrap">    
 	            <div class="title-content">  
 	            
-	            	<a href="event-news?tabNum=1"><div class="tit-go-list"> <span class="tit-go-list-txt">&lt;&nbsp;이벤트</span></div></a>
-	            	<div class="top-title">${eventDetailList.subject}</div>
-	            	<div class="title-date">${eventDetailList.start_date} - ${eventDetailList.end_date}</div>
+	            <!-- 뉴스로 링크 바꾸기 -->
+	            	<a  href="event-news?tabNum=2"> <!-- onclick="go_news()" --><div class="tit-go-list"> <span class="tit-go-list-txt">&lt;&nbsp;소식</span></div></a>
+	            	<div class="top-title">${newsDetailList.subject}</div>
+	            	<%-- <div class="title-date">${newsDetailList.start_date} - ${newsDetailList.end_date}</div> --%>
 	            	<div class="post-area">
-		            	<div class="post-area-left"><span>조회수 ${eventDetailList.view_count}</span></div>
-		            	<div class="post-area-right"><span>${eventDetailList.name} | 
-		            	<fmt:formatDate value="${eventDetailList.regdate}" pattern="yyyy.MM.dd"/></span></div>
+		            	<div class="post-area-left"><span>조회수 ${newsDetailList.view_count}</span></div>
+		            	<div class="post-area-right"><span>${newsDetailList.name} | 
+		            	<fmt:formatDate value="${newsDetailList.regdate}" pattern="yyyy.MM.dd"/></span></div>
 	            	</div>
 	            	
 	            </div>  
 	            
 				<div class="detail-content">
 		            <div class="detail-image">
-		            	<img src="images/event/${eventDetailList.image1}" alt="">
+		            	<img src="images/news/${newsDetailList.image1}" alt="">
 		            </div>
 		            <div class="detail-image">
-		            	<img src="images/event/${eventDetailList.image2}" alt="">
+		            	<img src="images/news/${newsDetailList.image2}" alt="">
 		            </div>
 		            <div class="detail-image">
-		            	<img src="images/event/${eventDetailList.image3}" alt="" >
+		            	<img src="images/news/${newsDetailList.image3}" alt="" >
 		            </div>
 		            <div class="detail-image">
-		            	<img src="images/event/${eventDetailList.image4}" alt="" >
+		            	<img src="images/news/${newsDetailList.image4}" alt="" >
 		            </div>
 		            <div class="detail-image" >
-		            	<img src="images/event/${eventDetailList.image5}" alt="" >
+		            	<img src="images/news/${newsDetailList.image5}" alt="" >
 		            </div>
 		    
 		        </div> 

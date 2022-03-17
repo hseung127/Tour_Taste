@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.tnt.dto.EventVO;
 import com.green.tnt.dto.NewsVO;
@@ -25,14 +26,14 @@ public class NewsController {
 			
 		
 		criteria.setRowsPerPage(10);
-		// »óÇ°¸ñ·Ï Á¶È¸
+		// ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 		List<NewsVO> newsList = newsService.getListWithPaging(criteria);
 						
-		// È­¸é¿¡ Ç¥½ÃÇÒ ÆäÀÌÁö¹öÆ° Á¤º¸ ¼³Á¤
+		// È­ï¿½é¿¡ Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCriteria(criteria);  // ÇöÀç ÆäÀÌÁö¿Í ÆäÀÌÁö´ç Ç×¸ñ ¼ö Á¤º¸ ¼³Á¤
+		pageMaker.setCriteria(criteria);  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		int totalCount = newsService.getCountNewsList();
-		pageMaker.setTotalCount(totalCount); // Á¤Ã¼ »óÇ°¸ñ·Ï °¹¼ö ¼³Á¤ ¹× ÆäÀÌÁö Á¤º¸ ÃÊ±âÈ­
+		pageMaker.setTotalCount(totalCount); // ï¿½ï¿½Ã¼ ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
 		System.out.println("[NewsList] pageMaker="+pageMaker);
 						
 		model.addAttribute("newsList", newsList);
@@ -41,6 +42,15 @@ public class NewsController {
 				
 		
 		return "event-news/newsList"; 
+	}
+	
+	
+	@GetMapping(value="/news_detail")
+	public String newsDetailAction(NewsVO vo, Model model, @RequestParam("nseq") String nseq) {
+		newsService.newsViewCount(nseq);
+		NewsVO newsDetailList = newsService.getSelectNewsDetail(nseq);
+		model.addAttribute("newsDetailList", newsDetailList);
+		return "event-news/newsDetail";
 	}
 
 
