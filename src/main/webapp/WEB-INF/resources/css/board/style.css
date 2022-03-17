@@ -8340,6 +8340,14 @@ h1, h2, h3, h4, h5,
 	font-size: 15px;
 }
 
+#boardbutton {
+	border: 1px solid #b9b9b982;
+	background: #fdfdfd;
+	float: right;
+	margin-top: 5px;
+	 
+}
+
 #insertboard {
 	border: 1px solid #b9b9b982;
 	background: #fdfdfd;

@@ -6,7 +6,7 @@ import com.green.tnt.dto.BookmarkVO;
 
 public interface BookmarkService  {
 
-	//Áñ°ÜÃ£±â Ãß°¡
+	//ì¦ê²¨ì°¾ê¸° ì¶”ê°€
 	void insertM1tBookmark(BookmarkVO vo);
 
 	void insertM1rBookmark(BookmarkVO vo);
@@ -14,16 +14,26 @@ public interface BookmarkService  {
 	void insertM0rBookmark(BookmarkVO vo);
 	
 	
-	// m1tseqº° Áñ°ÜÃ£±â °³¼ö
+	// m1tseqë³„ ì¦ê²¨ì°¾ê¸° ê°œìˆ˜
 	public List<BookmarkVO> getCountM1tBookmark(BookmarkVO vo);
-	// m1rseqº° Áñ°ÜÃ£±â °³¼ö
+	// m1rseqë³„ ì¦ê²¨ì°¾ê¸° ê°œìˆ˜
 	public List<BookmarkVO> getCountM1rBookmark(BookmarkVO vo);
-	// m1trseqº° Áñ°ÜÃ£±â °³¼ö
+	// m1trseqë³„ ì¦ê²¨ì°¾ê¸° ê°œìˆ˜
 	public List<BookmarkVO> getCountM0rBookmark(BookmarkVO vo);
 	
 	
 	//
 	public List<BookmarkVO> M1rBookmarkyn(BookmarkVO vo);
+	
+	public void insertM1tBM(BookmarkVO vo);
+
+	public void insertM1rBM(BookmarkVO vo);
+	
+	public void insertM0tBM(BookmarkVO vo);
+	
+	public void insertM0rBM(BookmarkVO vo);
+	
+	public void deleteBM(BookmarkVO vo);
 	
 }
 

@@ -17,18 +17,18 @@ public class Member0_tDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
-	//°Ë»ö ¸ñ·Ï 3°³ Á¶È¸ 
+	//ê²€ìƒ‰ ëª©ë¡ 3ê°œ ì¡°íšŒ 
 	public List<Member0_tVO> getSearchMember0_tList(String key){
 		return mybatis.selectList("mappings.member0_t-mapping.getSearchMember0_tList",key);
 	}
 
 	
-	// ÀüÃ¼ °Ë»ö ¸ñ·Ï °¹¼ö Á¶È¸
+	// ì „ì²´ ê²€ìƒ‰ ëª©ë¡ ê°¯ìˆ˜ ì¡°íšŒ
 	public int getCountSearchMember0_tList(String key) {	
 		return mybatis.selectOne("mappings.member0_t-mapping.countSearchMember0_tList",key);
 	}
 	
-	//ÆäÀÌÁöº° °Ë»ö¸ñ·Ï Á¶È¸ 
+	//í˜ì´ì§€ë³„ ê²€ìƒ‰ëª©ë¡ ì¡°íšŒ 
 	public List<Member0_tVO> getListWithPaging(Criteria criteria, String key) {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("criteria", criteria);
@@ -36,19 +36,31 @@ public class Member0_tDAO {
 		return mybatis.selectList("mappings.member0_t-mapping.listWithPaging", map);
 	}
 	
-	// ±Û ÀÛ¼º
+	// ê¸€ ì‘ì„±
 	public void insertMember0_t(Member0_tVO vo) {
 		
 		mybatis.insert("mappings.member0_t-mapping.insertMember0_t", vo);
 	}
 	
-	// ±Û °¹¼ö
+	// ê¸€ ìˆ˜ì •
+	public void updateMember0_t(Member0_tVO vo) {
+		
+		mybatis.update("mappings.member0_t-mapping.updateMember0_t", vo);
+	}
+	
+	//ê¸€ ì‚­ì œ
+	public void deleteMember0_t(Member0_tVO vo) {
+		
+		mybatis.delete("mappings.member0_t-mapping.deleteMember0_t", vo);
+	}
+	
+	// ê¸€ ê°¯ìˆ˜
 	public int countMember0_tList(Member0_tVO vo) {
 		
 		return mybatis.selectOne("mappings.member0_t-mapping.countMember0_tList", vo);
 	}
 	
-	// °Ô½ÃÆÇ ¸ñ·Ï ÆäÀÌÂ¡
+	// ê²Œì‹œíŒ ëª©ë¡ í˜ì´ì§•
 	public List<Member0_tVO> getM0_tListPaging(Criteria criteria, Member0_tVO vo) {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("criteria", criteria);
@@ -57,7 +69,7 @@ public class Member0_tDAO {
 		return mybatis.selectList("mappings.member0_t-mapping.getM0_tListPaging", map);
 	}
 	
-	// °Ô½ÃÆÇ »ó¼¼º¸±â
+	// ê²Œì‹œíŒ ìƒì„¸ë³´ê¸°
 	public Member0_tVO getM0_tDetail(Member0_tVO vo) {
 		
 		return mybatis.selectOne("mappings.member0_t-mapping.getM0_tDetail", vo);

@@ -53,7 +53,7 @@ public class Member1_rController {
 		return "worker_r/worker_rList";
 	}
 	
-	// »ó¼¼ Á¤º¸
+	// ìƒì„¸ ì •ë³´
 	@RequestMapping(value="/worker_rDetail")
 	public String worker_rDetail(Member1_rVO vo, Model model) {
 		

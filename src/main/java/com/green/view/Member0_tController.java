@@ -43,7 +43,7 @@ public class Member0_tController {
 	private Member0_tService m0tService;
 	
 	
-	// ¸ñ·Ï ÆäÀÌÂ¡
+	// ëª©ë¡ í˜ì´ì§•
 	@RequestMapping(value="/member_tList")
 	public String getMember0_tList(Member0_tVO vo, Model model, Criteria criteria) {
 		
@@ -65,13 +65,14 @@ public class Member0_tController {
 		return "member_t/member_tList";
 	}
 	
+	// ê¸€ë“±ë¡ í˜ì´ì§€ë¡œ ì´ë™
 	@PostMapping(value="/member_tinsert_form")
 	public String goMemberTourInsert(HttpSession session) {
 		
-		// (1) ·Î±×ÀÎ È®ÀÎ
+		// (1) ë¡œê·¸ì¸ í™•ì¸
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
 		
-		// (2) ·Î±×ÀÎÀÌ ¾ÈµÇ¾î ÀÖÀ¸¸é ·Î±×ÀÎ
+		// (2) ë¡œê·¸ì¸ì´ ì•ˆë˜ì–´ ìˆìœ¼ë©´ ë¡œê·¸ì¸
 		if (loginUser == null) {
 			return "member/login";
 		} else {
@@ -80,6 +81,7 @@ public class Member0_tController {
 		
 	}
 	
+	// ê¸€ ë“±ë¡
 	@PostMapping(value="/member_tinsert")
 	public String goMemberTourSave(Member0_tVO vo, HttpSession session) {
 		
@@ -89,7 +91,11 @@ public class Member0_tController {
 			return "member/login";
 		} else {
 			vo.setName(loginUser.getName());
+			vo.setId(loginUser.getId());
 			
+			if (vo.getArea() == null) {
+				vo.setArea("");
+			}
 			m0tService.insertMember0_t(vo);
 		
 			return "redirect:member_tList";
@@ -97,58 +103,109 @@ public class Member0_tController {
 		
 	}
 	
-	// »ó¼¼ Á¤º¸
-	@RequestMapping(value="/member_tDetail")
-	public String member_tDetail(Member0_tVO vo, Model model) {
+	// ê¸€ ìˆ˜ì •í˜ì´ì§€ë¡œ ì´ë™
+	@RequestMapping(value="/member_tupdate_form")
+	public String goMembertUpdate(Member0_tVO vo, HttpSession session, Model model) {
 		
+		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
+		
+		if (loginUser == null) {
+			return "member/login";
+		} else {
+			
+			Member0_tVO m0t = m0tService.getM0_tDetail(vo);
+			
+			model.addAttribute("m0t", m0t);
+			
+			return "member_t/member_tUpdate";
+		}
+	}
+	
+	// ê¸€ ìˆ˜ì •
+	@RequestMapping(value="/member_tupdate")
+	public String updateMember0_t(Member0_tVO vo, HttpSession session) {
+		
+		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
+		
+		if (loginUser == null) {
+			return "member/login";
+		} else {
+			m0tService.updateMember0_t(vo);
+			
+			return "redirect:member_tList";
+		}
+	}
+	
+	// ê¸€ ì‚­ì œ
+	@RequestMapping(value="/member_tdelete")
+	public String deleteMember0_t(Member0_tVO vo, HttpSession session, Model model) {
+		
+		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
+		
+		if (loginUser == null) {
+			return "member/login";
+		} else {
+			
+			m0tService.deleteMember0_t(vo);
+			
+			return "redirect:member_tList";
+		}
+	}
+	
+	// ìƒì„¸ ì •ë³´
+	@RequestMapping(value="/member_tDetail")
+	public String member_tDetail(Member0_tVO vo, HttpSession session, Model model) {
+		
+		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
 		Member0_tVO member0_t = m0tService.getM0_tDetail(vo);
 		
 		model.addAttribute("m0t", member0_t);
+		model.addAttribute("loginUser", loginUser);
 		
 		return "member_t/member_tDetail";
 	}
-	/*//ÀÌ¹ÌÁö ¾÷·Îµå
+	/*//ì´ë¯¸ì§€ ì—…ë¡œë“œ
 	@RequestMapping(value="/mine/imageUpload.do", method = RequestMethod.POST) 
 	public void imageUpload(HttpServletRequest request, 
 			HttpServletResponse response, MultipartHttpServletRequest multiFile , 
 			@RequestParam MultipartFile upload) throws Exception{ 
 		
-		// ·£´ı ¹®ÀÚ »ı¼º 
+		// ëœë¤ ë¬¸ì ìƒì„± 
 		UUID uid = UUID.randomUUID(); 
 		
 		OutputStream out = null; 
 		PrintWriter printWriter = null; 
 		
-		//ÀÎÄÚµù 
+		//ì¸ì½”ë”© 
 		response.setCharacterEncoding("utf-8"); 
 		response.setContentType("text/html;charset=utf-8"); 
 		
 		try{ 
-			//ÆÄÀÏ ÀÌ¸§ °¡Á®¿À±â 
+			//íŒŒì¼ ì´ë¦„ ê°€ì ¸ì˜¤ê¸° 
 			String fileName = upload.getOriginalFilename(); 
 			byte[] bytes = upload.getBytes(); 
 			
-			//ÀÌ¹ÌÁö °æ·Î »ı¼º 
-			String path = "D:/spring-workspace/TnT-0305/src/main/webapp/WEB-INF/resources/images";// fileDir´Â Àü¿ª º¯¼ö¶ó ±×³É ÀÌ¹ÌÁö °æ·Î ¼³Á¤ÇØÁÖ¸é µÈ´Ù. 
+			//ì´ë¯¸ì§€ ê²½ë¡œ ìƒì„± 
+			String path = "D:/spring-workspace/TnT-0305/src/main/webapp/WEB-INF/resources/images";// fileDirëŠ” ì „ì—­ ë³€ìˆ˜ë¼ ê·¸ëƒ¥ ì´ë¯¸ì§€ ê²½ë¡œ ì„¤ì •í•´ì£¼ë©´ ëœë‹¤. 
 			String ckUploadPath = path + uid + "_" + fileName; 
 			File folder = new File(path); 
 			
-			//ÇØ´ç µğ·ºÅä¸® È®ÀÎ 
+			//í•´ë‹¹ ë””ë ‰í† ë¦¬ í™•ì¸ 
 			if(!folder.exists()){ 
-				try{ folder.mkdirs(); // Æú´õ »ı¼º 
+				try{ folder.mkdirs(); // í´ë” ìƒì„± 
 				}catch(Exception e){ 
 					e.getStackTrace(); 
 					} 
 				} 
 			out = new FileOutputStream(new File(ckUploadPath)); 
 			out.write(bytes); 
-			out.flush(); // outputStram¿¡ ÀúÀåµÈ µ¥ÀÌÅÍ¸¦ Àü¼ÛÇÏ°í ÃÊ±âÈ­ 
+			out.flush(); // outputStramì— ì €ì¥ëœ ë°ì´í„°ë¥¼ ì „ì†¡í•˜ê³  ì´ˆê¸°í™” 
 			
 			String callback = request.getParameter("CKEditorFuncNum"); 
 			printWriter = response.getWriter(); 
-			String fileUrl = "/mine/ckImgSubmit.do?uid=" + uid + "&fileName=" + fileName; // ÀÛ¼ºÈ­¸é 
+			String fileUrl = "/mine/ckImgSubmit.do?uid=" + uid + "&fileName=" + fileName; // ì‘ì„±í™”ë©´ 
 			
-			// ¾÷·Îµå½Ã ¸Ş½ÃÁö Ãâ·Â 
+			// ì—…ë¡œë“œì‹œ ë©”ì‹œì§€ ì¶œë ¥ 
 			printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}"); 
 			printWriter.flush(); 
 				
@@ -170,14 +227,14 @@ public class Member0_tController {
 			, HttpServletRequest request, HttpServletResponse response) 
 	throws ServletException, IOException{ 
 		
-		//¼­¹ö¿¡ ÀúÀåµÈ ÀÌ¹ÌÁö °æ·Î 
+		//ì„œë²„ì— ì €ì¥ëœ ì´ë¯¸ì§€ ê²½ë¡œ 
 		String path = "D:/spring-workspace/TnT-0305/src/main/webapp/WEB-INF/resources/images";
 		
 		String sDirPath = path + uid + "_" + fileName;
 		
 		File imgFile = new File(sDirPath); 
 		
-		//»çÁø ÀÌ¹ÌÁö Ã£Áö ¸øÇÏ´Â °æ¿ì ¿¹¿ÜÃ³¸®·Î ºó ÀÌ¹ÌÁö ÆÄÀÏÀ» ¼³Á¤ÇÑ´Ù. 
+		//ì‚¬ì§„ ì´ë¯¸ì§€ ì°¾ì§€ ëª»í•˜ëŠ” ê²½ìš° ì˜ˆì™¸ì²˜ë¦¬ë¡œ ë¹ˆ ì´ë¯¸ì§€ íŒŒì¼ì„ ì„¤ì •í•œë‹¤. 
 		if(imgFile.isFile()){ 
 			byte[] buf = new byte[1024]; 
 			int readByte = 0; 

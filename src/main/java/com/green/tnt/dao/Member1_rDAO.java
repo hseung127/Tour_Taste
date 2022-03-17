@@ -17,23 +17,23 @@ public class Member1_rDAO  {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
-	//¸ŞÀÎÆäÀÌÁö
+	//ë©”ì¸í˜ì´ì§€
 	public List<Member1_rVO> getHomeMember1_rList(){
 		return mybatis.selectList("mappings.member1_r-mapping.getHomeMember1_rList");
 	}
 	
-	//°Ë»ö ¸ñ·Ï 3°³ Á¶È¸ 
+	//ê²€ìƒ‰ ëª©ë¡ 3ê°œ ì¡°íšŒ 
 	public List<Member1_rVO> getSearchMember1_rList(String key){
 		return mybatis.selectList("mappings.member1_r-mapping.getSearchMember1_rList",key);
 	}
 
 	
-	// ÀüÃ¼ °Ë»ö ¸ñ·Ï °¹¼ö Á¶È¸
+	// ì „ì²´ ê²€ìƒ‰ ëª©ë¡ ê°¯ìˆ˜ ì¡°íšŒ
 	public int getCountSearchMember1_rList(String key) {	
 		return mybatis.selectOne("mappings.member1_r-mapping.countSearchMember1_rList",key);
 	}
 	
-	//ÆäÀÌÁöº° °Ë»ö¸ñ·Ï Á¶È¸ 
+	//í˜ì´ì§€ë³„ ê²€ìƒ‰ëª©ë¡ ì¡°íšŒ 
 	public List<Member1_rVO> getListWithPaging(Criteria criteria, String key) {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("criteria", criteria);
@@ -41,13 +41,13 @@ public class Member1_rDAO  {
 		return mybatis.selectList("mappings.member1_r-mapping.listWithPaging", map);
 	}
 	
-	// ±Û °¹¼ö
+	// ê¸€ ê°¯ìˆ˜
 	public int countMember1_rList(Member1_rVO vo) {
 		
 		return mybatis.selectOne("mappings.member1_r-mapping.countMember1_rList", vo);
 	}
 	
-	// °Ô½ÃÆÇ ¸ñ·Ï ÆäÀÌÂ¡
+	// ê²Œì‹œíŒ ëª©ë¡ í˜ì´ì§•
 	public List<Member1_rVO> getM1_rListPaging(Criteria criteria, Member1_rVO vo) {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("criteria", criteria);
@@ -56,7 +56,7 @@ public class Member1_rDAO  {
 		return mybatis.selectList("mappings.member1_r-mapping.getM1_rListPaging", map);
 	}
 	
-	// °Ô½ÃÆÇ »ó¼¼º¸±â
+	// ê²Œì‹œíŒ ìƒì„¸ë³´ê¸°
 	public Member1_rVO getM1_rDetail(Member1_rVO vo) {
 		
 		return mybatis.selectOne("mappings.member1_r-mapping.getM1_rDetail", vo);

@@ -24,5 +24,8 @@ public class Member1_tVO {
 	private String image5;
 	private String id;
 	private Timestamp regdate;
+	
+	/* bookmark */
+	private int bseq;
    
 }

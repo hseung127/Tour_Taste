@@ -20,9 +20,9 @@
 	
 	<section class="ftco-section">
 		<div class="boardcontainer">
-			<form name="frm" id="member_tupdateform" method="post">
-			<input type='hidden' name="m0tseq" value='${m0t.m0tseq}'/>
-			<input type="text" name="subject" id="title" placeholder="제목" value="${m0t.subject}">
+			<form name="frm" id="member_rupdateform" method="post">
+			<input type='hidden' name="m0rseq" value='${m0r.m0rseq}'/>
+			<input type="text" name="subject" id="title" placeholder="제목" value="${m0r.subject}">
 			<div class="area_check">
 			<p>지역 선택
 			<label><input type="radio" name="area" value="서울특별시">서울</label>
@@ -43,15 +43,15 @@
 			<label><input type="radio" name="area" value="전라남도">전남</label>
 			<label><input type="radio" name="area" value="제주특별자치도">제주</label>
 			</div>
-			<textarea name="content" id="editor4">${m0t.content}</textarea>
+			<textarea name="content" id="editor4">${m0r.content}</textarea>
 			<script>CKEDITOR.replace('editor4', {
 				height : '500px',  // 입력창의 높이
 				//filebrowserUploadUrl:'/mine/imageUpload.do'
 			});</script>
 			
 			</form>
-			<button type="button" class="btn" id="insertboard" onclick="go_mtupdate()"><span>수정완료</span></button>
-			<button type="button" class="btn" id="boardbutton" onclick="location.href='/biz/member_tList?area=전체'"><span>취소하기</span></button>
+			<button type="button" class="btn" id="insertboard" onclick="go_mrupdate()"><span>수정완료</span></button>
+			<button type="button" class="btn" id="boardbutton" onclick="location.href='/biz/member_rList?area=전체'"><span>취소하기</span></button>
 		</div>
 	</section>
 <%@ include file="../footer.jsp" %>  

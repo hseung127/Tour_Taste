@@ -17,24 +17,24 @@ public class Member0_rDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
-	//¸ŞÀÎÆäÀÌÁö
+	//ë©”ì¸í˜ì´ì§€
 	public List<Member0_rVO> getHomeMember0_rList(){
 		return mybatis.selectList("mappings.member0_r-mapping.getHomeMember0_rList");
 	}
 	
 	
-	//°Ë»ö ¸ñ·Ï 3°³ Á¶È¸ 
+	//ê²€ìƒ‰ ëª©ë¡ 3ê°œ ì¡°íšŒ 
 	public List<Member0_rVO> getSearchMember0_rList(String key){
 		return mybatis.selectList("mappings.member0_r-mapping.getSearchMember0_rList",key);
 	}
 
 	
-	// ÀüÃ¼ °Ë»ö ¸ñ·Ï °¹¼ö Á¶È¸
+	// ì „ì²´ ê²€ìƒ‰ ëª©ë¡ ê°¯ìˆ˜ ì¡°íšŒ
 	public int getCountSearchMember0_rList(String key) {	
 		return mybatis.selectOne("mappings.member0_r-mapping.countSearchMember0_rList",key);
 	}
 	
-	//ÆäÀÌÁöº° °Ë»ö¸ñ·Ï Á¶È¸ 
+	//í˜ì´ì§€ë³„ ê²€ìƒ‰ëª©ë¡ ì¡°íšŒ 
 	public List<Member0_rVO> getListWithPaging(Criteria criteria, String key) {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("criteria", criteria);
@@ -42,19 +42,31 @@ public class Member0_rDAO {
 		return mybatis.selectList("mappings.member0_r-mapping.listWithPaging", map);
 	}
 	
-	// ±Û ÀÛ¼º
+	// ê¸€ ì‘ì„±
 	public void insertMember0_r(Member0_rVO vo) {
 		
 		mybatis.insert("mappings.member0_r-mapping.insertMember0_r", vo);
 	}
 	
-	// ±Û °¹¼ö
+	// ê¸€ ìˆ˜ì •
+	public void updateMember0_r(Member0_rVO vo) {
+		
+		mybatis.update("mappings.member0_r-mapping.updateMember0_r", vo);
+	}
+	
+	//ê¸€ ì‚­ì œ
+	public void deleteMember0_r(Member0_rVO vo) {
+		
+		mybatis.delete("mappings.member0_r-mapping.deleteMember0_r", vo);
+	}
+	
+	// ê¸€ ê°¯ìˆ˜
 	public int countMember0_rList(Member0_rVO vo) {
 		
 		return mybatis.selectOne("mappings.member0_r-mapping.countMember0_rList", vo);
 	}
 	
-	// °Ô½ÃÆÇ ¸ñ·Ï ÆäÀÌÂ¡
+	// ê²Œì‹œíŒ ëª©ë¡ í˜ì´ì§•
 	public List<Member0_rVO> getM0_rListPaging(Criteria criteria, Member0_rVO vo) {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("criteria", criteria);
@@ -63,7 +75,7 @@ public class Member0_rDAO {
 		return mybatis.selectList("mappings.member0_r-mapping.getM0_rListPaging", map);
 	}
 	
-	// °Ô½ÃÆÇ »ó¼¼º¸±â
+	// ê²Œì‹œíŒ ìƒì„¸ë³´ê¸°
 	public Member0_rVO getM0_rDetail(Member0_rVO vo) {
 		
 		return mybatis.selectOne("mappings.member0_r-mapping.getM0_rDetail", vo);

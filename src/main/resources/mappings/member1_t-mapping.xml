@@ -55,7 +55,40 @@
 	</select>
 	
 	<!-- 페이지별 목록 조회 -->
-	<select id="getM1_tListPaging" parameterType="hashMap" resultType="member1_t">		
+	<select id="getM1_tListPaging" parameterType="hashMap" resultType="member1_t">
+	
+		SELECT
+			*
+		FROM	
+			(
+				SELECT
+					  row_number() over(ORDER BY TB1.m1tseq DESC) rn
+			    	, TB1.*
+			    <if test = " vo.id != null and vo.id != '' ">  	
+			    	, BM.BSEQ
+			    </if>
+				FROM    
+				    MEMBER1_TBOARD TB1
+			    <if test = " vo.id != null and vo.id != '' ">  	
+				    LEFT OUTER JOIN BOOKMARK BM
+				    ON  #{vo.id} = BM.ID
+				    AND TB1.M1TSEQ = BM.M1TSEQ
+				</if>
+				WHERE 1=1
+			<if test = "vo.area != null and vo.area != '전체'">  		 
+			  	AND AREA = #{vo.area}
+		  	</if>
+			)
+		<![CDATA[
+		WHERE
+			rn <= #{criteria.pageNum} * #{criteria.rowsPerPage} 
+		AND rn > (#{criteria.pageNum}-1) * #{criteria.rowsPerPage}
+		]]>
+		
+	
+
+	    
+	<!-- 
 		SELECT m1tseq, image1, subject, address
 		  FROM(SELECT row_number() over(ORDER BY m1tseq DESC) rn, m1tseq, image1, subject, address
 		  		 FROM member1_tboard
@@ -67,6 +100,7 @@
 		WHERE rn <= #{criteria.pageNum} * #{criteria.rowsPerPage} 
 		  AND rn > (#{criteria.pageNum}-1) * #{criteria.rowsPerPage}
 		]]>
+	 -->
 	</select> 
 	
 	<!-- 상세 조회 -->

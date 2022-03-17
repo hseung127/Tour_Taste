@@ -40,7 +40,19 @@ public class Member0_tServiceImpl implements Member0_tService {
 		
 		m0tDao.insertMember0_t(vo);
 	}
+	
+	@Override
+	public void updateMember0_t(Member0_tVO vo) {
 
+		m0tDao.updateMember0_t(vo);
+	}
+
+	@Override
+	public void deleteMember0_t(Member0_tVO vo) {
+		
+		m0tDao.deleteMember0_t(vo);
+	}
+	
 	@Override
 	public int countMember0_tList(Member0_tVO vo) {
 	
@@ -58,6 +70,5 @@ public class Member0_tServiceImpl implements Member0_tService {
 		
 		return m0tDao.getM0_tDetail(vo);
 	}
-	
 
 }
