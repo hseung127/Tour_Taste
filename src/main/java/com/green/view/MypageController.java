@@ -7,16 +7,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.green.tnt.dto.MemberVO;
 import com.green.tnt.member.MemberService;
 
@@ -30,17 +25,17 @@ import utils.SHA256Util;
 @SessionAttributes("loginUser")
 public class MypageController {
 
-	@Autowired //@Autowired´Â ÀÎ½ºÅÏ½º¸¦ »ı¼ºÇÏÁö ¾Ê¾Æµµ ½ºÇÁ¸µÀÌ ÀÚµ¿À¸·Î ÀÎ½ºÅÏ½º¸¦ ÁÖÀÔÇØÁÖ´Â ±â´É
+	@Autowired //@AutowiredëŠ” ì¸ìŠ¤í„´ìŠ¤ë¥¼ ìƒì„±í•˜ì§€ ì•Šì•„ë„ ìŠ¤í”„ë§ì´ ìë™ìœ¼ë¡œ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ì£¼ì…í•´ì£¼ëŠ” ê¸°ëŠ¥
 	private MemberService memberService;
 	
-	//¸¶ÀÌ ÆäÀÌÁö ÀÌµ¿
+	//ë§ˆì´ í˜ì´ì§€ ì´ë™
 	@GetMapping(value="/mypage_form")
 	public String mypageView() {
 		
 		return "mypage/mypage_main";
 	}
 	
-	//ºñ¹Ğ¹øÈ£ º¯°æ ÆäÀÌÁö ÀÌµ¿
+	//ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ í˜ì´ì§€ ì´ë™
 	@GetMapping(value="/modify_pwd_form")
 	public String modifyPwdView() {
 		
@@ -58,42 +53,41 @@ public class MypageController {
 		PrintWriter out = response.getWriter();
 		
 	    MemberVO vo = (MemberVO) session.getAttribute("loginUser");
-	    String db_pwd = memberService.selectPwd(vo);	//Å×ÀÌºíÀÇ pwd¸¦ °¡Á®¿È
-	    String salt = memberService.getSaltById(vo);	//Å×ÀÌºíÀÇ salt¸¦ °¡Á®¿È
-	    String result = SHA256Util.getEncrypt(cur_pwd, salt);	//ÇöÀç ºñ¹Ğ¹øÈ£¿Í Å×ÀÌºíÀÇ salt¸¦ ¼¯À½
+	    String db_pwd = memberService.selectPwd(vo);	//í…Œì´ë¸”ì˜ pwdë¥¼ ê°€ì ¸ì˜´
+	    String salt = memberService.getSaltById(vo);	//í…Œì´ë¸”ì˜ saltë¥¼ ê°€ì ¸ì˜´
+	    String result = SHA256Util.getEncrypt(cur_pwd, salt);	//í˜„ì¬ ë¹„ë°€ë²ˆí˜¸ì™€ í…Œì´ë¸”ì˜ saltë¥¼ ì„ìŒ
 	    
 	    if (result.equals(db_pwd)) {
-	    	//ÇöÀç ºñ¹Ğ¹øÈ£¿Í Å×ÀÌºíÀÇ salt¸¦ ¼¯Àº °ª°ú Å×ÀÌºíÀÇ pwd°¡ ÀÏÄ¡ÇÏ¸é
-	    	//´Ù½Ã »õ·Î¿î salt¸¦ »ı¼ºÇÑ´Ù
+	    	//í˜„ì¬ ë¹„ë°€ë²ˆí˜¸ì™€ í…Œì´ë¸”ì˜ saltë¥¼ ì„ì€ ê°’ê³¼ í…Œì´ë¸”ì˜ pwdê°€ ì¼ì¹˜í•˜ë©´
+	    	//ë‹¤ì‹œ ìƒˆë¡œìš´ saltë¥¼ ìƒì„±í•œë‹¤
 	    	String new_salt = SHA256Util.generateSalt();
 	    	
-	    	//»õ·Î¿î ºñ¹Ğ¹øÈ£¿Í »õ·Î¿î salt¸¦ ¼¯À½
+	    	//ìƒˆë¡œìš´ ë¹„ë°€ë²ˆí˜¸ì™€ ìƒˆë¡œìš´ saltë¥¼ ì„ìŒ
 			String pwd = SHA256Util.getEncrypt(new_pwd, new_salt);
 			
-			// »õ·Î¿î ºñ¹Ğ¹øÈ£¿Í »õ·Î¿î salt¸¦ Å×ÀÌºí¿¡ ¾÷µ¥ÀÌÆ®
+			// ìƒˆë¡œìš´ ë¹„ë°€ë²ˆí˜¸ì™€ ìƒˆë¡œìš´ saltë¥¼ í…Œì´ë¸”ì— ì—…ë°ì´íŠ¸
 			vo.setPwd(pwd);
 	        vo.setSalt(new_salt);
 	    	
 	        memberService.updatePwd(vo);
 	        status.setComplete();
-	        out.println("<script>alert('ºñ¹Ğ¹øÈ£°¡ º¯°æµÇ¾î ·Î±×ÀÎÀÌ ÇØÁ¦µÇ¾ú½À´Ï´Ù."
+	        out.println("<script>alert('ë¹„ë°€ë²ˆí˜¸ê°€ ë³€ê²½ë˜ì–´ ë¡œê·¸ì¸ì´ í•´ì œë˜ì—ˆìŠµë‹ˆë‹¤."
 	        		+ "\\n"
-	        		+ "»õ·Î¿î ºñ¹Ğ¹øÈ£·Î ´Ù½Ã ·Î±×ÀÎÇØÁÖ¼¼¿ä.');"
+	        		+ "ìƒˆë¡œìš´ ë¹„ë°€ë²ˆí˜¸ë¡œ ë‹¤ì‹œ ë¡œê·¸ì¸í•´ì£¼ì„¸ìš”.');"
 					+ " location.href='login_form';</script>");
 			out.flush();
 			
 	    } else {
 	    	
-	    	out.println("<script>alert('ÇöÀç ºñ¹Ğ¹øÈ£¸¦ Àß¸ø ÀÔ·ÂÇÏ¿´½À´Ï´Ù."
+	    	out.println("<script>alert('í˜„ì¬ ë¹„ë°€ë²ˆí˜¸ë¥¼ ì˜ëª» ì…ë ¥í•˜ì˜€ìŠµë‹ˆë‹¤."
 	    			+ "\\n"
-	        		+ "´Ù½Ã È®ÀÎÇØÁÖ¼¼¿ä.');"
+	        		+ "ë‹¤ì‹œ í™•ì¸í•´ì£¼ì„¸ìš”.');"
 					+ " history.go(-1);</script>");
 			out.flush();
 	    	
 	    }
 	    
 	}
-
 
 
 }

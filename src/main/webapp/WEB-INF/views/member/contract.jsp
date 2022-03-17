@@ -4,13 +4,13 @@
 
 <head>
       <style>
-        div.contract{
+        .contract{
             font-size: small; 
             font-family: Arial, '맑은 고딕';
             width: 430px;
             margin: 0 auto;
-            margin-bottom: 50px;
-
+		    margin-bottom: 100px;
+		    margin-top: 70px;
         }
         h3.contarct_agree{
             margin: 30px;
@@ -21,6 +21,7 @@
         }
         .agree_btn{            
             text-align: center;
+            margin-top: 30px;
         }
         .ag_btn{
             width: 55.99306px;

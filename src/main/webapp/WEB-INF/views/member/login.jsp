@@ -8,9 +8,9 @@
 	    width: 500px;
 	    height: auto;
 	    padding-top: 20px;
-		margin-top: 50px;
-		margin-left: auto;
-		margin-right: auto;
+		margin: 0 auto;
+		margin-bottom: 30px;
+		margin-top: 70px;
 		
 	}
 	
@@ -55,7 +55,7 @@
 	  cursor: pointer;
 	  margin-top: 30px;
 	  text-align: center;
-	  margin-bottom: 50px;
+	  margin-bottom: 130px;
 	  
 	}
 	

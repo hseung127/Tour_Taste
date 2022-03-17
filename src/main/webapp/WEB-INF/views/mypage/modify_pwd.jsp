@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
@@ -9,10 +10,9 @@
 	    width: 500px;
 	    height: auto;
 	    padding-top: 20px;
-		margin-top: 50px;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50px;
+		margin: 0 auto;
+		margin-bottom: 130px;
+		margin-top: 70px;
 		
 	}
             
@@ -134,7 +134,7 @@ $(document).ready(function() {
 		        <span class="point error_box_new_pwdChk"></span>
 	        </div>
 	        <div class="modify_pwd_btn_box">
-	            <input type="button" value="비밀번호 변경" class="join_btn" onclick="go_modify_pwd()">
+	            <input type="button" value="변경 확인" class="join_btn" onclick="go_modify_pwd()">
 	        </div>
 	    </form>
     </div>

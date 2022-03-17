@@ -9,10 +9,9 @@
 	    width: 500px;
 	    height: auto;
 	    padding-top: 20px;
-		margin-top: 50px;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50px;
+		margin: 0 auto;
+		margin-bottom: 130px;
+		margin-top: 70px;
 		
 	}
 	

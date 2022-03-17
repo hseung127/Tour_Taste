@@ -1,6 +1,5 @@
 package com.green.view;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
@@ -31,35 +30,30 @@ import utils.SHA256Util;
 
 
 
-
 @Controller
 @SessionAttributes("loginUser")
 public class MemberController {
 
-	@Autowired //@Autowired´Â ÀÎ½ºÅÏ½º¸¦ »ı¼ºÇÏÁö ¾Ê¾Æµµ ½ºÇÁ¸µÀÌ ÀÚµ¿À¸·Î ÀÎ½ºÅÏ½º¸¦ ÁÖÀÔÇØÁÖ´Â ±â´É
+	@Autowired //@AutowiredëŠ” ì¸ìŠ¤í„´ìŠ¤ë¥¼ ìƒì„±í•˜ì§€ ì•Šì•„ë„ ìŠ¤í”„ë§ì´ ìë™ìœ¼ë¡œ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ì£¼ì…í•´ì£¼ëŠ” ê¸°ëŠ¥
 	private MemberService memberService;
 	@Autowired
 	private MemberMailSendService mss;	
-	@Autowired
-	private MemberDAO mDao;
 	
-	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-	
-	//¾à°üµ¿ÀÇ ÆäÀÌÁö ÀÌµ¿
+	//ì•½ê´€ë™ì˜ í˜ì´ì§€ ì´ë™
 	@GetMapping(value="/contract_form")
 	public String contractView() {
 		
 		return "member/contract";
 	}
 		
-	//È¸¿ø°¡ÀÔ ÆäÀÌÁö ÀÌµ¿
+	//íšŒì›ê°€ì… í˜ì´ì§€ ì´ë™
 	@PostMapping(value="/join_form")
 	public String joinView() {
 		
 		return "member/join";
 	}
 	
-	//¾ÆÀÌµğ Áßº¹ Ã¼Å©
+	//ì•„ì´ë”” ì¤‘ë³µ ì²´í¬
     @PostMapping(value="/idCheck")
     @ResponseBody
     public int idCheck(@RequestParam("id") String id){
@@ -67,8 +61,8 @@ public class MemberController {
         return cnt;
     }
 
-	//È¸¿ø°¡ÀÔ Ã³¸®
-	@PostMapping(value="/join")	//Æ÷½ºÆ®·Î °¡Á®¿È
+	//íšŒì›ê°€ì… ì²˜ë¦¬
+	@PostMapping(value="/join")	//í¬ìŠ¤íŠ¸ë¡œ ê°€ì ¸ì˜´
 	public String joinAction(MemberVO vo) {
 			
 		String salt = SHA256Util.generateSalt();
@@ -77,23 +71,23 @@ public class MemberController {
 		vo.setPwd(pwd);
         vo.setSalt(salt);
 		
-		//DB¿¡ È¸¿ø Á¤º¸ ¾÷µ¥ÀÌÆ®
+		//DBì— íšŒì› ì •ë³´ ì—…ë°ì´íŠ¸
  		memberService.insertMember(vo);
  		
-		//ÀÌ¸ŞÀÏ ÀÎÁõÀ» À§ÇÑ ÀÓÀÇÀÇ authKey »ı¼º & ÀÌ¸ŞÀÏ ¹ß¼Û
+		//ì´ë©”ì¼ ì¸ì¦ì„ ìœ„í•œ ì„ì˜ì˜ authKey ìƒì„± & ì´ë©”ì¼ ë°œì†¡
         String authKey = mss.sendAuthMail(vo.getId(), vo.getEmail());
         vo.setAuthkey(authKey);
         
-        //DB¿¡ »ı¼ºÇÑ ÀÓÀÇÀÇ authKey ¾÷µ¥ÀÌÆ®
+        //DBì— ìƒì„±í•œ ì„ì˜ì˜ authKey ì—…ë°ì´íŠ¸
 		memberService.updateAuthkey(vo);
 		
 		return "member/login";
 	}
 	
-	//ÀÌ¸ŞÀÏ ÀÎÁõ È®ÀÎ½Ã Authstatus 1·Î º¯°æ
+	//ì´ë©”ì¼ ì¸ì¦ í™•ì¸ì‹œ Authstatus 1ë¡œ ë³€ê²½
 	@GetMapping("/emailConfirm")
 		public String emailConfirm(MemberVO vo, Model model) throws Exception {
-		// authstatus ±ÇÇÑ »óÅÂ 1·Î º¯°æ
+		// authstatus ê¶Œí•œ ìƒíƒœ 1ë¡œ ë³€ê²½
 		memberService.updateAuthstatus(vo);
 		
 		model.addAttribute("vo", vo);
@@ -101,104 +95,102 @@ public class MemberController {
 		return "member/emailConfirm";
 	}
 	
-	//·Î±×ÀÎ ¹öÆ° -> ·Î±×ÀÎ È­¸éÀ¸·Î ÀÌµ¿
+	//ë¡œê·¸ì¸ ë²„íŠ¼ -> ë¡œê·¸ì¸ í™”ë©´ìœ¼ë¡œ ì´ë™
 	@GetMapping(value="/login_form")
 	public String loginView() {
 		
 		return "member/login";
 	}
 	
-	//·Î±×ÀÎ Ã³¸®
+	//ë¡œê·¸ì¸ ì²˜ë¦¬
 	@PostMapping(value="/login")
 	public String loginAction(MemberVO vo, Model model) {
 		MemberVO loginUser = null;
 		
 		int result = memberService.loginId(vo);		
 		
-		if (result == 1) { // »ç¿ëÀÚ ÀÎÁõ ¼º°ø
-			// »ç¿ëÀÚ Á¤º¸¸¦ Á¶È¸ÇÏ¿© Session °´Ã¼¿¡ ÀúÀå
+		if (result == 1) { // ì‚¬ìš©ì ì¸ì¦ ì„±ê³µ
+			// ì‚¬ìš©ì ì •ë³´ë¥¼ ì¡°íšŒí•˜ì—¬ Session ê°ì²´ì— ì €ì¥
 			loginUser = memberService.getMember(vo.getId());
 			
-			// @SessionAttributes·Î ÁöÁ¤ÇÏ¿© ¼¼¼Ç¿¡µµ ÀúÀåµÊ.
+			// @SessionAttributesë¡œ ì§€ì •í•˜ì—¬ ì„¸ì…˜ì—ë„ ì €ì¥ë¨.
 			//Model addAttribute(String name, Object value)
-			//value °´Ã¼¸¦ name ÀÌ¸§À¸·Î Ãß°¡ÇÑ´Ù. Áï, "loginUser" ¿¡´Â  loginUser °ªÀÌ µé¾î°£´Ù.
+			//value ê°ì²´ë¥¼ name ì´ë¦„ìœ¼ë¡œ ì¶”ê°€í•œë‹¤. ì¦‰, "loginUser" ì—ëŠ”  loginUser ê°’ì´ ë“¤ì–´ê°„ë‹¤.
 			model.addAttribute("loginUser", loginUser); 
 			
 			return "redirect:/index";	
 			
 			} else if(result == -1){
-				model.addAttribute("message", "¾ÆÀÌµğ¸¦ Àß¸ø ÀÔ·ÂÇÏ¿´½À´Ï´Ù.");
+				model.addAttribute("message", "ì•„ì´ë””ë¥¼ ì˜ëª» ì…ë ¥í•˜ì˜€ìŠµë‹ˆë‹¤.");
 				
 				return "member/login";
 				
 			} else {
-				model.addAttribute("message", "ºñ¹Ğ¹øÈ£¸¦ Àß¸ø ÀÔ·ÂÇÏ¿´½À´Ï´Ù.");
+				model.addAttribute("message", "ë¹„ë°€ë²ˆí˜¸ë¥¼ ì˜ëª» ì…ë ¥í•˜ì˜€ìŠµë‹ˆë‹¤.");
 				
 				return "member/login";
 				
 		}
 	}
 	
-	//·Î±×¾Æ¿ô Ã³¸®
+	//ë¡œê·¸ì•„ì›ƒ ì²˜ë¦¬
 	@GetMapping(value="/logout")
 	public String logout(SessionStatus status) {
 		
-		status.setComplete();    // ÇöÀç ¼¼¼ÇÀ» Á¾·á
+		status.setComplete();    // í˜„ì¬ ì„¸ì…˜ì„ ì¢…ë£Œ
 		
 		return "redirect:/index";
 	}
 	
-	//¾ÆÀÌµğ Ã£±â ÆäÀÌÁö ÀÌµ¿
+	//ì•„ì´ë”” ì°¾ê¸° í˜ì´ì§€ ì´ë™
 	@GetMapping(value="/find_id_form")
 	public String find_id_view() throws Exception{
 		
 		return "member/find_id_form";
 	}
 	
-	// ¾ÆÀÌµğ Ã£±â
+	// ì•„ì´ë”” ì°¾ê¸°
 	@PostMapping(value="/find_id")
 	public String find_id(HttpServletResponse response, MemberVO vo, Model md) throws Exception{
-		
-		String result = memberService.find_id(response, vo);
 		
 		md.addAttribute("id", memberService.find_id(response, vo));
 		
 		return "member/find_id";
 	}
 	
-	//ºñ¹Ğ¹øÈ£ Ã£±â ÆäÀÌÁö ÀÌµ¿
+	//ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° í˜ì´ì§€ ì´ë™
 	@GetMapping(value="/find_pwd_form")
 	public String find_pw_form() throws Exception{
 		
 		return "/member/find_pwd_form";
 	}
 	
-	// ºñ¹Ğ¹øÈ£ Ã£±â
+	// ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°
 	@PostMapping(value="/find_pwd")
 	public String find_pw(HttpServletResponse response, MemberVO vo, Model model) throws Exception {		
 		
-		//ºñ¹Ğ¹øÈ£ Ã£±â(¾ÆÀÌµğ¿Í ÀÌ¸ŞÀÏÀÌ ¸ÂÀ¸¸é true)
+		//ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°(ì•„ì´ë””ì™€ ì´ë©”ì¼ì´ ë§ìœ¼ë©´ true)
 		String result = memberService.selectPwd(vo);
 		
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
 		if(result != null) {
-			//ÀÓ½Ãºñ¹Ğ¹øÈ£ ¸ŞÀÏ º¸³»±â
+			//ì„ì‹œë¹„ë°€ë²ˆí˜¸ ë©”ì¼ ë³´ë‚´ê¸°
 			String tempPwd = mss.sendPwdMail(vo.getId(), vo.getEmail());	        
 			vo.setPwd(tempPwd);
 	        
-	        //ÀÓ½Ã ºñ¹Ğ¹øÈ£ ¾ÏÈ£È­
+	        //ì„ì‹œ ë¹„ë°€ë²ˆí˜¸ ì•”í˜¸í™”
 			String salt = SHA256Util.generateSalt();
 			String pwd = SHA256Util.getEncrypt(vo.getPwd(), salt);
 			
 			vo.setPwd(pwd);
 	        vo.setSalt(salt);
 	 		
-	        //DB¿¡ ¾ÏÈ£È­ÇÑ ÀÓ½Ã ºñ¹Ğ¹øÈ£ ¾÷µ¥ÀÌÆ®
+	        //DBì— ì•”í˜¸í™”í•œ ì„ì‹œ ë¹„ë°€ë²ˆí˜¸ ì—…ë°ì´íŠ¸
 			memberService.updatePwd(vo);
 			
-			out.println("<script>alert('ÇØ´ç ÀÌ¸ŞÀÏ·Î ÀÓ½Ã ºñ¹Ğ¹øÈ£¸¦ ¹ß¼ÛÇÏ¿´½À´Ï´Ù.');"
+			out.println("<script>alert('í•´ë‹¹ ì´ë©”ì¼ë¡œ ì„ì‹œ ë¹„ë°€ë²ˆí˜¸ë¥¼ ë°œì†¡í•˜ì˜€ìŠµë‹ˆë‹¤.');"
 					+ " location.href='login_form';</script>");
 			out.flush();
 			
@@ -206,15 +198,60 @@ public class MemberController {
 									
 		} else {
 			
-			model.addAttribute("message", "Á¸ÀçÇÏÁö ¾Ê´Â °èÁ¤ÀÔ´Ï´Ù.");
+			model.addAttribute("message", "ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê³„ì •ì…ë‹ˆë‹¤.");
 			
 			return "member/find_pwd_form";
 		}
 		
 	}
 	
+	//íšŒì› íƒˆí‡´ í˜ì´ì§€ ì´ë™
+	@GetMapping(value="/delete_member_form")
+	public String memberDeleteView() {
+		return "mypage/delete_member";
+	}
+		
+	//íšŒì› íƒˆí‡´
+	@PostMapping(value="/deleteMember")
+	public String memberDelete(MemberVO vo, HttpSession session, SessionStatus status, Model model) {
+		
+		int result = memberService.loginId(vo);
+		
+		if (result == 1) {
+			//ì„¸ì…˜ì„ ê°€ì ¸ì™€ memberë³€ìˆ˜ì— ë„£ìŒ
+			MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+			
+			//ì„¸ì…˜ì˜ ë¹„ë°€ë²ˆí˜¸ì™€ saltë¥¼ ê°€ì ¸ì™€ì„œ í•©ì¹¨
+			String sessionPwd = loginUser.getPwd();
+			
+			String salt = memberService.getSaltById(vo);	//dbì— ì €ì¥ëœ saltë¥¼ ê°€ì ¸ì˜´
+			String pwd = SHA256Util.getEncrypt(vo.getPwd(), salt);	//ì…ë ¥ë°›ì€ pwdë‘ ë‘ê°œë¥¼ í•©ì¹¨
+			vo.setPwd(pwd);
+			
+			//ì„¸ì…˜ì˜ ë¹„ë°€ë²ˆí˜¸(+salt)ì™€ ì…ë ¥ë°›ì€ ë¹„ë°€ë²ˆí˜¸(+salt)ë¥¼ ë¹„êµí•¨
+			if(sessionPwd.equals(pwd) && loginUser.getId().equals(vo.getId())) {
+				
+				status.setComplete();
+				memberService.deleteMember(vo);
+								
+			}
+			
+		} else if(result == -1){
+			model.addAttribute("message", "ì•„ì´ë””ë¥¼ ì˜ëª» ì…ë ¥í•˜ì˜€ìŠµë‹ˆë‹¤.");
+			
+			return "mypage/delete_member";
+			
+		} else {
+			model.addAttribute("message", "ë¹„ë°€ë²ˆí˜¸ë¥¼ ì˜ëª» ì…ë ¥í•˜ì˜€ìŠµë‹ˆë‹¤.");
+			
+			return "mypage/delete_member";
+		}
 
-
+		return "redirect:/index";
+		
+	}
+	
+	
 
 	
 	
@@ -238,7 +275,7 @@ public class MemberController {
 		@RequestMapping("/KakaLoginOK/{email}")
 		public ModelAndView loginOK(@PathVariable String email, Model model, HttpSession session) {
 			
-			System.out.println("µ¿ÀÛ");
+			System.out.println("ë™ì‘");
 			session.setAttribute("member", email);
 			ModelAndView mav = new ModelAndView("loginOK");
 			return mav;

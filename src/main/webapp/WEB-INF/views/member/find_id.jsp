@@ -9,10 +9,9 @@
 	    width: 500px;
 	    height: auto;
 	    padding-top: 20px;
-		margin-top: 50px;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50px;
+		margin: 0 auto;
+		margin-bottom: 130px;
+		margin-top: 70px;
 		
 	}
 
@@ -58,7 +57,7 @@
 		</div>
 		
 		<div class="find_btn_box">
-			<input type="button" onclick="location='login_form'" class="find_btn" value="로그인"></button><br>
+			<input type="button" onclick="location='login_form'" class="find_btn" value="로그인"><br>
 		</div>
 	</div>
 </body>

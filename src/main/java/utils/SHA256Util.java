@@ -10,9 +10,9 @@ import java.util.Random;
 public class SHA256Util {
 
 	/**
-	 * SHA-256 ¾ÏÈ£È­ ÇÔ
-	 * @param source ¿øº»
-	 * @param salt(String) SALT °ª
+	 * SHA-256 ì•”í˜¸í™” í•¨
+	 * @param source ì›ë³¸
+	 * @param salt(String) SALT ê°’
 	 * @return
 	 */
 	public static String getEncrypt(String source, String salt) {
@@ -20,9 +20,9 @@ public class SHA256Util {
 	}
 	
 	/**
-	 * SHA-256 ¾ÏÈ£È­ ÇÔ
-	 * @param source ¿øº»
-	 * @param salt(byte[]) SALT °ª
+	 * SHA-256 ì•”í˜¸í™” í•¨
+	 * @param source ì›ë³¸
+	 * @param salt(byte[]) SALT ê°’
 	 * @return
 	 */
 	public static String getEncrypt(String source, byte[] salt) {
@@ -36,7 +36,7 @@ public class SHA256Util {
 		System.arraycopy(salt, 0, bytes, a.length, salt.length);
 		
 		try {
-			// ¾ÏÈ£È­ ¹æ½Ä ÁöÁ¤ ¸Ş¼Òµå
+			// ì•”í˜¸í™” ë°©ì‹ ì§€ì • ë©”ì†Œë“œ
 			MessageDigest md = MessageDigest.getInstance("SHA-256");
 			md.update(bytes);
 			
@@ -56,7 +56,7 @@ public class SHA256Util {
 	}
 	
 	/**
-	 * SALT¸¦ ¾ò¾î¿Â´Ù.
+	 * SALTë¥¼ ì–»ì–´ì˜¨ë‹¤.
 	 * @return
 	 */
 	public static String generateSalt() {
@@ -67,7 +67,7 @@ public class SHA256Util {
 		
 		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < salt.length; i++) {
-			// byte °ªÀ» Hex °ªÀ¸·Î ¹Ù²Ù±â.
+			// byte ê°’ì„ Hex ê°’ìœ¼ë¡œ ë°”ê¾¸ê¸°.
 			sb.append(String.format("%02x",salt[i]));
 		}
 		
