@@ -9,49 +9,55 @@ import com.green.tnt.dto.MemberVO;
 
 public interface MemberService {
 
-	//ȸ�� ������ ��ȸ
+	//회원 상세정보 조회
 	MemberVO getMember(String id);
 
-	//�α��� ó��
+	//로그인 처리
 	int loginId(MemberVO vo);
 	
-	//salt�� ��������
+	//salt값 가져오기
 	String getSaltById(MemberVO vo);
 
-	//ȸ�� ���
+	//회원 등록
 	void insertMember(MemberVO vo);
 
-	//�񵿱� ���̵� �ߺ� Ȯ��
+	//비동기 아이디 중복 확인
 	int idCheck(String id);
 	
-	// AuthKey ������Ʈ
+	// AuthKey 업데이트
 	void updateAuthkey(MemberVO vo);
 	
-	//Authstatus ������Ʈ
+	//Authstatus 업데이트
 	void updateAuthstatus(MemberVO vo);
 	
-	//���̵� ã��
+	//아이디 찾기
 	String find_id(HttpServletResponse response, MemberVO vo) throws Exception;
 	
-	//��й�ȣ ã��
+	//비밀번호 찾기
 	String selectPwd(MemberVO vo);
 	
-	//�ӽ� ��й�ȣ ������Ʈ
+	//임시 비밀번호 업데이트
 	void updatePwd(MemberVO vo);
 	
-	
+	//회원 탈퇴
+	void deleteMember(MemberVO vo);
 
 	
-	//ȸ�� ��� ��ȸ
+	//회원 목록 조회
 	List<MemberVO> listMember(String name);
 	
-	//īī��
+	//카카오
 	String getReturnAccessToken(String code);
 
 	
+	public void signout(HttpSession session);
 
 	
-	public void signout(HttpSession session);
+
+	
+
+	
+
 
 
 	

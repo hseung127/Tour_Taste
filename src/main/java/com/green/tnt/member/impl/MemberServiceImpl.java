@@ -58,7 +58,7 @@ public class MemberServiceImpl implements MemberService {
 		mDao.insertMember(vo);
 	}
 	
-	//�񵿱� ���̵� �ߺ� Ȯ��
+	//비동기 아이디 중복 확인
 	@Override
     public int idCheck(String id) {
         int cnt = mDao.idCheck(id);
@@ -86,7 +86,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		if (id == null) {
 			out.println("<script>");
-			out.println("alert('���Ե� ���̵� �����ϴ�.');");
+			out.println("alert('가입된 아이디가 없습니다.');");
 			out.println("history.go(-1);");
 			out.println("</script>");
 			out.close();
@@ -95,9 +95,6 @@ public class MemberServiceImpl implements MemberService {
 			return id;
 		}
 	}
-	
-
-
 	
 	@Override
 	public String selectPwd(MemberVO vo) {
@@ -110,6 +107,13 @@ public class MemberServiceImpl implements MemberService {
 		
 		mDao.updatePwd(vo);
 	}
+	
+	@Override
+	public void deleteMember(MemberVO vo) {
+		
+		mDao.deleteMember(vo);
+	}
+	
 	
 	
 	@Override
@@ -128,22 +132,22 @@ public class MemberServiceImpl implements MemberService {
             URL url = new URL(reqURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             
-             //HttpURLConnection ���� �� ����
+             //HttpURLConnection 설정 값 셋팅
              conn.setRequestMethod("POST");
              conn.setDoOutput(true);
              
              
-             // buffer ��Ʈ�� ��ü �� ���� �� ��û
+             // buffer 스트림 객체 값 셋팅 후 요청
              BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
              StringBuilder sb = new StringBuilder();
              sb.append("grant_type=authorization_code");
-             sb.append("&client_id=[�� ���ø����̼� Key ��]");  //�� KEY VALUE
-             sb.append("&redirect_uri=http://localhost:8080/kakao_callback"); // �� CALLBACK ���
+             sb.append("&client_id=[내 애플리케이션 Key 값]");  //앱 KEY VALUE
+             sb.append("&redirect_uri=http://localhost:8080/kakao_callback"); // 앱 CALLBACK 경로
              sb.append("&code=" + code);
              bw.write(sb.toString());
              bw.flush();
              
-             //  RETURN �� result ������ ����
+             //  RETURN 값 result 변수에 저장
              BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
              String br_line = "";
              String result = "";
@@ -156,7 +160,7 @@ public class MemberServiceImpl implements MemberService {
              JsonElement element = parser.parse(result);
  
              
-             // ��ū �� ���� �� ����
+             // 토큰 값 저장 및 리턴
              access_token = element.getAsJsonObject().get("access_token").getAsString();
              refresh_token = element.getAsJsonObject().get("refresh_token").getAsString();
  
@@ -169,12 +173,11 @@ public class MemberServiceImpl implements MemberService {
          return access_token;
      }
 
+	
 	@Override
 	public void signout(HttpSession session) {
 		session.invalidate();
 		
 	}
-
-	
 
 }
