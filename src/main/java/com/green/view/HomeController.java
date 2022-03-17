@@ -245,6 +245,12 @@ public class HomeController {
 	}
 	
 
+	@GetMapping(value="/area")
+	public String goarea(Model model) {
+		
+	
+		return "area";
+	}
 	
 	
 	
