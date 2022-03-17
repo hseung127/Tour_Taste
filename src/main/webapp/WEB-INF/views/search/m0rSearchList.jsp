@@ -40,7 +40,7 @@
 							   		<img src="images/member0_r/${m0rVO.image1}" alt="" style="width:180px;height:120px; object-fit: cover;"/>
 							   	</div> 
 					            
-					            <a class="search-list-tit" href="#">	
+					            <a class="search-list-tit" href="member_rDetail?m0rseq=${m0rVO.m0rseq}">	
 					            	<p>${m0rVO.subject}</p>
 					           	</a>    
 					       
