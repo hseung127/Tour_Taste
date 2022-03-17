@@ -1,16 +1,10 @@
 
 package com.green.tnt.dao;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.green.tnt.dto.MemberVO;
 
 import utils.SHA256Util;
@@ -96,6 +90,13 @@ public class MemberDAO {
 	public void updatePwd(MemberVO vo) {
 		mybatis.update("mappings.member-mapping.updatePwd", vo);
 	}
+	
+	//회원 탈퇴	
+	public void deleteMember(MemberVO vo) {
+
+		mybatis.delete("mappings.member-mapping.deleteMember", vo);
+	}
+	
 
 	
 
