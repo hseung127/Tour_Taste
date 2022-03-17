@@ -117,7 +117,7 @@
                       </li>
                       <li class="rd-nav-item"><a class="rd-nav-link" href="about-us">시즌 테마</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="typography">지역</a>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="area">지역</a>
                       </li>
                       <li class="rd-nav-item"><a class="rd-nav-link" href="event-news">소식&이벤트</a>
                       </li>
