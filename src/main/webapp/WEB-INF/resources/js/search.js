@@ -52,7 +52,41 @@ $(function(){
 	
 	
 	
-		    
+
+	//검색창 클릭하면 테두리 굵게 표시
+	/*$("#searchTextBox").click(function () {
+		$("form.header-searchBox").css({"outline-color": "#666"});
+	});*/
+	
+	//header-searchBox
+	/*$('html').click(function() { 
+		if(!$(this).hasClass("header-searchBox")) { 
+			$("form.header-searchBox").css({"outline-color": "none"});
+		} 
+	});
+	*/
+	
+	$(document).click(function(e){ //문서 body를 클릭했을때
+ 		/*if(e.target.className =="searchBoxClick"){return false} *///내가 클릭한 요소(target)를 기준으로 상위요소에 .share-pop이 없으면 (갯수가 0이라면)
+		if(!$(this).hasClass("searchBoxClick")||!$(this).hasClass("search-image")||!$(this).hasClass("blind")) { 
+			$("form.header-searchBox").css({"outline-color": "transparent"});
+			console.log('3');
+		} else{
+			$("form.header-searchBox").css({"outline-color": "#666"});
+		}
+		
+
+ 		
+ });
+
+
+
+	
+	//css({"background-color":"grey","opacity":"0.5"});
+
+
+	
+    
 });  
 
 
@@ -70,15 +104,6 @@ function go_search_index(e){
 
 
 
-
-/*var key = $('.searchKey').html(); //searchkey의 html 값 = 검색키워드값
-if(key != ""){ //비어있지않으면?
-    $(".search-list:contains('"+key+"')").each(function () {
-        //var regex = new RegExp(key,'gi');
-        $(this).html( $(this).text().replace(key, "<span class='text-red'>"+key+"</span>") );
-    });
-}
-*/
 
 
 
