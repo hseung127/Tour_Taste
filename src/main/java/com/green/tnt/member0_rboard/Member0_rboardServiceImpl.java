@@ -15,15 +15,15 @@ public class Member0_rboardServiceImpl implements Member0_rboardService {
 	@Autowired
 	private Member0_rboardDAO m0rDao; 
 	@Override
-	public Member0_rboardVO getMember0_rboard(Member0_rboardVO vo) {
+	public Member0_rboardVO getMember0_rboard(int m0rseq) {
 		
-		return m0rDao.getMember0_rboard(vo);
+		return m0rDao.getMember0_rboard(m0rseq);
 	}
 
 	@Override
-	public int countMember0_rboard(String subject) {
+	public int countMember0_rboard(Criteria criteria) {
 		
-		return m0rDao.countMember0_rboard(subject);
+		return m0rDao.countMember0_rboard(criteria);
 	}
 
 	@Override
@@ -33,9 +33,9 @@ public class Member0_rboardServiceImpl implements Member0_rboardService {
 	}
 
 	@Override
-	public List<Member0_rboardVO> ListWithPaging(Criteria criteria, String subject) {
+	public List<Member0_rboardVO> ListWithPaging(Criteria criteria) {
 		
-		return m0rDao.ListWithPaging(criteria, subject);
+		return m0rDao.ListWithPaging(criteria);
 	}
 
 
@@ -43,6 +43,12 @@ public class Member0_rboardServiceImpl implements Member0_rboardService {
 	public void deletemember0_rboard(int m0rseq) {
 		
 		 m0rDao.deletemember0_rboard(m0rseq);
+	}
+
+	@Override
+	public void member0_rboardHit(Member0_rboardVO vo) {
+		m0rDao.member0_rboardHit(vo);
+		
 	}
 
 }

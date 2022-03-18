@@ -2,6 +2,7 @@
 /**
  * 
  */
+
 function go() {
 
 }
@@ -205,7 +206,7 @@ function go_m1tmod_save(m1tseq) {
 	}
 }
 /*
- * 소식 수정 취소하고 목록으로 이동함.
+ *  수정 취소하고 목록으로 이동함.
  */
 function go_mov() {
 	/*write*/
@@ -224,12 +225,16 @@ function go_mov() {
 	
 	
 }
+/*페이지 유징 */
+
 
 /*
- * 소식 상세보기에서 목록으로 이동
+ * 상세보기에서 목록으로 이동
  */
 function go_list() {
 	$("#ndetail_form").attr("action", "admin_newsboard_list").submit();
+	
+	
 	$("#m0rdetail_form").attr("action", "admin_member0_rboard_list").submit();
 	$('#m0tdetail_form').attr("action", "admin_member0_tboard_list").submit();
 	$('#m1rdetail_form').attr("action", "admin_member1_rboard_list").submit();
@@ -253,9 +258,11 @@ function go_delete() {
 		$('#edetail_form').attr("action","admin_eventboard_delete").submit();
 		$('#sdetail_form').attr("action","admin_seasonboard_delete").submit();
 		$('#cdetail_form').attr("action","admin_comments_delete").submit();
-		
+		alert("삭제가 완료되었습니다.");
+	}else {
+		return false;
 	}
-	alert("삭제가 완료되었습니다.");
+	
 
 }
 function checkAll(){
@@ -303,7 +310,7 @@ function checkAll(){
 
 }
 
-function go_sdelete(){
+function go_ndelete(){
 var con = confirm("정말로 삭제하시겠습니까?");
 var count = 0;
 //삭제할 항목이 하나인 경우 확인
@@ -323,11 +330,162 @@ if (count == 0) {
 	alert("삭제할 항목을 선택해 주세요!");
 } else {
 	if(con){
-		 $("#admin_newsboardList").attr("action", "admin_newsboard_sdelete").submit();
+		 $("#admin_newsboardList").attr("action", "admin_newsboard_ndelete").submit();
+
+	}
+}
+
+
+
+
+}
+function go_m1rdelete(){
+	var con = confirm("정말로 삭제하시겠습니까?");
+	var count = 0;
+if (document.m1rfrm.m1rseq.length == undefined) {
+	if (document.m1rfrm.m1rseq.checked == true) {
+		count++;
+	}
+}
+// 삭제할 항목이 2개 이상인 경우 확인
+for (var i=0; i<document.m1rfrm.m1rseq.length; i++) {
+	if (document.m1rfrm.m1rseq[i].checked == true) {
+		count++;
+	}
+}
+
+if (count == 0) {
+	alert("삭제할 항목을 선택해 주세요!");
+} else {
+	if(con){
+		 $("#admin_member1_rboardList").attr("action", "admin_member1_rboard_m1rdelete").submit();
+
+	}
+}
+}
+
+function go_m0rdelete(){
+	var con = confirm("정말로 삭제하시겠습니까?");
+	var count = 0;
+if (document.m0rfrm.m0rseq.length == undefined) {
+	if (document.m0rfrm.m0rseq.checked == true) {
+		count++;
+	}
+}
+// 삭제할 항목이 2개 이상인 경우 확인
+for (var i=0; i<document.m0rfrm.m0rseq.length; i++) {
+	if (document.m0rfrm.m0rseq[i].checked == true) {
+		count++;
+	}
+}
+
+if (count == 0) {
+	alert("삭제할 항목을 선택해 주세요!");
+} else {
+	if(con){
+		 $("#admin_member0_rboardList").attr("action", "admin_member0_rboard_m0rdelete").submit();
 
 	}
 }
 }
 
 
+function go_m0tdelete(){
+	var con = confirm("정말로 삭제하시겠습니까?");
+	var count = 0;
+if (document.m0tfrm.m0tseq.length == undefined) {
+	if (document.m0tfrm.m0tseq.checked == true) {
+		count++;
+	}
+}
+// 삭제할 항목이 2개 이상인 경우 확인
+for (var i=0; i<document.m0tfrm.m0tseq.length; i++) {
+	if (document.m0tfrm.m0tseq[i].checked == true) {
+		count++;
+	}
+}
 
+if (count == 0) {
+	alert("삭제할 항목을 선택해 주세요!");
+} else {
+	if(con){
+		 $("#admin_member0_tboardList").attr("action", "admin_member0_tboard_m0tdelete").submit();
+
+	}
+}
+}
+
+function go_m1tdelete(){
+	var con = confirm("정말로 삭제하시겠습니까?");
+	var count = 0;
+if (document.m1tfrm.m1tseq.length == undefined) {
+	if (document.m1tfrm.m1tseq.checked == true) {
+		count++;
+	}
+}
+// 삭제할 항목이 2개 이상인 경우 확인
+for (var i=0; i<document.m1tfrm.m1tseq.length; i++) {
+	if (document.m1tfrm.m1tseq[i].checked == true) {
+		count++;
+	}
+}
+
+if (count == 0) {
+	alert("삭제할 항목을 선택해 주세요!");
+} else {
+	if(con){
+		 $("#admin_member1_tboardList").attr("action", "admin_member1_tboard_m1tdelete").submit();
+
+	}
+}
+}
+
+function go_sdelete(){
+	var con = confirm("정말로 삭제하시겠습니까?");
+	var count = 0;
+if (document.sfrm.sseq.length == undefined) {
+	if (document.sfrm.sseq.checked == true) {
+		count++;
+	}
+}
+// 삭제할 항목이 2개 이상인 경우 확인
+for (var i=0; i<document.sfrm.sseq.length; i++) {
+	if (document.sfrm.sseq[i].checked == true) {
+		count++;
+	}
+}
+
+if (count == 0) {
+	alert("삭제할 항목을 선택해 주세요!");
+} else {
+	if(con){
+		 $("#admin_seasonboardList").attr("action", "admin_seasonboard_sdelete").submit();
+
+	}
+}
+}
+
+function go_edelete(){
+	var con = confirm("정말로 삭제하시겠습니까?");
+	var count = 0;
+if (document.efrm.eseq.length == undefined) {
+	if (document.efrm.eseq.checked == true) {
+		count++;
+	}
+}
+// 삭제할 항목이 2개 이상인 경우 확인
+for (var i=0; i<document.efrm.eseq.length; i++) {
+	if (document.efrm.eseq[i].checked == true) {
+		count++;
+	}
+}
+
+if (count == 0) {
+	alert("삭제할 항목을 선택해 주세요!");
+} else {
+	if(con){
+		 $("#admin_eventboardList").attr("action", "admin_eventboard_edelete").submit();
+
+	}
+}
+}

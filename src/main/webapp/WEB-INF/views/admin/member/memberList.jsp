@@ -28,7 +28,7 @@
 			}
 		</script>
 			<div id="wrap">
-  <form action="" autocomplete="on">
+  <form action="admin_member_update" autocomplete="on">
   <input id="search" name="keyword" type="text" placeholder="검색어를 입력해주세요."><input id="keyword" value="${pageMaker.criteria.keyword}" type="submit" onclick="go_search(this.key)">
   </form>
 </div>
@@ -40,30 +40,24 @@
 				
 					<tr>
 						
-						<th>아이디(탈퇴여부)</th>
+						<th>아이디</th>
 						<th>이름</th>
-						<th>생일</th>
 						<th>이메일</th>
 						<th>회원등급</th>
 						<th>가입일</th>
+					
+						
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${memberList}" var="memberVO">
 						<tr>
 						
-							<td>${memberVO.id}<c:choose>
-									<c:when test='${memberVO.useryn=="n"}'>
-										<input type="checkbox" name="useryn" disabled="disabled">
-									</c:when>
-									<c:otherwise>
-										<input type="checkbox" name="useryn" checked="checked"
-											disabled="disabled">
-									</c:otherwise>
-								</c:choose>
+							<td>${memberVO.id}
+									
+								
 							</td>
 							<td>${memberVO.name}</td>
-							<td>${memberVO.birthday}</td>
 							<td>${memberVO.email}</td>
 							<td><c:if test="${memberVO.user_type == 1}">
        		관리자
@@ -72,10 +66,12 @@
        		</c:if></td>
 
 							<td><fmt:formatDate value="${memberVO.regdate}" /></td>
+							
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
+			</form>
 <form id="moveForm">
 		<input type="hidden" name="pageNum" value="${pageMaker.criteria.pageNum }">
         <input type="hidden" name="rowsPerPage" value="${pageMaker.criteria.rowsPerPage }"> 
@@ -93,7 +89,7 @@
 
 				<!-- 각번호 페이지 버튼 -->
 				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="index">
-				<li class="pageinfo_btn">
+				<li class="pageinfo_btn ${pageMaker.criteria.pageNum == index ? "active":"" }">
 					<a href="admin_member_list${pageMaker.makeQuery(index)}">${index}</a>
 				</li>
 				</c:forEach>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.green.tnt.dto.Member0_tboardVO;
+import com.green.tnt.dto.Member1_tboardVO;
 
 import utils.Criteria;
 
@@ -16,14 +17,14 @@ public class Member0_tboardDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 
-	public Member0_tboardVO getMember0_tboard(Member0_tboardVO vo) {
+	public Member0_tboardVO getMember0_tboard(int m0tseq) {
 
-		return mybatis.selectOne("mappings.member0_tboard-mapping.getMember0_tboard", vo);
+		return mybatis.selectOne("mappings.member0_tboard-mapping.getMember0_tboard", m0tseq);
 	}
 
-	public int countMember0_tboard(String subject) {
+	public int countMember0_tboard(Criteria criteria) {
 
-		return mybatis.selectOne("mappings.member0_tboard-mapping.countMember0_tboardList", subject);
+		return mybatis.selectOne("mappings.member0_tboard-mapping.countMember0_tboardList", criteria);
 	}
 
 	public List<Member0_tboardVO> listMember0_tboard(String subject) {
@@ -31,16 +32,17 @@ public class Member0_tboardDAO {
 		return mybatis.selectList("mappings.member0_tboard-mapping.listMember0_tboard", subject);
 	}
 
-	public List<Member0_tboardVO> ListWithPaging(Criteria criteria, String subject) {
-		HashMap<String, Object> map = new HashMap<>();
-		map.put("criteria", criteria);
-		map.put("subject", subject);
-		return mybatis.selectList("mappings.member0_tboard-mapping.listWithPaging", map);
+	public List<Member0_tboardVO> ListWithPaging(Criteria criteria) {
+
+		return mybatis.selectList("mappings.member0_tboard-mapping.listWithPaging", criteria);
 	}
 	
 
 	public void deletemember0_tboard(int m0tseq) {
 		mybatis.delete("mappings.member0_tboard-mapping.deletemember0_tboard", m0tseq);
 
+	}
+	public void member0_tboardHit(Member0_tboardVO vo) {
+		mybatis.update("mappings.member0_tboard-mapping.member0_tboardHit",vo);
 	}
 }

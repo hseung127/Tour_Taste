@@ -15,15 +15,15 @@ public class EventboardServiceImpl implements EventboardService {
 	@Autowired
 	private EventboardDAO eDao; 
 	@Override
-	public EventboardVO getEventboard(EventboardVO vo) {
+	public EventboardVO getEventboard(int eseq) {
 		
-		return eDao.getEventboard(vo);
+		return eDao.getEventboard(eseq);
 	}
 
 	@Override
-	public int countEventboard(String subject) {
+	public int countEventboard(Criteria criteria) {
 		
-		return eDao.countEventboard(subject);
+		return eDao.countEventboard(criteria);
 	}
 
 	@Override
@@ -33,9 +33,9 @@ public class EventboardServiceImpl implements EventboardService {
 	}
 
 	@Override
-	public List<EventboardVO> ListWithPaging(Criteria criteria, String subject) {
+	public List<EventboardVO> ListWithPaging(Criteria criteria) {
 		
-		return eDao.ListWithPaging(criteria, subject);
+		return eDao.ListWithPaging(criteria);
 	}
 
 
@@ -54,6 +54,12 @@ public class EventboardServiceImpl implements EventboardService {
 	@Override
 	public void updateEventboard(EventboardVO vo) {
 		eDao.updateEventboard(vo);
+		
+	}
+
+	@Override
+	public void eventboardHit(int eseq) {
+		eDao.eventboardHit(eseq);
 		
 	}
 

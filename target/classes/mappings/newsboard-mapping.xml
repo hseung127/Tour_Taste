@@ -40,7 +40,7 @@
 		  	WHERE 
 		  	 ]]>         
             <if test="keyword != null">
-                subject like '%'||#{keyword}||'%' and
+                (subject like '%'||#{keyword}||'%' OR content like '%'||#{keyword}||'%')  and
             </if>
             
     <![CDATA[        

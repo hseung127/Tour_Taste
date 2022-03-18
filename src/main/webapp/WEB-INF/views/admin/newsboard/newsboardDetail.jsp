@@ -46,14 +46,25 @@
 <input class="btn"  type="button" value="수정" onClick="go_nmod('${newsboardVO.nseq}')">
 <input class="btn" type="button"  value="삭제" onClick="go_delete()">
 <!--[9] 목록 버튼이 눌리면 상품 리스트 페이지로 이동하되 현재 페이지를 전달해 준다. --> 
-<input class="btn"  type="button" value="목록" onClick="go_list('${criteria.pageNum}', '${criteria.rowsPerPage}')">           
+<input class="btn" id="list_btn" type="button" value="목록" onClick="go_list('${criteria.pageNum}', '${criteria.rowsPerPage}')">           
+
+
 </form>
 </div>
-
+	<form name="infoForm" method="post" action="admin_newsboard_write">
+		<input type="hidden" id="nseq" name="nseq" value = "${pageInfo.nseq}">
+		<input type="hidden" name="pageNum" value="${criteria.pageNum}">
+        <input type="hidden" name="rowsPerPage" value="${criteria.rowsPerPage}"> 
+        <input type="hidden" name="keyword" value="${criteria.keyword}">
+        
+	</form>
+	
 	<footer id="footer">
 	<div id="footer_box">
 		<%@ include file="../footer.jsp" %> 
 	</div>
 </footer>
+
+
 </body>
 </html>

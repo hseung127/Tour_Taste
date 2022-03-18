@@ -15,14 +15,14 @@ public class NewsboardDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 
-	public NewsboardVO getNewsboard(NewsboardVO vo) {
+	public NewsboardVO getNewsboard(int nseq) {
 
-		return mybatis.selectOne("mappings.newsboard-mapping.getNewsboard", vo);
+		return mybatis.selectOne("mappings.newsboard-mapping.getNewsboard", nseq);
 	}
 
-	public int countNewsboardList(Criteria cri) {
+	public int countNewsboardList(Criteria criteria) {
 
-		return mybatis.selectOne("mappings.newsboard-mapping.countNewsboardList", cri);
+		return mybatis.selectOne("mappings.newsboard-mapping.countNewsboardList", criteria);
 	}
 
 	public List<NewsboardVO> listNewsboard(String subject) {
@@ -49,8 +49,8 @@ public class NewsboardDAO {
 		mybatis.delete("mappings.newsboard-mapping.deleteNewsboard", nseq);
 	}
 	
-	public void newsboardHit(NewsboardVO vo) {
-		mybatis.update("mappings.newsboard-mapping.newsboardHit",vo);
+	public void newsboardHit(int nseq) {
+		mybatis.update("mappings.newsboard-mapping.newsboardHit",nseq);
 	}
 		
 

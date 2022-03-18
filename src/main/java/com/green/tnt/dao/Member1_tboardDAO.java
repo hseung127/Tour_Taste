@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.green.tnt.dto.Member1_tboardVO;
+import com.green.tnt.dto.NewsboardVO;
 
 import utils.Criteria;
 
@@ -16,14 +17,14 @@ public class Member1_tboardDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 
-	public Member1_tboardVO getMember1_tboard(Member1_tboardVO vo) {
+	public Member1_tboardVO getMember1_tboard(int m1tseq) {
 
-		return mybatis.selectOne("mappings.member1_tboard-mapping.getMember1_tboard", vo);
+		return mybatis.selectOne("mappings.member1_tboard-mapping.getMember1_tboard", m1tseq);
 	}
 
-	public int countMember1_tboard(String subject) {
+	public int countMember1_tboard(Criteria criteria) {
 
-		return mybatis.selectOne("mappings.member1_tboard-mapping.countMember1_tboardList", subject);
+		return mybatis.selectOne("mappings.member1_tboard-mapping.countMember1_tboardList", criteria);
 	}
 
 	public List<Member1_tboardVO> listMember1_tboard(String subject) {
@@ -31,11 +32,9 @@ public class Member1_tboardDAO {
 		return mybatis.selectList("mappings.member1_tboard-mapping.listMember1_tboard", subject);
 	}
 
-	public List<Member1_tboardVO> ListWithPaging(Criteria criteria, String subject) {
-		HashMap<String, Object> map = new HashMap<>();
-		map.put("criteria", criteria);
-		map.put("subject", subject);
-		return mybatis.selectList("mappings.member1_tboard-mapping.listWithPaging", map);
+	public List<Member1_tboardVO> ListWithPaging(Criteria criteria) {
+
+		return mybatis.selectList("mappings.member1_tboard-mapping.listWithPaging", criteria);
 	}
 	public void insertMember1_tboard(Member1_tboardVO vo) {
 		mybatis.insert("mappings.member1_tboard-mapping.insertMember1_tboard", vo);
@@ -50,4 +49,8 @@ public class Member1_tboardDAO {
 		mybatis.delete("mappings.member1_tboard-mapping.deletemember1_tboard", m1tseq);
 
 	}
+	public void member1_tboardHit(Member1_tboardVO vo) {
+		mybatis.update("mappings.member1_tboard-mapping.member1_tboardHit",vo);
+	}
+		
 }

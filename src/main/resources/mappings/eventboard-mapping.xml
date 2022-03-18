@@ -9,12 +9,22 @@
 	</select>
 
 <!-- 조회한 총  갯수 -->
-	<select id="countEventboardList" parameterType="String"
+	<select id="countEventboardList" 
 		resultType="int">
 		SELECT COUNT(*) FROM eventboard
-		WHERE name LIKE '%'||#{subject}||'%'
+		<if test="keyword != null">
+		
+            where subject like '%'||#{keyword}||'%'
+            
+        </if>
 	</select>
+	<update id="eventboardHit" parameterType="eventboard">
 
+		UPDATE eventboard SET
+		hit = hit+1
+		where eseq = #{eseq}
+
+	</update>
 	<!--  목록 조회 -->
 	<select id="listEventboard" parameterType="String"
 		resultType="eventboard">
@@ -31,9 +41,16 @@
 	SELECT eseq, subject, name, regdate
 	  FROM (SELECT row_number() over(ORDER BY eseq DESC) rn, eseq, subject, name,regdate
 		  FROM eventboard
-		 WHERE subject LIKE '%'||#{subject}||'%')	 
-	 WHERE rn <=#{criteria.pageNum} * #{criteria.rowsPerPage} 
-	   AND rn> (#{criteria.pageNum}-1) * #{criteria.rowsPerPage}]]>
+		 WHERE 		  	 ]]>         
+            <if test="keyword != null">
+                (subject like '%'||#{keyword}||'%' OR content like '%'||#{keyword}||'%')  and
+            </if>
+            
+    <![CDATA[        
+		  		rownum <=#{pageNum} * #{rowsPerPage}
+		  	)
+		  	where rn > (#{pageNum}-1) * #{rowsPerPage}
+		  ]]>
 	</select>
 	<!-- 추가 -->
 	<insert id="insertEventboard">
