@@ -20,7 +20,7 @@
 	
 	<section class="ftco-section">
 		<div class="boardcontainer">
-			<form name="frm" id="member_rinsertform" method="post">
+			<form name="frm" id="member_rinsertform" method="post" enctype="multipart/form-data">
 			<input type="text" name="subject" id="title" placeholder="제목">
 			<div class="area_check">
 			<p>지역 선택
@@ -47,7 +47,7 @@
 				height : '500px',  // 입력창의 높이
 				//filebrowserUploadUrl:'/mine/imageUpload.do'
 			});</script>
-			
+			<input type="file" id="member0r_image" name="member0r_image" style="margin-top: 10px;">
 			</form>
 			<button type="button" class="btn" id="insertboard" onclick="go_mrsave()"><span>글등록</span></button>
 		</div>

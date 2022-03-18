@@ -83,13 +83,31 @@ public class Member0_tController {
 	
 	// 글 등록
 	@PostMapping(value="/member_tinsert")
-	public String goMemberTourSave(Member0_tVO vo, HttpSession session) {
+	public String goMemberTourSave(@RequestParam(value="member0t_image") MultipartFile uploadFile,
+								   Member0_tVO vo, HttpSession session) {
 		
 		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
 		
 		if (loginUser == null) {
 			return "member/login";
 		} else {
+			String fileName = "";
+			if (!uploadFile.isEmpty()) {
+				fileName = uploadFile.getOriginalFilename();
+				
+				vo.setImage1(fileName);
+				
+				String image_path = session.getServletContext().getRealPath("WEB-INF/resources/images/member0_t/");
+				System.out.println("이미지 경로: " + image_path);
+				
+				try {
+					// 이미지 파일을 위의 경로로 이동시킴
+					File dest = new File(image_path + fileName);
+					uploadFile.transferTo(dest);
+				} catch (IllegalStateException | IOException e) {
+					e.printStackTrace();
+				}
+			}
 			vo.setName(loginUser.getName());
 			vo.setId(loginUser.getId());
 			
