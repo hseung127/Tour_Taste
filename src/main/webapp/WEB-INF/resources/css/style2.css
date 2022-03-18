@@ -37,6 +37,12 @@ form.searchBox {
 	}
 	
 	
+form.searchBox:hover {	
+	
+	outline:2px solid #000;
+}
+	
+	
 form.searchBox input {
 		border: none;
 		padding: 10px;
@@ -44,6 +50,8 @@ form.searchBox input {
 		margin-left:20px;
 		width: 380px;
 	}
+	
+
 
 form.searchBox input[type=text]::placeholder{
 		color:  #666;
@@ -104,7 +112,7 @@ form button {
 .ham-ul{
 	
 	border:none; /*1px blue solid;*/
-    margin:40px 0px 0px 0px;
+    margin:6px 0px 0px 0px;
     padding: 0px;
     max-width: 347px;
     width: 100%;
@@ -128,12 +136,13 @@ form button {
 }
 
 .ham-ul-a{
-	border:none;/*1px green solid;*/
-	font-size:16px;
-	padding:8px 171px 7px 2px;
-	float:left;
-	margin: 0 0 0 17px;
-	color:#1d1d1d;
+	border: none;
+    font-size: 15px;
+    padding: 8px 171px 7px 2px;
+    float: left;
+    margin: 0 0 0 17px;
+    color: #ffffff;
+    font-weight: bold;
 }
 
 .ham-ul-a:hover{
@@ -797,3 +806,50 @@ div.tab-item input[type="radio"]:checked ~ .tab-content {
 	position: relative;
     height: 51px;
 }
+
+
+
+
+/*햄버거 버튼*/
+.menubar-recommend {
+    font-size: 1.17em;
+    width: fit-content;
+    display: inline;
+    color: #0e0e0e;
+
+}
+
+.wrap-menubar-recommend {
+    width: 34px;
+    height: 36px;
+    padding: 6px 0;
+    transition: all .3s ease;
+    cursor: pointer;
+    z-index: 10;
+    top: 23px;
+    left: 383px;
+}
+
+.menubar-wrap{
+	position: relative;
+}
+
+
+
+
+.menubar-main{
+	width: fit-content;
+    position: relative;
+    left: 380px;
+}
+#nav-item-recommend{
+	margin-left: 54px;
+    width: fit-content;
+    display: inline-block;
+    font-size: 1.17em;
+    width: fit-content;
+    display: inline;
+    color: #0e0e0e;
+}
+
+
