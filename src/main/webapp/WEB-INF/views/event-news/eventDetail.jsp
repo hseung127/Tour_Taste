@@ -20,7 +20,7 @@
 			<div class="allWrap">    
 	            <div class="title-content">  
 	            
-	            	<a href="event-news"><div class="tit-go-list"> <span class="tit-go-list-txt">이벤트</span></div></a>
+	            	<a href="event-news?tabNum=1"><div class="tit-go-list"> <span class="tit-go-list-txt">&lt;&nbsp;이벤트</span></div></a>
 	            	<div class="top-title">${eventDetailList.subject}</div>
 	            	<div class="title-date">${eventDetailList.start_date} - ${eventDetailList.end_date}</div>
 	            	<div class="post-area">

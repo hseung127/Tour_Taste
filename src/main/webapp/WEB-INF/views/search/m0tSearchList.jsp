@@ -36,7 +36,7 @@
 							   		<img src="images/member0_t/${m0tVO.image1}" alt="" style="width:180px;height:120px; object-fit: cover;"/>
 							   	</div> 
 					            
-					            <a class="search-list-tit" href="#">	
+					            <a class="search-list-tit" href="member_tDetail?m0tseq=${m0tVO.m0tseq}">	
 					            	<p>${m0tVO.subject}</p>
 					           	</a>    
 					       

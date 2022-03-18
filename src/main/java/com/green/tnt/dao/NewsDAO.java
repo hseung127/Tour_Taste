@@ -25,14 +25,14 @@ public class NewsDAO  {
 	}
 	
 	
-	// ÀüÃ¼ »óÇ°ÀÇ °¹¼ö Á¶È¸
+	// ï¿½ï¿½Ã¼ ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 	public int getCountNewsList() {	
 		return mybatis.selectOne("mappings.news-mapping.countNewsList");
 	}
 	
 	
 	
-	//ÆäÀÌÁöº° ÀÌº¥Æ® ¸ñ·Ï Á¶È¸
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 	public List<NewsVO> getListWithPaging(Criteria criteria) {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("criteria", criteria);
@@ -40,4 +40,18 @@ public class NewsDAO  {
 		return mybatis.selectList("mappings.news-mapping.listWithPaging", map);
 	}
 
+	
+	
+	//ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public NewsVO getSelectNewsDetail(String nseq) {
+		
+		return mybatis.selectOne("mappings.news-mapping.selectNewsDetail", nseq);
+	}
+	
+	//ï¿½Ìºï¿½Æ® ï¿½ï¿½È¸ï¿½ï¿½
+	public NewsVO newsViewCount(String nseq) {
+		
+		return mybatis.selectOne("mappings.news-mapping.newsViewCount", nseq);
+	}
+	
 }

@@ -14,4 +14,7 @@ public interface NewsService {
 	
 	public List<NewsVO> getListWithPaging(Criteria criteria);
 
+	public NewsVO getSelectNewsDetail(String nseq); 
+	
+	public NewsVO newsViewCount(String nseq);
 }

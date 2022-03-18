@@ -20,7 +20,7 @@
 	}
 	
 	
-form.searchBox {
+form.header-searchBox {
 		border:none;
 		width: 446px;
 		height: 42px;
@@ -33,19 +33,28 @@ form.searchBox {
 		padding-top: 3px;
 		margin: 0 auto;
 		border-radius: 4px ;
+		outline:2px solid transparent;
 		
 	}
 	
 	
-form.searchBox input {
+/* form.header-searchBox:hover {	
+	
+	outline:2px solid #000;
+} */
+	
+	
+form.header-searchBox input {
 		border: none;
 		padding: 10px;
 		background-color:transparent;
 		margin-left:20px;
 		width: 380px;
 	}
+	
 
-form.searchBox input[type=text]::placeholder{
+
+form.header-searchBox input[type=text]::placeholder{
 		color:  #666;
 	}
 	
@@ -104,7 +113,7 @@ form button {
 .ham-ul{
 	
 	border:none; /*1px blue solid;*/
-    margin:40px 0px 0px 0px;
+    margin:6px 0px 0px 0px;
     padding: 0px;
     max-width: 347px;
     width: 100%;
@@ -128,12 +137,13 @@ form button {
 }
 
 .ham-ul-a{
-	border:none;/*1px green solid;*/
-	font-size:16px;
-	padding:8px 171px 7px 2px;
-	float:left;
-	margin: 0 0 0 17px;
-	color:#1d1d1d;
+	border: none;
+    font-size: 15px;
+    padding: 8px 171px 7px 2px;
+    float: left;
+    margin: 0 0 0 17px;
+    color: #ffffff;
+    font-weight: bold;
 }
 
 .ham-ul-a:hover{
@@ -653,6 +663,7 @@ div.tab-item input[type="radio"]:checked ~ .tab-content {
     font-size: 1em;
     color: #8b8b8b;
     margin-bottom: 50px;
+    font-weight: bold;
 }
 
 
@@ -716,3 +727,130 @@ div.tab-item input[type="radio"]:checked ~ .tab-content {
     font-size: 0.85em;
     margin-bottom: 42px;
 }
+
+
+
+/*이벤트&소식 첫화면 체크*/
+.tab-num {
+    display: none;
+}
+
+/*메인페이지 더보기*/
+.home_btn_more_news{
+	float: right;
+    font-size: 0.6em;
+    padding-top: 7px;
+    font-weight: 100;
+}
+
+.home_btn_more_m1t{
+	float: right;
+    font-size: 1.0em;
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    top: -14px;
+}
+
+.home_btn_more_m1r{
+	float: right;
+    font-size: 0.9em;
+    position: relative;
+    top: -13px;
+}
+
+.home_btn_more_m0r{
+	float: right;
+    font-size: 0.9em;
+    position: relative;
+    top: 13px;
+}
+
+
+/* .home-m1r-title-wrap{
+	position: relative;
+    top: 3px;
+}
+
+.home-m0r-title-wrap{
+	position: relative;
+    top: -18px;
+} */
+
+/*메인 페이지 추천 맛집*/
+.row-m1r{
+	display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    top: -29px;
+    position: relative;
+}
+
+.row-m0r{
+	display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    top: -3px;
+    position: relative;
+}
+
+/*메인페이지 관리자 추천 관광지*/
+.home-title-wrap-m1t{
+	position: relative;
+    bottom: -21px;
+}
+
+
+.blank-m0r{
+	position: relative;
+    height: 51px;
+}
+
+
+
+
+/*햄버거 버튼*/
+.menubar-recommend {
+    font-size: 1.17em;
+    width: fit-content;
+    display: inline;
+    color: #0e0e0e;
+
+}
+
+.wrap-menubar-recommend {
+    width: 34px;
+    height: 36px;
+    padding: 6px 0;
+    transition: all .3s ease;
+    cursor: pointer;
+    z-index: 10;
+    top: 23px;
+    left: 383px;
+}
+
+.menubar-wrap{
+	position: relative;
+}
+
+
+
+
+.menubar-main{
+	width: fit-content;
+    position: relative;
+    left: 380px;
+}
+#nav-item-recommend{
+	margin-left: 54px;
+    width: fit-content;
+    display: inline-block;
+    font-size: 1.17em;
+    width: fit-content;
+    display: inline;
+    color: #0e0e0e;
+}
+
+

@@ -27,10 +27,11 @@
   <form action="" autocomplete="on">
   <input id="search" name="keyword" type="text" placeholder="검색어를 입력해주세요."><input id="keyword" value="${pageMaker.criteria.keyword}" type="submit">
   </form>
+
+
 </div>
 <h1>소식 리스트</h1>
 <form name="nfrm" id="admin_newsboardList" method="post">
-	
 
 <!--  <div class="search_wrap">
     	<input type="text" name="keyword" id="keyword" value="${pageMaker.criteria.keyword}">
@@ -60,13 +61,13 @@
     <tr>
       <td><input name="nseq" type="checkbox" value="${newsboardVO.nseq}">
       </td>
-      <td height="23" align="center">${newsboardVO.nseq}</td>
+      <td height="23" align="center"><c:out value="${newsboardVO.nseq}"/></td>
       <td style="text-align: left; padding-left: 50px; padding-right: 0px;">   
-        <a href="admin_newsboard_detail${pageMaker.makeQuery(pageMaker.criteria.pageNum)}&nseq=${newsboardVO.nseq}">
-    	 ${newsboardVO.subject}     
+        <a class="move" href="admin_newsboard_detail${pageMaker.makeQuery(pageMaker.criteria.pageNum)}&nseq=${newsboardVO.nseq}">
+    	 <c:out value="${newsboardVO.subject}"/>    
    		</a>
    	  </td>
-   	  <td>${newsboardVO.name} </td>
+   	  <td><c:out value="${newsboardVO.name}"/> </td>
       <td><fmt:formatDate value="${newsboardVO.regdate}"/></td>
       <td align="center" ><c:out value="${newsboardVO.hit}"/></td>
   
@@ -79,15 +80,16 @@
 </table>
 <div id="btnList">
 	        <input class="btn" type="button" name="btn_write" value="등록" onClick="go_wrt()">
-     		<input class="btn" type="button" name="btn_selectdelete" onClick="go_sdelete()" value="삭제">  
+     		<input class="btn" type="button" name="btn_selectdelete" onClick="go_ndelete()" value="삭제">  
      		</div> 
-</form>
+     		
 
-<form id="moveForm">
+</form>
+	<form name="actionForm" method="get">
 		<input type="hidden" name="pageNum" value="${pageMaker.criteria.pageNum }">
-        <input type="hidden" name="rowsPerPage" value="${pageMaker.criteria.rowsPerPage }"> 
-        <input type="hidden" name="keyword" value="${pageMaker.criteria.rowsPerPage }"> 
-</form>	
+        <input type="hidden" name="rowsPerPage" value="${pageMaker.criteria.rowsPerPage}"> 
+        <input type="hidden" name="keyword" value="${pageMaker.criteria.keyword}">
+	</form>
 <div class="pageInfo_wrap">
 	<div class="pageInfo_area">
 		<ul class="pageInfo">
@@ -100,7 +102,7 @@
 
 				<!-- 각번호 페이지 버튼 -->
 				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="index">
-				<li class="pageinfo_btn">
+				<li class="pageinfo_btn ${pageMaker.criteria.pageNum == index ? "active":"" }">
 					<a href="admin_newsboard_list${pageMaker.makeQuery(index)}">${index}</a>
 				</li>
 				</c:forEach>
@@ -121,6 +123,8 @@
 		<%@ include file="../footer.jsp" %> 
 	</div>
 	</footer>
+
+ 
 
 
 </body>

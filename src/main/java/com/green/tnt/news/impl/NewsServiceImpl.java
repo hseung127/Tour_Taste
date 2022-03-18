@@ -27,7 +27,6 @@ public class NewsServiceImpl implements NewsService {
 
 	@Override
 	public List<NewsVO> getListWithPaging(Criteria criteria) {
-		// TODO Auto-generated method stub
 		return nDao.getListWithPaging(criteria);
 	}
 
@@ -35,8 +34,21 @@ public class NewsServiceImpl implements NewsService {
 
 	@Override
 	public int getCountNewsList() {
-		// TODO Auto-generated method stub
 		return nDao.getCountNewsList();
+	}
+
+
+
+	@Override
+	public NewsVO getSelectNewsDetail(String nseq) {
+		return nDao.getSelectNewsDetail(nseq);
+	}
+
+
+
+	@Override
+	public NewsVO newsViewCount(String nseq) {
+		return nDao.newsViewCount(nseq);
 	}
 
 }

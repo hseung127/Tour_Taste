@@ -70,7 +70,7 @@
 </table>
 <div id="btnList">
 
-     		<input class="btn" type="button" name="btn_selectdelete" onClick="go_sdelete()" value="삭제">  
+     		<input class="btn" type="button" name="btn_selectdelete" onClick="go_m0tdelete()" value="삭제">  
      		</div> 
 </form>
 <form id="moveForm">
@@ -90,7 +90,7 @@
 
 				<!-- 각번호 페이지 버튼 -->
 				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="index">
-				<li class="pageinfo_btn">
+				<li class="pageinfo_btn ${pageMaker.criteria.pageNum == index ? "active":"" }">
 					<a href="admin_member0_tboard_list${pageMaker.makeQuery(index)}">${index}</a>
 				</li>
 				</c:forEach>

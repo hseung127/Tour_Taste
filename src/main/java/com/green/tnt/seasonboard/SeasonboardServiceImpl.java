@@ -15,15 +15,15 @@ public class SeasonboardServiceImpl implements SeasonboardService {
 	@Autowired
 	private SeasonboardDAO sDao; 
 	@Override
-	public SeasonboardVO getSeasonboard(SeasonboardVO vo) {
+	public SeasonboardVO getSeasonboard(int sseq) {
 		
-		return sDao.getSeasonboard(vo);
+		return sDao.getSeasonboard(sseq);
 	}
 
 	@Override
-	public int countSeasonboard(String subject) {
+	public int countSeasonboard(Criteria criteria) {
 		
-		return sDao.countSeasonboard(subject);
+		return sDao.countSeasonboard(criteria);
 	}
 
 	@Override
@@ -33,9 +33,9 @@ public class SeasonboardServiceImpl implements SeasonboardService {
 	}
 
 	@Override
-	public List<SeasonboardVO> ListWithPaging(Criteria criteria, String subject) {
+	public List<SeasonboardVO> ListWithPaging(Criteria criteria) {
 		
-		return sDao.ListWithPaging(criteria, subject);
+		return sDao.ListWithPaging(criteria);
 	}
 
 
@@ -54,6 +54,12 @@ public class SeasonboardServiceImpl implements SeasonboardService {
 	@Override
 	public void updateSeasonboard(SeasonboardVO vo) {
 		sDao.updateSeasonboard(vo);
+		
+	}
+
+	@Override
+	public void seasonboardHit(SeasonboardVO vo) {
+		sDao.seasonboardHit(vo);
 		
 	}
 

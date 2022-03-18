@@ -16,15 +16,15 @@ public class Member1_tboardServiceImpl implements Member1_tboardService {
 	private Member1_tboardDAO m1tDao; 
 	
 	@Override
-	public Member1_tboardVO getMember1_tboard(Member1_tboardVO vo) {
+	public Member1_tboardVO getMember1_tboard(int m1tseq) {
 		
-		return m1tDao.getMember1_tboard(vo);
+		return m1tDao.getMember1_tboard(m1tseq);
 	}
 
 	@Override
-	public int countMember1_tboard(String subject) {
+	public int countMember1_tboard(Criteria criteria) {
 		
-		return m1tDao.countMember1_tboard(subject);
+		return m1tDao.countMember1_tboard(criteria);
 	}
 
 	@Override
@@ -34,9 +34,9 @@ public class Member1_tboardServiceImpl implements Member1_tboardService {
 	}
 
 	@Override
-	public List<Member1_tboardVO> ListWithPaging(Criteria criteria, String subject) {
+	public List<Member1_tboardVO> ListWithPaging(Criteria criteria) {
 		
-		return m1tDao.ListWithPaging(criteria, subject);
+		return m1tDao.ListWithPaging(criteria);
 	}
 
 
@@ -54,6 +54,12 @@ public class Member1_tboardServiceImpl implements Member1_tboardService {
 	@Override
 	public void updateMember1_tboard(Member1_tboardVO vo) {
 		m1tDao.updateMember1_tboard(vo);
+		
+	}
+
+	@Override
+	public void member1_tboardHit(Member1_tboardVO vo) {
+		m1tDao.member1_tboardHit(vo);
 		
 	}
 

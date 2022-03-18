@@ -15,15 +15,15 @@ public class Member1_rboardServiceImpl implements Member1_rboardService {
 	@Autowired
 	private Member1_rboardDAO m1rDao; 
 	@Override
-	public Member1_rboardVO getMember1_rboard(Member1_rboardVO vo) {
+	public Member1_rboardVO getMember1_rboard(int m1rseq) {
 		
-		return m1rDao.getMember1_rboard(vo);
+		return m1rDao.getMember1_rboard(m1rseq);
 	}
 
 	@Override
-	public int countMember1_rboard(String subject) {
+	public int countMember1_rboard(Criteria criteria) {
 		
-		return m1rDao.countMember1_rboard(subject);
+		return m1rDao.countMember1_rboard(criteria);
 	}
 
 	@Override
@@ -33,9 +33,9 @@ public class Member1_rboardServiceImpl implements Member1_rboardService {
 	}
 
 	@Override
-	public List<Member1_rboardVO> ListWithPaging(Criteria criteria, String subject) {
+	public List<Member1_rboardVO> ListWithPaging(Criteria criteria) {
 		
-		return m1rDao.ListWithPaging(criteria, subject);
+		return m1rDao.ListWithPaging(criteria);
 	}
 
 
@@ -54,6 +54,12 @@ public class Member1_rboardServiceImpl implements Member1_rboardService {
 	@Override
 	public void updateMember1_rboard(Member1_rboardVO vo) {
 		m1rDao.updateMember1_rboard(vo);
+		
+	}
+
+	@Override
+	public void member1_rboardHit(Member1_rboardVO vo) {
+		m1rDao.member1_rboardHit(vo);
 		
 	}
 

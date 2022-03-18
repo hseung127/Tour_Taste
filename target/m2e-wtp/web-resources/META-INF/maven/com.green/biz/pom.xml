@@ -94,7 +94,7 @@
 			<artifactId>ojdbc</artifactId>
 			<version>18.3</version>
 			<scope>system</scope>
-			<systemPath>c:\ojdbc8.jar</systemPath>	
+			<systemPath>C:\ojdbc8.jar</systemPath>	
 		</dependency>
 		<!-- Spring JDBC -->
 		<dependency>

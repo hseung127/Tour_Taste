@@ -31,7 +31,7 @@
 				
 								<div class="searchBoard 0">
 									<div class="search-title">관리자 추천 관광지
-										<a class="search-go-list" href="#">관리자 추천 관광지 더보기 </a> 
+										<a class="search-go-list" href="worker_tList"> 더보기 </a> 
 									</div>
 									
 									<c:forEach items="${searchM1tList}" var="m1tVO">
@@ -43,7 +43,7 @@
 							   						<img src="images/member1_t/${m1tVO.image1}" alt="" style="width:180px;height:120px; object-fit: cover;"/>
 							   					</div>  
 								            	 
-									            <a class="search-list-tit" href="#">	
+									            <a class="search-list-tit" href="worker_tDetail?m1tseq=${m1tVO.m1tseq}">	
 									            	<p>${m1tVO.subject} </p>
 									           	</a>    
 									       
@@ -60,7 +60,7 @@
 								
 								<div class="searchBoard 1">
 									<div class="search-title">관리자 추천 맛집  
-										<a class="search-go-list" href="#">관리자 추천 관광지 더보기 </a> 
+										<a class="search-go-list" href="worker_rList"> 더보기 </a> 
 									</div>
 									
 									<c:forEach items="${searchM1rList}" var="m1rVO">
@@ -72,7 +72,7 @@
 							   						<img src="images/member1_r/${m1rVO.image1}" alt="" style="width:180px;height:120px; object-fit: cover;"/>
 							   					</div>
 									                    
-									            <a class="search-list-tit" href="#">	
+									            <a class="search-list-tit" href="worker_rDetail?m1rseq=${m1rVO.m1rseq}">	
 									            	<p>${m1rVO.subject} </p>
 									           	</a>    
 									       
@@ -97,7 +97,7 @@
 								
 								<div class="searchBoard 2">
 									<div class="search-title">회원 추천 관광지
-										<a class="search-go-list" href="#">관리자 추천 관광지 더보기 </a> 
+										<a class="search-go-list" href="member_tList"> 더보기 </a> 
 									</div>
 									
 									<c:forEach items="${searchM0tList}"  var="m0tVO">
@@ -109,7 +109,7 @@
 							   						<img src="images/member0_t/${m0tVO.image1}" alt="" style="width:180px;height:120px; object-fit: cover;"/>
 							   					</div>   
 									                    
-									            <a class="search-list-tit" href="#">	
+									            <a class="search-list-tit" href="member_tDetail?m0tseq=${m0tVO.m0tseq}">	
 									            	<p>${m0tVO.subject}</p> 
 									           	</a>    
 									       
@@ -126,7 +126,7 @@
 								
 								<div class="searchBoard 3">
 									<div class="search-title">회원 추천 맛집
-										<a class="search-go-list" href="#">관리자 추천 관광지 더보기 </a>    	
+										<a class="search-go-list" href="member_rList"> 더보기 </a>    	
 									</div>
 									
 									<c:forEach items="${searchM0rList}" var="m0rVO">
@@ -138,7 +138,7 @@
 							   						<img src="images/member0_r/${m0rVO.image1}" alt="" style="width:180px;height:120px; object-fit: cover;"/>
 							   					</div> 
 									                    
-									            <a class="search-list-tit" href="#">	
+									            <a class="search-list-tit" href="member_rDetail?m0rseq=${m0rVO.m0rseq}">	
 									            	<p>${m0rVO.subject} </p>
 									           	</a>    
 									       

@@ -1,14 +1,39 @@
 $(document).ready(function(){
-						$("#tab-1").load('event_list', function() {
-							$("#p-index1").addClass('current');
-						});
+	
+	var tabNum = $(".tab-num").html();
+	console.log(tabNum);
+	if(tabNum == 2){
+		/*$("#tab-2").load('event_list', function() {
+			$("#p-index2").addClass('current');
+		});
+		
+		*/
+		$("#tab-2").load('news_list', function() {
+			$('.tab-link').removeClass('current'); 
+	        $('.tab-content').removeClass('current'); 
+
+	        $("[data-tab='tab-2']").addClass('current');      
+			$("#tab-2").addClass('current');
+		});
+		
+		console.log("2번실행");
+	}else{
+		$("#tab-1").load('event_list', function() {
+			$('.tab-link').removeClass('current'); 
+	        $('.tab-content').removeClass('current'); 
+
+	        $("[data-tab='tab-1']").addClass('current');      
+			$("#tab-1").addClass('current');
+		});
+	}
+						
 						
 						
 						/*$(document).ready(function(){
 							$("#p-index1").addClass('current');
 						});*/
 						
-						tab_click();
+						tab_click(); //여기에 필요없음
 					        
 				    
 });  
@@ -70,7 +95,7 @@ function tab_click() {
     $('.tab-link').click(function () {
     	var tabId = $(this).attr('data-tab'); //현재  data-tab='tab-2' 가져옴
 
-    	$('.tab-link').removeClass('current'); //모든 손잡이의 current 지우기
+    	$('.tab-link').removeClass('current'); //모든 내용의 current 지우기
         $('.tab-content').removeClass('current'); //모든 내용의 current 지우기
 
         $(this).addClass('current');  //현재 class에 current 추가

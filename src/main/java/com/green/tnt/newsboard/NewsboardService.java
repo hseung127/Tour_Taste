@@ -8,7 +8,7 @@ import utils.Criteria;
 
 public interface NewsboardService {
 
-	NewsboardVO getNewsboard(NewsboardVO vo);
+	NewsboardVO getNewsboard(int nseq);
 
 	public int countNewsboardList(Criteria criteria);
 
@@ -22,7 +22,7 @@ public interface NewsboardService {
 
 	public void deleteNewsboard(int nseq);
 	
-	public void newsboardHit(NewsboardVO vo);
+	public void newsboardHit(int  nseq);
 	
 	
 	

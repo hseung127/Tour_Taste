@@ -12,11 +12,11 @@
 <%@ include file="../header.jsp" %> 
     
       
-      <!-- Base typography-->
+     <!-- Base typography-->
       <section class="section section-sm section-first bg-default section-style-2 text-md-left">
         <div class="container">
           <div class="row row-50">
-
+			   <div class="tab-num">${tabNum}</div>
 	           <div class="allWrap">     
 					<div class="tabBox">
 			            <div class="tab-link current" data-tab="tab-1">이벤트</div>

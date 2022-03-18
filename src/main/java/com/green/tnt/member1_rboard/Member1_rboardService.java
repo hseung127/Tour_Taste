@@ -8,17 +8,19 @@ import utils.Criteria;
 
 public interface Member1_rboardService {
 	
-	Member1_rboardVO getMember1_rboard(Member1_rboardVO vo);
+	Member1_rboardVO getMember1_rboard(int m1rseq);
 
-	public int countMember1_rboard(String subject);
+	public int countMember1_rboard(Criteria criteria);
 
 	public List<Member1_rboardVO> listMember1_rboard(String subject);
 
-	public List<Member1_rboardVO> ListWithPaging(Criteria criteria, String subject);
+	public List<Member1_rboardVO> ListWithPaging(Criteria criteria);
 	
 	public void insertMember1_rboard(Member1_rboardVO vo);
 
 	public void updateMember1_rboard(Member1_rboardVO vo);
 
 	public void deletemember1_rboard(int m1rseq);
+	
+	public void member1_rboardHit(Member1_rboardVO vo);
 }
