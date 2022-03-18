@@ -54,9 +54,9 @@
                     <ul class="rd-navbar-contacts-2">
                       <li>
                         <div class="search">
-			              <form class="searchBox" action="search" method="get" onsubmit="go_search()">
-			                <input type="text" id="searchTextBox" name="key" placeholder="다음 여행지를 검색해 보세요">
-			                <button type="submit" id="searchButton"> 
+			              <form class="header-searchBox" action="search" method="get" onsubmit="go_search()">
+			                <input type="text" class="searchBoxClick" id="searchTextBox" name="key" placeholder="다음 여행지를 검색해 보세요">
+			                <button type="submit" id="searchButton" class="searchBoxClick"> 
 			                	<span class="blind">검색</span>
 			                	<img class="search-image" src="images/search_icon_240.png"/>
 			                </button>
@@ -111,40 +111,41 @@
                       <li><a class="icon mdi mdi-google-plus" href="#"></a></li>
                     </ul> -->
                   </div>
-                  <div class="rd-navbar-main">
+                  <div class="menubar-wrap"> <!-- class="rd-navbar-main"> -->
                     <!-- RD Navbar Nav-->
-                    <ul class="rd-navbar-nav">
+                    <ul class="menubar-main"> <!-- class="rd-navbar-nav"> -->
                       <li class="rd-nav-item active"><a class="rd-nav-link" href="index">Home</a>
                       </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="about-us">시즌 테마</a>
-                      </li>
+                      <!-- <li class="rd-nav-item"><a class="rd-nav-link" href="about-us">시즌 테마</a>
+                      </li> -->
                       <li class="rd-nav-item"><a class="rd-nav-link" href="area">지역</a>
                       </li>
                       <li class="rd-nav-item"><a class="rd-nav-link" href="event-news?tabNum=1">이벤트&소식</a>
                       </li>
-                    </ul>
-                
-                <div class="rd-navbar-project-hamburger rd-navbar-project-hamburger-open rd-navbar-fixed-element-1" data-multitoggle=".rd-navbar-inner" data-multitoggle-blur=".rd-navbar-wrap" data-multitoggle-isolate="data-multitoggle-isolate">
-                  <div class="project-hamburger"><span class="project-hamburger-arrow"></span><span class="project-hamburger-arrow"></span><span class="project-hamburger-arrow"></span>
-                  </div>
-                </div>
-                <div class="rd-navbar-project">
-                  <!-- rd-navbar-project-title -->
-                    <h5 class="ham-title">추천</h5>
-                  
-                    <ul class="ham-ul">
-                      <li class="ham-li"><a class="ham-ul-a" href="worker_tList">관리자 추천 관광지</a>
-                      </li>
-                      <li class="ham-li"><a class="ham-ul-a" href="worker_rList">관리자 추천 맛집</a>
-                      </li>
-                      <li class="ham-li"><a class="ham-ul-a" href="member_tList">회원 추천 관광지</a>
-                      </li>
-                      <li class="ham-li"><a class="ham-ul-a" href="member_rList">회원 추천 맛집</a>
-                      </li>
-                    </ul>
-              
-            
-              </div>
+                      <li class="rd-nav-item" id="nav-item-recommend">추천
+                      	<div class="wrap-menubar-recommend rd-navbar-project-hamburger-open rd-navbar-fixed-element-1" data-multitoggle=".rd-navbar-inner" data-multitoggle-blur=".rd-navbar-wrap" data-multitoggle-isolate="data-multitoggle-isolate">
+		                  <div class="menubar-recommend"><!-- <span class="project-hamburger-arrow"></span><span class="project-hamburger-arrow"></span><span class="project-hamburger-arrow"></span> -->
+		                  </div>
+		                </div>
+		                <div class="rd-navbar-project">
+		                  <!-- rd-navbar-project-title -->
+		                   <div class="ham-title"></div> 
+		                  
+		                    <ul class="ham-ul">
+		                      <li class="ham-li"><a class="ham-ul-a" href="worker_tList">관리자 추천 관광지</a>
+		                      </li>
+		                      <li class="ham-li"><a class="ham-ul-a" href="worker_rList">관리자 추천 맛집</a>
+		                      </li>
+		                      <li class="ham-li"><a class="ham-ul-a" href="member_tList">회원 추천 관광지</a>
+		                      </li>
+		                      <li class="ham-li"><a class="ham-ul-a" href="member_rList">회원 추천 맛집</a>
+		                      </li>
+		                    </ul>
+		              	 </div>
+                      	
+	                    </li>
+	      			  </ul>
+ 
             </div>
           </nav>
         </div>
