@@ -20,7 +20,7 @@
 	}
 	
 	
-form.searchBox {
+form.header-searchBox {
 		border:none;
 		width: 446px;
 		height: 42px;
@@ -33,17 +33,18 @@ form.searchBox {
 		padding-top: 3px;
 		margin: 0 auto;
 		border-radius: 4px ;
+		outline:2px solid transparent;
 		
 	}
 	
 	
-form.searchBox:hover {	
+/* form.header-searchBox:hover {	
 	
 	outline:2px solid #000;
-}
+} */
 	
 	
-form.searchBox input {
+form.header-searchBox input {
 		border: none;
 		padding: 10px;
 		background-color:transparent;
@@ -53,7 +54,7 @@ form.searchBox input {
 	
 
 
-form.searchBox input[type=text]::placeholder{
+form.header-searchBox input[type=text]::placeholder{
 		color:  #666;
 	}
 	
