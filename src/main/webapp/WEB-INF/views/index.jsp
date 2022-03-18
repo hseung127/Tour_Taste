@@ -26,7 +26,8 @@
                 <div class="row">
                   <div class="col-sm-9 col-md-8 col-lg-7 col-xl-7 offset-lg-1 offset-xxl-0">
                     <h1 class="oh swiper-title"><span class="d-inline-block" data-caption-animate="slideInUp" data-caption-delay="0">${homeSeasonList[0].subject}</span></h1>
-                    <p class="big swiper-text" data-caption-animate="fadeInLeft" data-caption-delay="300">${homeSeasonList[0].b_content}</p><a class="button button-lg button-primary button-winona button-shadow-2" href="#" data-caption-animate="fadeInUp" data-caption-delay="300">보러가기</a>
+                    <p class="big swiper-text" data-caption-animate="fadeInLeft" data-caption-delay="300">${homeSeasonList[0].b_content}</p>
+                    <!--<a class="button button-lg button-primary button-winona button-shadow-2" href="#" data-caption-animate="fadeInUp" data-caption-delay="300">보러가기</a>-->
                   </div>
                 </div>
               </div>
@@ -39,7 +40,7 @@
                   <div class="col-sm-8 col-lg-7 offset-lg-1 offset-xxl-0">
                     <h1 class="oh swiper-title"><span class="d-inline-block" data-caption-animate="slideInDown" data-caption-delay="0">${homeSeasonList[1].subject}</span></h1>
                     <p class="big swiper-text" data-caption-animate="fadeInRight" data-caption-delay="300">${homeSeasonList[1].b_content}</p>
-                    <div class="button-wrap oh"><a class="button button-lg button-primary button-winona button-shadow-2" href="#" data-caption-animate="slideInUp" data-caption-delay="0">보러가기</a></div>
+                    <!-- <div class="button-wrap oh"><a class="button button-lg button-primary button-winona button-shadow-2" href="#" data-caption-animate="slideInUp" data-caption-delay="0">보러가기</a></div> -->
                   </div>
                 </div>
               </div>
@@ -51,16 +52,16 @@
         <div class="swiper-pagination" data-bullet-custom="true"></div>
         <!-- Swiper Navigation-->
         <div class="swiper-button-prev">
-          <div class="preview">
+          <!-- <div class="preview">
             <div class="preview__img"></div>
-          </div>
+          </div> -->
           <div class="swiper-button-arrow"></div>
         </div>
         <div class="swiper-button-next">
           <div class="swiper-button-arrow"></div>
-          <div class="preview">
+          <!-- <div class="preview">
             <div class="preview__img"></div>
-          </div>
+          </div> -->
         </div>
       </section>
       <!-- What We Offer-->
@@ -208,7 +209,7 @@
 				            <div class="banner_pcTop active">
 				                <div class="swiper-container swiper-container-initialized swiper-container-horizontal">
 				                    
-				                    <ul class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-1395px, 0px, 0px);">
+				                    <ul class="swiper-wrapper"  style="transition-duration: 0ms; transform: translate3d(-1395px, 0px, 0px);">
 				                        
 				                        <li class="swiper-slide swiper-slide-duplicate swiper-slide-next swiper-slide-duplicate-prev" data-swiper-slide-index="1" style="width: 465px;">	
 				                            <ul>		
