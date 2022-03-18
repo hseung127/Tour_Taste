@@ -26,6 +26,7 @@
 인코딩 타입을 multipart/form-data 로 지정해야 한다. -->
 	<form name="frm" id="nwrite_form" method="post"
 		enctype="multipart/form-data">
+
 		
 		<table id="list">
 			<tr>
@@ -64,8 +65,16 @@
 		</table>
 		<input class="btn" type="button" value="등록" onClick="go_nsave()">
 		<input class="btn" type="button" value="취소" onClick="go_mov()">
+		
+
+
 	</form>
 	</div>
+	<form name="hiddenNfm" method="post" autocomplete="off">
+		<input type="hidden" name="pageNum" value="${criteria.pageNum}">
+        <input type="hidden" name="rowsPerPage" value="${criteria.rowsPerPage}"> 
+        <input type="hidden" name="keyword" value="${criteria.rowsPerPage}">
+	</form>
 	<footer id="footer">
 		<div id="footer_box">
 			<%@ include file="../footer.jsp"%>

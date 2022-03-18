@@ -33,7 +33,8 @@
   <tr>
     <th>상세설명</th>
     <td colspan="5">
-      <textarea name="content" id="content" rows="8" cols="70" >${newsboardVO.content}</textarea>
+      <textarea name="content" id="content" rows="8" cols="70" >${newsboardVO.content}
+      </textarea>
       <script>
 
 							var ckeditor_config = {
@@ -59,7 +60,15 @@
 </table>
 <input class="btn" type="button" value="등록" onClick="go_nmod_save('${newsboardVO.nseq}')">        
 <input class="btn" type="button" value="취소" onClick="go_mov()">
+
+
 </form> 
+
+	<form name="hiddenNfm" method="post" autocomplete="off">
+		<input type="hidden" name="pageNum" value="${criteria.pageNum }">
+        <input type="hidden" name="rowsPerPage" value="${criteria.rowsPerPage}"> 
+        <input type="hidden" name="keyword" value="${criteria.rowsPerPage}">
+	</form>
 </div>
 	<footer id="footer">
 	<div id="footer_box">

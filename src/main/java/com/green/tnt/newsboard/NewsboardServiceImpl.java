@@ -20,9 +20,9 @@ public class NewsboardServiceImpl implements NewsboardService {
 	
 	
 	@Override
-	public NewsboardVO getNewsboard(NewsboardVO vo) {
+	public NewsboardVO getNewsboard(int nseq) {
 			
-		return nDao.getNewsboard(vo) ;
+		return nDao.getNewsboard(nseq) ;
 	}
 
 	@Override
@@ -61,9 +61,8 @@ public class NewsboardServiceImpl implements NewsboardService {
 	
 	@Transactional(isolation = Isolation.READ_COMMITTED)
 	@Override
-	public void newsboardHit(NewsboardVO vo) {
-		nDao.newsboardHit(vo);
-		
+	public void newsboardHit(int nseq) {
+		nDao.newsboardHit(nseq);
 	}
 
 

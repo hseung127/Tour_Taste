@@ -47,6 +47,8 @@
 	<c:otherwise>
 	<c:forEach items="${member0_rboardList}" var="member0_rboardVO">
     <tr>
+    <td><input name="m0rseq" type="checkbox" value="${member0_rboardVO.m0rseq}">
+      </td>
       <td height="23" align="center" >${member0_rboardVO.m0rseq}</td>
       <td style="text-align: left; padding-left: 50px; padding-right: 0px;">   
         <a href="admin_member0_rboard_detail${pageMaker.makeQuery(pageMaker.criteria.pageNum)}&m0rseq=${member0_rboardVO.m0rseq}">
@@ -67,7 +69,7 @@
 </table>
 <div id="btnList">
 	       
-     		<input class="btn" type="button" name="btn_selectdelete" onClick="go_sdelete()" value="삭제">  
+     		<input class="btn" type="button" name="btn_selectdelete" onClick="go_m0rdelete()" value="삭제">  
      		</div> 
 </form>
 <form id="moveForm">
@@ -87,7 +89,7 @@
 
 				<!-- 각번호 페이지 버튼 -->
 				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="index">
-				<li class="pageinfo_btn">
+				<li class="pageinfo_btn ${pageMaker.criteria.pageNum == index ? "active":"" }">
 					<a href="admin_member0_rboard_list${pageMaker.makeQuery(index)}">${index}</a>
 				</li>
 				</c:forEach>

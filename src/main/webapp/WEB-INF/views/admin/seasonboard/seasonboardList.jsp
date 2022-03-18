@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 	<header id="header">
@@ -31,7 +32,7 @@
 <table id="seasonboardList">
 <thead>
     <tr>
-        <th scope="col"><input id="allCheck" type="checkbox" name="allCheck" onclick="checkAll()"></th><th>번호</th><th>제목</th><th>이름</th><th>등록일</th>
+        <th scope="col"><input id="allCheck" type="checkbox" name="allCheck" onclick="checkAll()"></th><th>번호</th><th>제목</th><th>이름</th><th>등록일</th><th>조회수</th>
     </tr>
     </thead>
     <tbody>
@@ -50,13 +51,14 @@
       </td>
       <td height="23" align="center" >${seasonboardVO.sseq}</td>
       <td style="text-align: left; padding-left: 50px; padding-right: 0px;">   
-        <a href="admin_seasonboard_detail${pageMaker.makeQuery(pageMaker.criteria.pageNum)}&sseq=${seasonboardVO.sseq}">
+        <a class="move" href="admin_seasonboard_detail${pageMaker.makeQuery(pageMaker.criteria.pageNum)}&sseq=${seasonboardVO.sseq}" onclick="move(sseq)">
 		
     	 ${seasonboardVO.subject}     
    		</a>
    	  </td>
    	  <td>${seasonboardVO.name} </td>
       <td><fmt:formatDate value="${seasonboardVO.regdate}"/></td>
+      <td>${seasonboardVO.hit}</td>
   
     </tr>
     </c:forEach>
@@ -88,7 +90,7 @@
 
 				<!-- 각번호 페이지 버튼 -->
 				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="index">
-				<li class="pageinfo_btn">
+				<li class="pageinfo_btn ${pageMaker.criteria.pageNum == index ? "active":"" }">
 					<a href="admin_seasonboard_list${pageMaker.makeQuery(index)}">${index}</a>
 				</li>
 				</c:forEach>

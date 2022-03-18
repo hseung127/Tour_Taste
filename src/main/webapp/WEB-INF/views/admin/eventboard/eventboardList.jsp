@@ -58,7 +58,7 @@
    	  </td>
    	  <td>${eventboardVO.name} </td>
       <td><fmt:formatDate value="${eventboardVO.regdate}"/></td>
-      <td>${eventboardVO.hit}</td>
+      <td><c:out value="${eventboardVO.hit}"/></td>
   
     </tr>
     </c:forEach>
@@ -68,7 +68,7 @@
 </table>
 <div id="btnList">
 	        <input class="btn" type="button" name="btn_write" value="등록" onClick="go_wrt()">
-     		<input class="btn" type="button" name="btn_selectdelete" onClick="go_sdelete()" value="삭제">  
+     		<input class="btn" type="button" name="btn_selectdelete" onClick="go_edelete()" value="삭제">  
      		</div> 
 </form>
 
@@ -89,7 +89,7 @@
 
 				<!-- 각번호 페이지 버튼 -->
 				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="index">
-				<li class="pageinfo_btn">
+				<li class="pageinfo_btn ${pageMaker.criteria.pageNum == index ? "active":"" }">
 					<a href="admin_eventboard_list${pageMaker.makeQuery(index)}">${index}</a>
 				</li>
 				</c:forEach>
