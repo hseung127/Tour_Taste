@@ -42,8 +42,8 @@
 	
 	<!-- 글 작성 -->
 	<insert id="insertMember0_t">
-		INSERT INTO member0_tboard(m0tseq, subject, id, name, area, content)
-		VALUES(member0_tboard_seq.NEXTVAL, #{subject}, #{id}, #{name}, #{area}, #{content})
+		INSERT INTO member0_tboard(m0tseq, subject, id, name, area, content, image1)
+		VALUES(member0_tboard_seq.NEXTVAL, #{subject}, #{id}, #{name}, #{area}, #{content}, #{image1})
 	</insert>
 	
 	<!-- 글 수정 -->

@@ -47,8 +47,8 @@
 	
 	<!-- 글 작성 -->
 	<insert id="insertMember0_r">
-		INSERT INTO member0_rboard(m0rseq, subject, id, name, area, content)
-		VALUES(member0_rboard_seq.NEXTVAL, #{subject}, #{id}, #{name}, #{area}, #{content})
+		INSERT INTO member0_rboard(m0rseq, subject, id, name, area, content, image1)
+		VALUES(member0_rboard_seq.NEXTVAL, #{subject}, #{id}, #{name}, #{area}, #{content}, #{image1})
 	</insert>
 	
 	<!-- 글 수정 -->

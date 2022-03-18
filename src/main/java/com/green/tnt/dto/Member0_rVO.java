@@ -2,6 +2,8 @@ package com.green.tnt.dto;
 
 import java.sql.Timestamp;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,6 +25,7 @@ public class Member0_rVO {
 	private String id;
 	private String name;
 	private Timestamp regdate;
+	private MultipartFile uploadFile;
 
 	private String staravg; //메인페이지용 별점 평균 
 }

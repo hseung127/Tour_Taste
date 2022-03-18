@@ -64,7 +64,8 @@
 				<h5 class="h5 mb-4 text-left" id="subject">${m0t.subject}</h5>
 				<p id="writer">${m0t.name}</p>
 			<hr>
-			<div class="content" style="text-align: left; height: 300px;">
+			<div class="content" style="text-align: left; height: 100%;">
+				<img src="images/member0_t/${m0t.image1}" style="display:block; padding: 10px;">
 		   		${m0t.content}
 		    </div>
 		    </form>
