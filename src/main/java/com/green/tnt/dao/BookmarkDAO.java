@@ -56,6 +56,12 @@ public class BookmarkDAO {
 		return mybatis.selectList("mappings.bookmark-mapping.countM0rBookmark",vo);
 	}
 	
+	// bseq 가져오기
+	public int getBM_currval() {
+		return mybatis.selectOne("mappings.bookmark-mapping.getBM_currval");
+	}
+
+	
 	
 	// id별 M1r즐겨찾기 여부
 	public List<BookmarkVO> M1rBookmarkyn(BookmarkVO vo) {	
@@ -89,7 +95,7 @@ public class BookmarkDAO {
 	
 	public void deleteBM(BookmarkVO vo) {
 		
-		mybatis.insert("mappings.bookmark-mapping.deleteBM", vo);
+		mybatis.delete("mappings.bookmark-mapping.deleteBM", vo);
 	}
 	
 	

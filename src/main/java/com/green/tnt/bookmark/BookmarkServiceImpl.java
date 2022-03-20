@@ -48,6 +48,10 @@ public class BookmarkServiceImpl implements BookmarkService {
 		
 		return bDao.getCountM0rBookmark(vo);
 	}
+	@Override
+	public int getBM_currval() {
+		return bDao.getBM_currval();
+	}
 
 	@Override
 	public List<BookmarkVO> M1rBookmarkyn(BookmarkVO vo) {

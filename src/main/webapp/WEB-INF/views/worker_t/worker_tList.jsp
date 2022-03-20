@@ -11,8 +11,8 @@
 	
 	
 	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:100,300,300i,400,500,600,700,900%7CRaleway:500">
-	<link rel="stylesheet" href="css/board/style.css">
 	
+	<link rel="stylesheet" href="css/board/style.css">
 	<script src="js/board/jquery.min.js"></script>
 	<script src="js/board/popper.js"></script>
 	<script src="js/board/bootstrap.min.js"></script>
@@ -21,30 +21,48 @@
 		
 		const BEFORE_IMG_URL = 'images/bookmark0.png';
 		const AFTER_IMG_URL = 'images/bookmark1.png';
-		/*
-		const xstgValue = $('#bookmark_${status.count}').attr('src')
-		if ( xstgValue === BEFORE_IMG_URL ){
-			$('#bookmark_${status.count}').attr('src', AFTER_IMG_URL)	
-		} else {
-			$('#bookmark_${status.count}').attr('src', BEFORE_IMG_URL)
+		
+		function bookmarkOnClick ( componentId, memberId, m1tseq ) {
+			const cId = '#'.concat(componentId); // #bookmark_1
+			const xstgValue = $( cId ).attr('src');
+			
+			const cName = $( cId ).attr('name'); // bseq_1
+			const bseq = cName.split("_")[1];
+			
+			const url = xstgValue === BEFORE_IMG_URL ? '/tnt/ajax/insertM1tBM'
+					  : xstgValue === AFTER_IMG_URL ? '/tnt/ajax/deleteBM'
+					  : '';
+			console.log(url)
+			console.log( componentId, bseq, memberId, m1tseq );
+			
+			$.ajax({
+			      type : 'post' // 타입 (get, post, put 등등)
+			    , url : url // 요청할 서버url
+			    , dataType : 'json'// 데이터 타입 (html, xml, json, text 등등)
+			    , data : { 
+			        'm1tseq' : String(m1tseq)
+			        , 'id' : String(memberId)
+			        , 'bseq' : String(bseq)
+			    }
+			    , success : function(result) { // 결과 성공 콜백함수
+					if ( xstgValue === BEFORE_IMG_URL ){
+						$(cId).attr('src', AFTER_IMG_URL)
+						$(cId).attr('name', 'bseq_'.concat(result.newBseq) )
+						alert('즐겨찾기에 추가되었습니다.')
+					} else {
+						$(cId).attr('src', BEFORE_IMG_URL)
+						$(cId).attr('name', 'bseq_'.concat('0') )
+						alert('즐겨찾기에서 삭제되었습니다.')
+					}
+			    }
+			    , error : function(request, status, error) { // 결과 에러 콜백함수
+			    	alert('에러')
+			    }
+			})
+			
 		}
-		$.ajax({
-		      type : 'post' // 타입 (get, post, put 등등)
-		    , url : '/biz/ajax/bookmark' // 요청할 서버url
-		    , dataType : 'json'// 데이터 타입 (html, xml, json, text 등등)
-		    , data : { 
-		          m1tseq : '11111'
-		          , clsf : 'update'
-		    }
-		    , success : function(result) { // 결과 성공 콜백함수
-		    	
-		        console.log(result)
-		    }
-		    , error : function(request, status, error) { // 결과 에러 콜백함수
-		        console.log(error);
-		    }
-		})
-		*/
+		
+		
 		
 	</script>
 
@@ -85,44 +103,27 @@
 							        <td>
 								      	<div class="email">
 								      		<span><a href="worker_tDetail${pageMaker.makeQuery(pageMaker.criteria.pageNum)}&m1tseq=${member1_tList.m1tseq}">${member1_tList.subject}</a></span>
-								      		<span>${member1_tList.address}${member1_tList.bseq}${member1_tList.bseq}${member1_tList.bseq}</span>
+								      		<span>${member1_tList.address}</span>
 								      	</div>
 							        </td>
+							        
 							        <c:set var="loginuserid" value="${loginUser.id}"/>
 							        <c:if test="${not empty loginuserid}">
 								    	<td>
-								    		
-								      		<a><img src="images/bookmark0.png" id="bookmark_${status.count}" 
-								      				onclick="
-														$.ajax({
-														      type : 'post' // 타입 (get, post, put 등등)
-														    , url : '/biz/ajax/insertM1tBM' // 요청할 서버url
-														    , dataType : 'json'// 데이터 타입 (html, xml, json, text 등등)
-														    , data : { 
-														        m1tseq : ${member1_tList.m1tseq}
-														        , id : '${loginUser.id}'
-														    }
-														    , success : function(result) { // 결과 성공 콜백함수
-														    	console.log('result : '+ JSON.stringify(result))
-														    	const xstgValue = $('#bookmark_${status.count}').attr('src')
-																if ( xstgValue === BEFORE_IMG_URL ){
-																	$('#bookmark_${status.count}').attr('src', AFTER_IMG_URL)
-																	alert('즐겨찾기에 추가되었습니다.')
-																} else {
-																	$('#bookmark_${status.count}').attr('src', BEFORE_IMG_URL)
-																	alert('즐겨찾기에서 삭제되었습니다.')
-																}
-														    }
-														    , error : function(request, status, error) { // 결과 에러 콜백함수
-														    
-														    }
-														})
-								      					
-								      				">
-								      		</a>
-								      		
+								      		<a><img src=""
+								      				id="bookmark_${status.count}" name = "bseq_${member1_tList.bseq}" style="cursor:pointer;" 
+								      				onclick=" bookmarkOnClick ( 'bookmark_'.concat(${status.count}), '${loginUser.id}', '${member1_tList.m1tseq}' )">
+							      			</a>
+								    		<script>
+								    			if ( Number('${member1_tList.bseq}') > 0  ){
+								    				$('#bookmark_${status.count}').attr('src', AFTER_IMG_URL)
+								    			} 
+								    			else {
+								    				$('#bookmark_${status.count}').attr('src', BEFORE_IMG_URL)
+								    			}
+								    		</script>
 						        		</td>
-					        		</c:if>
+						        	</c:if>
 							    </tr>
 						    </c:forEach>
 						    <tr><td colspan="6" style="text-align: center;"> ${paging} </td></tr>
@@ -132,24 +133,24 @@
 					</div>
 				</div>
 				<div class="area-box">
-					<button type="button" class="btn" onClick = "location.href = '/biz/worker_tList?area=전체'"><span>#전체</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/biz/worker_tList?area=서울특별시'"><span>#서울</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/biz/worker_tList?area=부산광역시'"><span>#부산</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/biz/worker_tList?area=대구광역시'"><span>#대구</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/biz/worker_tList?area=인천광역시'"><span>#인천</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/biz/worker_tList?area=광주광역시'"><span>#광주</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/biz/worker_tList?area=대전광역시'"><span>#대전</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/biz/worker_tList?area=울산광역시'"><span>#울산</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/biz/worker_tList?area=세종특별자치시'"><span>#세종</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/biz/worker_tList?area=경기도'"><span>#경기</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/biz/worker_tList?area=강원도'"><span>#강원</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/biz/worker_tList?area=충청남도'"><span>#충남</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/biz/worker_tList?area=충청북도'"><span>#충북</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/biz/worker_tList?area=경상북도'"><span>#경북</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/biz/worker_tList?area=경상남도'"><span>#경남</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/biz/worker_tList?area=전라북도'"><span>#전북</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/biz/worker_tList?area=전라남도'"><span>#전남</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/biz/worker_tList?area=제주특별자치도'"><span>#제주</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_tList?area=전체'"><span>#전체</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_tList?area=서울특별시'"><span>#서울</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_tList?area=부산광역시'"><span>#부산</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_tList?area=대구광역시'"><span>#대구</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_tList?area=인천광역시'"><span>#인천</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_tList?area=광주광역시'"><span>#광주</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_tList?area=대전광역시'"><span>#대전</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_tList?area=울산광역시'"><span>#울산</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_tList?area=세종특별자치시'"><span>#세종</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_tList?area=경기도'"><span>#경기</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_tList?area=강원도'"><span>#강원</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_tList?area=충청남도'"><span>#충남</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_tList?area=충청북도'"><span>#충북</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_tList?area=경상북도'"><span>#경북</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_tList?area=경상남도'"><span>#경남</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_tList?area=전라북도'"><span>#전북</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_tList?area=전라남도'"><span>#전남</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_tList?area=제주특별자치도'"><span>#제주</span></button>
 				</div>
 			</div>
 		</div>

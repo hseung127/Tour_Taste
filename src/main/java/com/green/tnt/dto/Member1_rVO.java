@@ -25,6 +25,8 @@ public class Member1_rVO {
 	private String id;
 	private Timestamp regdate;
 	
+	/* bookmark */
+	private int bseq;
 	
 
 }
