@@ -2,6 +2,8 @@ package com.green.view;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.green.tnt.dto.Member1_rVO;
 import com.green.tnt.dto.Member1_tVO;
+import com.green.tnt.dto.MemberVO;
 import com.green.tnt.member1_r.Member1_rService;
 import com.green.tnt.member1_t.Member1_tService;
 
@@ -33,7 +36,13 @@ public class Member1_rController {
 	}*/
 	
 	@RequestMapping(value="/worker_rList")
-	public String getMember1_rList(Member1_rVO vo, Model model, Criteria criteria) {
+	public String getMember1_rList(Member1_rVO vo, Model model, Criteria criteria, HttpSession session) {
+		
+		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
+		if( loginUser != null ) {
+			vo.setId(loginUser.getId());
+			model.addAttribute("loginUser", loginUser);
+		}
 		
 		List<Member1_rVO> member1rList = m1rService.getM1_rListPaging(criteria, vo);
 		

@@ -21,12 +21,13 @@ public interface BookmarkService  {
 	// m1trseq별 즐겨찾기 개수
 	public List<BookmarkVO> getCountM0rBookmark(BookmarkVO vo);
 	
+	public int getBM_currval();
 	
 	//
 	public List<BookmarkVO> M1rBookmarkyn(BookmarkVO vo);
 	
 	public void insertM1tBM(BookmarkVO vo);
-
+	
 	public void insertM1rBM(BookmarkVO vo);
 	
 	public void insertM0tBM(BookmarkVO vo);

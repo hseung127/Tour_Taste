@@ -58,8 +58,11 @@
 		    ORDER BY m0rCount DESC
 	</select>
 	
+	<select id="getBM_currval"  resultType="int">
+		SELECT bookmark_seq.currval FROM DUAL
+	</select>
 	
-	
+
 	<!-- 메인페이지 id의 m1rseq 북마크 여부 -->
 	<select id="M1rBookmarkyn" resultType="bookmark">
 		SELECT NVL(COUNT(m1rseq),0) AS m1rBookmarkyn 
@@ -68,8 +71,10 @@
     </select>
 	
 	<insert id="insertM1tBM">
+
 		INSERT INTO bookmark(bseq, id, m1tseq)
 		VALUES(bookmark_seq.nextval, #{id}, #{m1tseq})
+
 	</insert>
 	
 	<insert id="insertM1rBM">
