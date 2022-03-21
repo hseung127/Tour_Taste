@@ -95,7 +95,7 @@
                       
                       <c:if test="${sessionScope.loginUser.user_type == 1}">
       		 				<li>
-      		 		<a href="admin_index">관리자화면</a>
+      		 		<a href="admin_newsboard_list">관리자화면</a>
       		 				</li>
       					 </c:if>
                       </c:otherwise>

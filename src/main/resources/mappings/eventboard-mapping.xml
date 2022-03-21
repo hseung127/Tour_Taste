@@ -28,7 +28,7 @@
 	<!--  목록 조회 -->
 	<select id="listEventboard" parameterType="String"
 		resultType="eventboard">
-		SELECT eseq, subject, name, regdate
+		SELECT eseq, subject, name, regdate,hit
 		FROM eventboard
 		WHERE subject LIKE '%'||#{subject}||'%'
 		ORDER BY eseq DESC
@@ -38,8 +38,8 @@
 	<select id="listWithPaging" parameterType="hashMap"
 		resultType="eventboard">
 	<![CDATA[
-	SELECT eseq, subject, name, regdate
-	  FROM (SELECT row_number() over(ORDER BY eseq DESC) rn, eseq, subject, name,regdate
+	SELECT eseq, subject, name, regdate,hit
+	  FROM (SELECT row_number() over(ORDER BY eseq DESC) rn, eseq, subject, name,regdate,hit
 		  FROM eventboard
 		 WHERE 		  	 ]]>         
             <if test="keyword != null">
@@ -54,8 +54,8 @@
 	</select>
 	<!-- 추가 -->
 	<insert id="insertEventboard">
-		INSERT INTO eventboard(eseq,subject, content, image1, image2, image3, image4, image5,start_date,end_date,homeimg,bighome_yn)
-		VALUES(event_seq.NEXTVAL,#{subject}, #{content}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5},#{start_date},#{end_date},#{homeimg},#{bighome_yn})
+		INSERT INTO eventboard(eseq,subject, content, image1,start_date,end_date)
+		VALUES(event_seq.NEXTVAL,#{subject}, #{content}, #{image1},#{start_date},#{end_date})
 	</insert>
 
 	<!-- 정보 수정 -->

@@ -30,7 +30,7 @@
 	<!-- 목록 조회 -->
 	<select id="listSeasonboard" parameterType="String"
 		resultType="seasonboard">
-		SELECT sseq, subject, name, regdate
+		SELECT sseq, subject, name, regdate,hit
 		FROM seasonboard
 		WHERE subject LIKE '%'||#{subject}||'%'
 		ORDER BY sseq DESC
@@ -40,8 +40,8 @@
 	<select id="listWithPaging" parameterType="hashMap"
 		resultType="seasonboard">
 	<![CDATA[
-	SELECT sseq, subject, name, regdate
-	  FROM (SELECT row_number() over(ORDER BY sseq DESC) rn, sseq, subject, name,regdate
+	SELECT sseq, subject, name, regdate,hit
+	  FROM (SELECT row_number() over(ORDER BY sseq DESC) rn, sseq, subject, name,regdate,hit
 		  FROM seasonboard
 		 WHERE 		  	 ]]>         
             <if test="keyword != null">
@@ -56,14 +56,14 @@
 	</select>
 	<!-- 추가 -->
 	<insert id="insertSeasonboard">
-		INSERT INTO seasonboard(sseq,subject, content, image1, image2, image3, image4, image5,bannerimg,b_content)
-		VALUES(season_seq.NEXTVAL,#{subject}, #{content}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5},#{bannerimg},#{b_content})
+		INSERT INTO seasonboard(sseq,subject, content, image1)
+		VALUES(season_seq.NEXTVAL,#{subject}, #{content}, #{image1})
 	</insert>
 
 	<!-- 정보 수정 -->
 	<update id="updateSeasonboard">
 		UPDATE seasonboard
-		SET subject=#{subject}, content=#{content}, image1=#{image1},image2=#{image2},image3=#{image3},image4=#{image4},image5=#{image5},bannerimg=#{bannerimg},b_content=#{b_content}
+		SET subject=#{subject}, content=#{content}, image1=#{image1}
 		WHERE sseq=#{sseq}
 	</update>
 	<!-- 소식 삭제 -->

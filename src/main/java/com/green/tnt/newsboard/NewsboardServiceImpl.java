@@ -65,6 +65,12 @@ public class NewsboardServiceImpl implements NewsboardService {
 		nDao.newsboardHit(nseq);
 	}
 
+	@Override
+	public void insertNewsboardImage(NewsboardVO vo) {
+		nDao.insertNewsboardImage(vo);
+		
+	}
+
 
 
 

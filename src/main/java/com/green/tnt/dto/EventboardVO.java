@@ -1,6 +1,9 @@
 package com.green.tnt.dto;
 
 import java.sql.Timestamp;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -31,8 +34,13 @@ public class EventboardVO {
 	private int eseq;
 	private String subject;
 	private String content;
-	private Timestamp start_date;
-	private Timestamp end_date;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date start_date;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date end_date;
+	
 	private String image1;
 	private String image2;
 	private String image3;

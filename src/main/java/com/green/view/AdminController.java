@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -169,13 +170,14 @@ public class AdminController {
 	
 
 	@PostMapping(value="/admin_newsboard_write")
-	public String adminNewsboardWrite(@RequestParam(value="newsboard_image")  MultipartFile uploadFile,
+	public String adminNewsboardWrite(@RequestParam(value="newsboard_image") MultipartFile uploadFile,
 								    NewsboardVO vo, HttpSession session) {
 			String fileName = "";
 			
 				fileName = uploadFile.getOriginalFilename();
 		
 				vo.setImage1(fileName);
+			
 				
 			
 				String image_path = 
@@ -529,10 +531,7 @@ public class AdminController {
 				fileName = uploadFile.getOriginalFilename();
 		
 				vo.setImage1(fileName);
-				vo.setImage2(fileName);
-				vo.setImage3(fileName);
-				vo.setImage4(fileName);
-				vo.setImage5(fileName);
+	
 				
 			
 				String image_path = 
@@ -580,10 +579,7 @@ public class AdminController {
 				fileName = uploadFile.getOriginalFilename();
 		
 				vo.setImage1(fileName);
-				vo.setImage2(fileName);
-				vo.setImage3(fileName);
-				vo.setImage4(fileName);
-				vo.setImage5(fileName);
+	
 				
 			
 				String image_path = 
@@ -600,10 +596,7 @@ public class AdminController {
 			} else {
 		
 				vo.setImage1(origImage);
-				vo.setImage2(origImage);
-				vo.setImage3(origImage);
-				vo.setImage4(origImage);
-				vo.setImage5(origImage);
+
 			}
 			member1_rboardService.updateMember1_rboard(vo);
 			rttr.addAttribute("pageNum",criteria.getPageNum());
@@ -682,10 +675,7 @@ public class AdminController {
 				fileName = uploadFile.getOriginalFilename();
 		
 				vo.setImage1(fileName);
-				vo.setImage2(fileName);
-				vo.setImage3(fileName);
-				vo.setImage4(fileName);
-				vo.setImage5(fileName);
+	
 				
 			
 				String image_path = 
@@ -733,10 +723,7 @@ public class AdminController {
 				fileName = uploadFile.getOriginalFilename();
 		
 				vo.setImage1(fileName);
-				vo.setImage2(fileName);
-				vo.setImage3(fileName);
-				vo.setImage4(fileName);
-				vo.setImage5(fileName);
+	
 				
 			
 				String image_path = 
@@ -753,10 +740,7 @@ public class AdminController {
 			} else {
 		
 				vo.setImage1(origImage);
-				vo.setImage2(origImage);
-				vo.setImage3(origImage);
-				vo.setImage4(origImage);
-				vo.setImage5(origImage);
+
 			}
 			
 			
@@ -842,10 +826,7 @@ public class AdminController {
 				fileName = uploadFile.getOriginalFilename();
 		
 				vo.setImage1(fileName);
-				vo.setImage2(fileName);
-				vo.setImage3(fileName);
-				vo.setImage4(fileName);
-				vo.setImage5(fileName);
+		
 				
 			
 				String image_path = 
@@ -865,6 +846,7 @@ public class AdminController {
 		
 		return "redirect:admin_seasonboard_list";
 	}
+	
 
 	
 
@@ -893,10 +875,7 @@ public class AdminController {
 				fileName = uploadFile.getOriginalFilename();
 		
 				vo.setImage1(fileName);
-				vo.setImage2(fileName);
-				vo.setImage3(fileName);
-				vo.setImage4(fileName);
-				vo.setImage5(fileName);
+				vo.setBannerimg(fileName);
 				
 			
 				String image_path = 
@@ -913,10 +892,7 @@ public class AdminController {
 			} else {
 		
 				vo.setImage1(origImage);
-				vo.setImage2(origImage);
-				vo.setImage3(origImage);
-				vo.setImage4(origImage);
-				vo.setImage5(origImage);
+				vo.setBannerimg(fileName);
 			}
 			
 			rttr.addAttribute("pageNum",criteria.getPageNum());
@@ -1001,15 +977,12 @@ public class AdminController {
 				fileName = uploadFile.getOriginalFilename();
 		
 				vo.setImage1(fileName);
-				vo.setImage2(fileName);
-				vo.setImage3(fileName);
-				vo.setImage4(fileName);
-				vo.setImage5(fileName);
+	
 				
 			
 				String image_path = 
 					session.getServletContext().getRealPath("WEB-INF/resources/eventboard_images/");
-				System.out.println("占싱뱄옙占쏙옙 占쏙옙占쎌씠誘몄�寃쎈줈: " + image_path);
+		
 						
 				try {
 					
@@ -1024,6 +997,7 @@ public class AdminController {
 		
 		return "redirect:admin_eventboard_list";
 	}
+	
 
 	
 
@@ -1052,10 +1026,7 @@ public class AdminController {
 				fileName = uploadFile.getOriginalFilename();
 		
 				vo.setImage1(fileName);
-				vo.setImage2(fileName);
-				vo.setImage3(fileName);
-				vo.setImage4(fileName);
-				vo.setImage5(fileName);
+	
 				
 			
 				String image_path = 
@@ -1072,10 +1043,7 @@ public class AdminController {
 			} else {
 		
 				vo.setImage1(origImage);
-				vo.setImage2(origImage);
-				vo.setImage3(origImage);
-				vo.setImage4(origImage);
-				vo.setImage5(origImage);
+
 			}
 			
 			rttr.addAttribute("pageNum",criteria.getPageNum());

@@ -26,19 +26,20 @@
         <input type="hidden" name="keyword" value="${criteria.keyword}">
 <table id="list">  
 		<tr> 
+		 <th align="center" >이벤트기간</th>
     <td>${newsboardVO.start_date}</td><td>${newsboardVO.end_date}</td><td>${eventboardVO.bighome_yn}</td>
     </tr>  
     <tr>
         <th align="center" >제목</th>
         <td colspan="5">${eventboardVO.subject}</td>
     </tr>
+    <!-- 
           <tr>
      <th>메인 이미지</th>
-     <td colspan="5" align="center">
-  <!--[7]  이미지를 출력하기 -->     
+     <td colspan="5" align="center">     
    	<img src="eventboard_images/${eventboardVO.homeimg}" width="200pt">  
      </td>
-    </tr>
+    </tr> -->
       <tr>
      <th>이미지</th>
      <td colspan="5" align="center">

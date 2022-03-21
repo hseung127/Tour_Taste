@@ -5,6 +5,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Admin</title>
+<script>
+function printClock() {
+    
+    var clock = document.getElementById("clock");            // 출력할 장소 선택
+    var currentDate = new Date();                                     // 현재시간
+    var calendar = currentDate.getFullYear() + "-" + (currentDate.getMonth()+1) + "-" + currentDate.getDate() // 현재 날짜
+    var amPm = 'AM'; // 초기값 AM
+    var currentHours = addZeros(currentDate.getHours(),2); 
+    var currentMinute = addZeros(currentDate.getMinutes() ,2);
+    var currentSeconds =  addZeros(currentDate.getSeconds(),2);
+    
+    if(currentHours >= 12){ // 시간이 12보다 클 때 PM으로 세팅, 12를 빼줌
+    	amPm = 'PM';
+    	currentHours = addZeros(currentHours - 12,2);
+    }
+
+    if(currentSeconds >= 50){// 50초 이상일 때 색을 변환해 준다.
+       currentSeconds = '<span style="color:#de1951;">'+currentSeconds+'</span>'
+    }
+    clock.innerHTML =" <span style='font-size:30px;'>&nbsp;"+ amPm+ currentHours+":"+currentMinute+":"+currentSeconds +"</span>"; //날짜를 출력해 줌
+    
+    setTimeout("printClock()",1000);         // 1초마다 printClock() 함수 호출
+}
+$(document).ready = printClock;
+</script>
 <style>
 @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 }
@@ -171,10 +196,19 @@ border-right:1px solid #e5e5e5;
     display: block;
     
 }
+#admin_title{
+magin: 2px;
+color: #fff;
+}
+#clock{
+position:absolute;
+left:0;
+bottom:20;}
 </style>
 
 </head>
-<body><div class="area"></div><nav class="main-menu">
+<body onload="printClock()"><div class="area"></div><nav class="main-menu">
+<h1 id="admin_title" style="color:#fff";><a href="admin_newsboard_list"style="color:#fff";>T&T<span id="admin" style="color:#fff";>Admin</span></a></h1>
             <ul>
                 <li>
                     <a href="index">
@@ -224,7 +258,7 @@ border-right:1px solid #e5e5e5;
                     </a>
                 </li>
                 <li>
-                    <a href="ii">
+                    <a href="#">
                        <i class="fa fa-info fa-2x"></i>
                         <span class="nav-text">
                             ii
@@ -232,7 +266,7 @@ border-right:1px solid #e5e5e5;
                     </a>
                 </li>
             </ul>
-
+<div class="top-part" style=" color: #666; font-size: 15px;" id="clock"></div>
             <ul class="logout">
                 <li>
                    <a href="admin_logout">

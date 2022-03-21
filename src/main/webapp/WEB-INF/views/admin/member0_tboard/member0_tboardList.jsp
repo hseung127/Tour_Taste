@@ -7,8 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+td{
+text-align: center;
+}
+</style>
 </head>
-<body>
+<body onload="printClock()">
 	<header id="header">
 	<div id="header_box">
 		<%@ include file="../header.jsp" %> 
@@ -32,7 +37,7 @@
 		<input type="hidden" name="pageNum" value="${pageMaker.criteria.pageNum }">
         <input type="hidden" name="rowsPerPage" value="${pageMaker.criteria.rowsPerPage }"> 
         <input type="hidden" name="keyword" value="${pageMaker.criteria.keyword}">
-<table id="member0_tboardList">
+<table id="member0_tboardList" class="listbox">
 	<thead>
     <tr>
         <th scope="col"><input id="allCheck" type="checkbox" name="allCheck" onclick="checkAll()"></th> <th>번호</th><th>제목</th><th>이름</th><th>등록일</th><th>조회수</th>

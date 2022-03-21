@@ -62,7 +62,10 @@
 		INSERT INTO newsboard(nseq,subject, content, image1)
 		VALUES(news_seq.NEXTVAL,#{subject}, #{content}, #{image1})
 	</insert>
-
+	<insert id="insertNewsboardImage">
+		insert into newsboard_images(nseq, name, detail_image, newsimagenum)
+		values(#{nseq}, #{name}, #{detail_image}, news_image_seq.nextval)
+	</insert>
 	<!-- 정보 수정 -->
 	<update id="updateNewsboard">
 		UPDATE newsboard

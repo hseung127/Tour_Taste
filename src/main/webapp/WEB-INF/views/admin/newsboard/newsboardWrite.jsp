@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+</script>
 </head>
 <body>
 	<header id="header">
@@ -18,7 +20,11 @@
 		</div>
 	</aside>
 	<div id=container>
+<script type="text/javascript">
 
+
+
+    </script>
 
 
 	<h1>소식등록</h1>
@@ -55,7 +61,11 @@
 	
 				<td width="343" colspan="5">
 					<!--  [2] 파일 업로드를 하기 위한 input 태그는 타입 속성 값을 file로 지정해야 한다.  --> <input
-					type="file" name="newsboard_image" id="newsboard_image">
+					type="file" name="newsboard_image" id="newsboard_image" onchange="readURL(this);" class="oriImg">
+					<img id="blah" src="#" class="thumbImg"/>
+
+					
+					
 				</td>
 			</tr>
 		</table>

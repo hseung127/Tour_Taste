@@ -22,8 +22,14 @@ public class NewsboardVO {
 	private String subject;
 	private String content;
 	private String image1;
+	private String image2;
+	private String image3;
+	private String image4;
+	private String image5;
 	private String id;
 	private String name;
 	private Timestamp regdate;
 	private int hit;
+	private int newimagenum;
+	private String detail_image;
 }

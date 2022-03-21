@@ -35,11 +35,13 @@
        
     이벤트 종료일   <input type="text" name="end_date" id="end_date" size="47" maxlength="100" autocomplete="off" readonly="readonly" value="${eventboardVO.end_date}">
   </td>
+  <!-- 
   <td>
   	메인 빅이미지 게시여부
   <input type="checkbox" id="cb1" value="${eventboardVO.bighome_yn}">
     <label for="cb1"></label>
   </td>
+   -->
 </tr>
  <tr>
   <tr>
@@ -54,13 +56,12 @@
       <textarea name="content" id="content" rows="8" cols="70" >${eventboardVO.content}</textarea>
             <script>
 
-							
-
 							CKEDITOR.replace("content", {
 								height : '500px'});
 						</script>
     </td>
   </tr>
+    <!-- 
   <tr>
      <td  colspan="3">
    	<h3>메인이미지</h3> 
@@ -69,15 +70,18 @@
    	  <input type="file"  multiple="multiple" name="homeimg" id="homeimg">
       <input type="hidden" name="image" value="${eventboardVO.homeimg}">
 
+
     </td>
-  </tr> 
-  <tr>
+  </tr> -->
+ 	 <input type="hidden" name="image" value="${eventboardVO.image1}">
+    <tr>
     
     <td colspan="3">
     	<h3>내용 이미지</h3>
       <img src="eventboard_images/${eventboardVO.image1}" width="200pt">     
       <br>
-      <input type="file" name="eventboard_image" id="eventboard_image">
+      <input type="file" name="eventboard_image" id="eventboard_image"onchange="readURL(this);" class="oriImg">
+					<img id="blah" src="#" class="thumbImg"/>
       <input type="hidden" name="image" value="${eventboardVO.image1}">
     </td> 
   </tr>    

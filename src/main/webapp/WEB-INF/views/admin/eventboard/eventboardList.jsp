@@ -13,6 +13,12 @@
 	<div id="header_box">
 		<%@ include file="../header.jsp" %> 
 		</div>
+		
+		<style>
+td{
+text-align: center;
+}
+</style>
 	</header>
 	<aside id="aside">
 		<div id="aside_box">

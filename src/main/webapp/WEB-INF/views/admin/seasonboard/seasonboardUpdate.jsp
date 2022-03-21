@@ -47,13 +47,16 @@
   </tr>
   <tr>
     <td colspan="5">
-    본문 이미지
+
       <img src="seasonboard_images/${seasonboardVO.image1}" width="200pt">     
       <br>
-      <input type="file" name="seasonboard_image" id="seasonboard_image">
+      <input type="file" name="seasonboard_image" id="seasonboard_image"onchange="readURL(this);" class="oriImg">
+					<img id="blah" src="#" class="thumbImg"/>
       <input type="hidden" name="image" value="${seasonboardVO.image1}">
     </td> 
   </tr> 
+    
+    <!--  
     <tr>
     <td colspan="5">
     배너 내용
@@ -69,12 +72,12 @@
   <tr>
     <td colspan="5">
     배너 이미지
-      <img src="seasonboard_images/${seasonboardVO.image1}" width="200pt">     
+      <img src="seasonboard_images/${seasonboardVO.bannerimg}" width="200pt">     
       <br>
       <input type="file" name="seasonboard_bannerimg" id="seasonboard_bannerimg">
-      <input type="hidden" name="image" value="${seasonboardVO.bannerimg }">
+      <input type="hidden" name="image" value="${seasonboardVO.bannerimg}">
     </td> 
-  </tr>    
+  </tr> -->   
 </table>
 <input class="btn" type="button" value="취소" onClick="go_mov('${criteria.pageNum}', '${criteria.rowsPerPage}')">
 <input class="btn" type="button" value="등록" onClick="go_smod_save('${seasonboardVO.sseq}')">           

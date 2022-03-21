@@ -36,7 +36,7 @@
   <tr>
 
     <td colspan="5">
-        본문내용
+
       <textarea name="content" id="content" rows="8" cols="70" >
       </textarea>
             <script>
@@ -48,11 +48,12 @@
   <tr>
     <td width="343" colspan="5">
 <!--  [2] 파일 업로드를 하기 위한 input 태그는 타입 속성 값을 file로 지정해야 한다.  -->
-      <input type="file" name="seasonboard_image" id="seasonboard_image">
+      <input type="file" name="seasonboard_image" id="seasonboard_image"onchange="readURL(this);" class="oriImg">
+					<img id="blah" src="#" class="thumbImg"/>
     </td>
   </tr> 
   
-  
+  <!-- 
   <tr>
     <td colspan="5">
     	배너 내용
@@ -63,14 +64,14 @@
 							CKEDITOR.replace("b_content", {
 								height : '200px'});
 						</script>
-  </tr>       
+  </tr>        
 <tr>
     <td width="343" colspan="5">
     	배너 이미지
-<!--  [2] 파일 업로드를 하기 위한 input 태그는 타입 속성 값을 file로 지정해야 한다.  -->
-      <input type="file" name="bannerimg" id="bannerimg">
+ [2] 파일 업로드를 하기 위한 input 태그는 타입 속성 값을 file로 지정해야 한다. 
+      <input type="file" name="seasonboard_bannerimg" id="seasonboard_bannerimg">
     </td>
-  </tr>  
+  </tr>  --> 
 </table>
 <input class="btn" type="button" value="취소" onClick="go_mov()">
 <input class="btn" type="button" value="등록" onClick="go_ssave()">           
