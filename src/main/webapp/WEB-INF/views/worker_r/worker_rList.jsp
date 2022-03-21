@@ -28,8 +28,8 @@
 			const cName = $( cId ).attr('name'); // bseq_1
 			const bseq = cName.split("_")[1];
 			
-			const url = xstgValue === BEFORE_IMG_URL ? '/tnt/ajax/insertM1rBM'
-					  : xstgValue === AFTER_IMG_URL ? '/tnt/ajax/deleteBM'
+			const url = xstgValue === BEFORE_IMG_URL ? '/biz/ajax/insertM1rBM'
+					  : xstgValue === AFTER_IMG_URL ? '/biz/ajax/deleteBM'
 					  : '';
 			console.log(url)
 			console.log( componentId, bseq, memberId, m1rseq );
@@ -128,24 +128,24 @@
 					</div>
 				</div>
 				<div class="area-box">
-					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_rList?area=전체'"><span>#전체</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_rList?area=서울특별시'"><span>#서울</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_rList?area=부산광역시'"><span>#부산</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_rList?area=대구광역시'"><span>#대구</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_rList?area=인천광역시'"><span>#인천</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_rList?area=광주광역시'"><span>#광주</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_rList?area=대전광역시'"><span>#대전</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_rList?area=울산광역시'"><span>#울산</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_rList?area=세종특별자치시'"><span>#세종</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_rList?area=경기도'"><span>#경기</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_rList?area=강원도'"><span>#강원</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_rList?area=충청남도'"><span>#충남</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_rList?area=충청북도'"><span>#충북</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_rList?area=경상북도'"><span>#경북</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_rList?area=경상남도'"><span>#경남</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_rList?area=전라북도'"><span>#전북</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_rList?area=전라남도'"><span>#전남</span></button>
-					<button type="button" class="btn" onClick = "location.href = '/tnt/worker_rList?area=제주특별자치도'"><span>#제주</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/biz/worker_rList?area=전체'"><span>#전체</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/biz/worker_rList?area=서울특별시'"><span>#서울</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/biz/worker_rList?area=부산광역시'"><span>#부산</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/biz/worker_rList?area=대구광역시'"><span>#대구</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/biz/worker_rList?area=인천광역시'"><span>#인천</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/biz/worker_rList?area=광주광역시'"><span>#광주</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/biz/worker_rList?area=대전광역시'"><span>#대전</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/biz/worker_rList?area=울산광역시'"><span>#울산</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/biz/worker_rList?area=세종특별자치시'"><span>#세종</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/biz/worker_rList?area=경기도'"><span>#경기</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/biz/worker_rList?area=강원도'"><span>#강원</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/biz/worker_rList?area=충청남도'"><span>#충남</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/biz/worker_rList?area=충청북도'"><span>#충북</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/biz/worker_rList?area=경상북도'"><span>#경북</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/biz/worker_rList?area=경상남도'"><span>#경남</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/biz/worker_rList?area=전라북도'"><span>#전북</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/biz/worker_rList?area=전라남도'"><span>#전남</span></button>
+					<button type="button" class="btn" onClick = "location.href = '/biz/worker_rList?area=제주특별자치도'"><span>#제주</span></button>
 				</div>
 			</div>
 		</div>
