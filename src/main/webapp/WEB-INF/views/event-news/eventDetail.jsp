@@ -47,6 +47,9 @@
 		            <div class="detail-image" >
 		            	<img src="images/event/${eventDetailList.image5}" alt="" >
 		            </div>
+		            <div class="detail-content-txt" >
+		            	${newsDetailList.content}
+		            </div>
 		    
 		        </div> 
 		        
