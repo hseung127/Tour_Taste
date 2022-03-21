@@ -98,7 +98,7 @@
 							    <tr class="alert" role="alert">
 							    	<td>
 							    		<!-- <div class="img" style="background-image: url(images/gallery-1-1200x800-original.jpg);"></div> -->
-							    		<div class="img"><a href="worker_tDetail${pageMaker.makeQuery(pageMaker.criteria.pageNum)}&m1tseq=${member1_tList.m1tseq}"><img src="images/member1_t/한글.jpg"></a></div>
+							    		<div class="img"><a href="worker_tDetail${pageMaker.makeQuery(pageMaker.criteria.pageNum)}&m1tseq=${member1_tList.m1tseq}"><img src="images/member1_t/${member1_tList.image1}" style="width:195px; height:130px; object-fit: cover;"></a></div>
 							    	</td>
 							        <td>
 								      	<div class="email">

@@ -93,7 +93,7 @@
 						  	<c:forEach var="member1_rList" items="${member1rList}">
 						    <tr class="alert" role="alert">
 						    	<td>
-						    		<div class="img"><a href="worker_rDetail${pageMaker.makeQuery(pageMaker.criteria.pageNum)}&m1rseq=${member1_rList.m1rseq}"><img src="images/gallery-1-1200x800-original.jpg"></a></div>
+						    		<div class="img"><a href="worker_rDetail${pageMaker.makeQuery(pageMaker.criteria.pageNum)}&m1rseq=${member1_rList.m1rseq}"><img src="images/member1_r/${member1_rList.image1}" style="width:195px; height:130px; object-fit: cover;"></a></div>
 						    	</td>
 						      <td>
 						      	<div class="email">
