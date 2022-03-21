@@ -8,31 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Admin Main</title>
-
+<script src='js/main.js'></script>
+<script src='js/calendar.js'></script>
+<script src='js/clock.js'></script>
 <script>
 
-function printClock() {
-    
-    var clock = document.getElementById("clock");            // 출력할 장소 선택
-    var currentDate = new Date();                                     // 현재시간
-    var calendar = currentDate.getFullYear() + "-" + (currentDate.getMonth()+1) + "-" + currentDate.getDate() // 현재 날짜
-    var amPm = 'AM'; // 초기값 AM
-    var currentHours = addZeros(currentDate.getHours(),2); 
-    var currentMinute = addZeros(currentDate.getMinutes() ,2);
-    var currentSeconds =  addZeros(currentDate.getSeconds(),2);
-    
-    if(currentHours >= 12){ // 시간이 12보다 클 때 PM으로 세팅, 12를 빼줌
-    	amPm = 'PM';
-    	currentHours = addZeros(currentHours - 12,2);
-    }
-
-    if(currentSeconds >= 50){// 50초 이상일 때 색을 변환해 준다.
-       currentSeconds = '<span style="color:#de1951;">'+currentSeconds+'</span>'
-    }
-    clock.innerHTML = currentHours+":"+currentMinute+":"+currentSeconds +" <span style='font-size:50px;'>"+ amPm+"</span>"; //날짜를 출력해 줌
-    
-    setTimeout("printClock()",1000);         // 1초마다 printClock() 함수 호출
-}
 
 function addZeros(num, digit) { // 자릿수 맞춰주기
 	  var zero = '';
@@ -44,37 +24,438 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 	  }
 	  return zero + num;
 }
-</script>
-<style>
+ </script>
+		<script> $('#calendar'). fullCalendar ({ 
+				googleCalendarApiKey: 'AIzaSyD-hhwVvgAMdzBbH8tgayvMjw8D6a1NvRw', 
+				header: { 
+					left: '',center: 'prev, title, next', 
+					// right: 'month, basicWeek, agendaDay'
+			right: '' 
+			}, 
+			monthYearFormat: 'MMMM YYYY', 
+			ventLimit: true,
+			fixedWeekCount: false, defaultView: 'month', 
+			dayNamesShort:["S","M","T","W","T","F","S"],
+			buttonText: { 
+				today : "오늘", 
+				month :"월별",
+				week : "주별", 
+				day : "일별", 
+				}, 
+			eventSources : // 한국 기념일ko.south_korea 추가 
+			[ { googleCalendarId : 'qkrdmlghks@kakao.com' } , 
+				 ] }); </script>
+				 <style>
+				 * {
+  box-sizing: border-box;
+  outline: none;
+}
 
-</style>
+:root {
+  --bg-color: #f5f8ff;;
+  --main-color: #353536;
+  --secondary-color: #8e92a4;
+  --main-text-color: #5d606b;
+  --secondary-dark-color: #9496a5;
+  --tag-color-one: #e0fbf6;
+  --tag-color-text-one: #58c2a9;
+  --tag-color-two: #ece7fe;
+  --tag-color-text-two: #8972f3;
+  --tag-color-three: #fde7ea;
+  --tag-color-text-three: #e77f89;
+  --tag-color-four: #f7f8fc;
+  --tag-color-text-four: #a0a6b5;
+  --button-color: #49beb7;
+  --box-color: #fff1d6;
+  --box-color-2: #d3e6ff;
+  --box-color-3: #ffd9d9;
+  --box-color-4: #daffe5;
+  --task-color: #777982;
+}
+
+%flex {
+  display: flex;
+  align-items: center;
+}
+
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+button { 
+  border: none; 
+  background: none;
+  cursor: pointer;
+}
+
+.task-manager {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow:
+  0 0.3px 2.2px rgba(0, 0, 0, 0.011),
+  0 0.7px 5.3px rgba(0, 0, 0, 0.016),
+  0 1.3px 10px rgba(0, 0, 0, 0.02),
+  0 2.2px 17.9px rgba(0, 0, 0, 0.024),
+  0 4.2px 33.4px rgba(0, 0, 0, 0.029),
+  0 10px 80px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+
+
+
+
+
+
+.circle {
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  background-color: #fe4d46;
+  box-shadow: 14px 0 0 0 #fbc023, 28px 0 0 0 #7dd21f;
+}
+
+.circle-2 {
+  border-radius: 50%;
+  width: 4px;
+  height: 4px;
+  background-color: #d5d7e3;
+  box-shadow: -6px 0 0 0 #d5d7e3, 6px 0 0 0 #d5d7e3;
+}
+
+.right-bar {
+  width: 320px;
+  border-left: 1px solid #e3e7f7;
+  display: flex;
+  flex-direction: column;
+ } 
+  #header { 
+    font-size: 20px; 
+    color: var(--main-text-color);
+    margin-left: 30px;
+    text-align: center;
+    height: 100px;
+  }
+
+
+.top-part {
+  padding: 10px;
+  @extend %flex; 
+  
+
+}
+
+.right-content {
+  padding: 10px 40px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.task-box {
+  position: relative;
+  border-radius: 12px;
+  width: 100%;
+  margin: 20px 0;
+  padding: 16px;
+  cursor: pointer;
+  box-shadow: 2px 2px 4px 0px rgba(235,235,235,1);
+  
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+
+
+
+
+}
+ .header { 
+    font-size: 26px; 
+    color: var(--main-color); 
+    margin-top: 30px;
+    text-align: center;
+  }
+.page-content1 {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 40px 20px 0 300px;
+}
+
+.page-content2 {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 40px 20px 0 20px;
+}
+
+
+
+.tasks-wrapper {
+  padding: 30px 0;
+  flex: 1;
+  overflow-y: auto;
+  height: 100%;
+  padding-right: 8px;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 16px;
+  padding-left: 30px;
+  color: var(--task-color);
+  font-size: 13px;
+  font-weight: 500;
+  
+  &:hover {
+    transform: translatex(2px);
+  }
+  
+
+}
+
+ label .label-text { position: relative; }
+
+ label .label-text:before {
+  content:'';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  left: -24px;
+  transition: .2s ease;
+}
+
+
+
+.tag {
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 20px;
+  
+  &.approved {
+    background-color: var(--tag-color-one);
+    color: var(--tag-color-text-one);
+  }
+  
+  &.progress {
+    background-color: var(--tag-color-two);
+    color: var(--tag-color-text-two);
+  }
+  
+  &.review {
+    background-color: var(--tag-color-three);
+    color: var(--tag-color-text-three);
+  }
+  
+  &.waiting {
+    background-color: var(--tag-color-four);
+    color: var(--tag-color-text-four);
+  }
+}
+
+.upcoming { 
+  border-bottom: 1px solid #ddd; 
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+}
+
+@media screen and (max-width: 900px) {
+  .left-bar {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .task-manager {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  
+  .right-bar, .page-content1,.page-content2 {
+    width: 100%;
+    display: block;
+  }
+  
+  .tasks-wrapper { height: auto; }
+}
+
+@media screen and (max-width: 520px) {
+  .page-content1 { padding: 40px 10px 0 10px; }
+  
+  .right-content { padding: 10px 16px; }
+  
+}
+				 </style>
+
 </head>
 
 <body onload="printClock()">
-<div id="travel">
-	<header id="header">
-	<div id="header_box">
+	<div class="header">
 		<%@ include file="header.jsp" %> 
-		</div>
-	</header>
+		</div>	
+<div class="task-manager">
+
 	<section>
 	<aside>
 		<%@ include file="aside.jsp" %> 
 	</aside>
 	</section>
-	<div id="container">
-		<div style="border:1px solid #dedede; width:600px; height:250px; line-height:250px; color:#666;font-size:100px; text-align:center;" id="clock">
-	</div>
-	헤더수정
-	푸터수정
-	소식 이벤트 시즌 회원여행 회원맛집 관리자 여행 관리자맛집 지도 달력
-	</div>
-	<footer id="footer">
-	<div id="footer_box">
-		<%@ include file="footer.jsp" %> 
-	</div>
-	
-</footer>
+  <div class="page-content1">
+
+    <div class="tasks-wrapper">
+    <div class="header upcoming">소식 게시판</div>
+    <div>
+  			                    <ul class="list_board">
+			                        <li>
+			                            <a href="#" >제목</a>
+			                        </li>
+			                        <li>
+			                            <a href="#" >제목</a>
+			                        </li>
+			                        <li>
+			                            <a href="#" >제목</a>
+			                        </li>
+			                        <li>
+			                            <a href="#" >제목</a>
+			                        </li>
+			                    </ul>
+      </div>
+      <div class="header upcoming">이벤트 게시판</div>
+    <div>
+      <ul class="list_board">
+			                        <li>
+			                            <a href="#" > <span class="label-text">제목</span></a>
+			                        </li>
+			                        <li>
+			                            <a href="#" >제목</a>
+			                        </li>
+			                        <li>
+			                            <a href="#"  >제목</a>
+			                        </li>
+			                        <li>
+			                            <a href="#" >제목</a>
+			                        </li>
+			                    </ul>
+      </div>
+      <div class="header upcoming">시즌 게시판</div>
+    <div>
+      <ul class="list_board">
+			                        <li>
+			                            <a href="#" > <span class="label-text">제목</span></a>
+			                        </li>
+			                        <li>
+			                            <a href="#" >제목</a>
+			                        </li>
+			                        <li>
+			                            <a href="#"  >제목</a>
+			                        </li>
+			                        <li>
+			                            <a href="#" >제목</a>
+			                        </li>
+			                    </ul>
+			                    <br>
+			                    <br>
+			                
+      </div>
+      <hr>
+      <div class="header upcoming">회원 맛집 게시판</div>
+    <div>
+      <ul class="list_board">
+			                        <li>
+			                            <a href="#" > <span class="label-text">제목</span></a>
+			                        </li>
+			                        <li>
+			                            <a href="#" >제목</a>
+			                        </li>
+			                        <li>
+			                            <a href="#"  >제목</a>
+			                        </li>
+			                        <li>
+			                            <a href="#" >제목</a>
+			                        </li>
+			                    </ul>
+      </div>
+
+    </div>
+  </div>
+    <div class="page-content2">
+    <div class="tasks-wrapper">
+         <div class="header upcoming">회원 여행 게시판</div>
+    <div>
+      <ul class="list_board">
+			                        <li>
+			                            <a href="#" > <span class="label-text">제목</span></a>
+			                        </li>
+			                        <li>
+			                            <a href="#" >제목</a>
+			                        </li>
+			                        <li>
+			                            <a href="#"  >제목</a>
+			                        </li>
+			                        <li>
+			                            <a href="#" >제목</a>
+			                        </li>
+			                    </ul>
+      </div>
+      <div class="header upcoming">관리자 맛집 게시판</div>
+    <div>
+      <ul class="list_board">
+			                        <li>
+			                            <a href="#" > <span class="label-text">제목</span></a>
+			                        </li>
+			                        <li>
+			                            <a href="#" >제목</a>
+			                        </li>
+			                        <li>
+			                            <a href="#"  >제목</a>
+			                        </li>
+			                        <li>
+			                            <a href="#" >제목</a>
+			                        </li>
+			                    </ul>
+      </div>
+      <div class="header upcoming">관리자 여행 게시판</div>
+    <div>
+      <ul class="list_board">
+			                        <li>
+			                            <a href="#" > <span class="label-text">제목</span></a>
+			                        </li>
+			                        <li>
+			                            <a href="#" >제목</a>
+			                        </li>
+			                        <li>
+			                            <a href="#"  >제목</a>
+			                        </li>
+			                        <li>
+			                            <a href="#" >제목</a>
+			                        </li>
+			                    </ul>
+      </div>
+    </div>
+
 </div>
+  <div class="right-bar">
+
+    <div class="top-part" style=" color: #666; font-size: 15px; text-align: center;"
+				id="clock">
+      현재시간
+    </div>
+    <div class="right-content">
+   
+
+  <div id='calendar'></div>
+    </div>
+  </div>
+  </div>
 </body>
 </html>

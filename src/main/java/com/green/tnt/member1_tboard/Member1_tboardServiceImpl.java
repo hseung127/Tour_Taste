@@ -58,8 +58,8 @@ public class Member1_tboardServiceImpl implements Member1_tboardService {
 	}
 
 	@Override
-	public void member1_tboardHit(Member1_tboardVO vo) {
-		m1tDao.member1_tboardHit(vo);
+	public void member1_tboardHit(int m1tseq) {
+		m1tDao.member1_tboardHit(m1tseq);
 		
 	}
 

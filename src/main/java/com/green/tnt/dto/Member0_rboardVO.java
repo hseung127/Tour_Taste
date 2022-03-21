@@ -25,6 +25,7 @@ public class Member0_rboardVO {
 	 */
 	
 	private int m0rseq;
+	private String area;
 	private String subject;
 	private String content;
 	private String image1;

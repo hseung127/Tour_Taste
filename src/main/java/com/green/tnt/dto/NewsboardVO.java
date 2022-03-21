@@ -21,7 +21,7 @@ public class NewsboardVO {
 	private int nseq;
 	private String subject;
 	private String content;
-	private String image;
+	private String image1;
 	private String id;
 	private String name;
 	private Timestamp regdate;

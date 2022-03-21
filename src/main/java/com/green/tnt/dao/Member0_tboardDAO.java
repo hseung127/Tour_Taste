@@ -42,7 +42,7 @@ public class Member0_tboardDAO {
 		mybatis.delete("mappings.member0_tboard-mapping.deletemember0_tboard", m0tseq);
 
 	}
-	public void member0_tboardHit(Member0_tboardVO vo) {
-		mybatis.update("mappings.member0_tboard-mapping.member0_tboardHit",vo);
+	public void member0_tboardHit(int m0tseq) {
+		mybatis.update("mappings.member0_tboard-mapping.member0_tboardHit",m0tseq);
 	}
 }

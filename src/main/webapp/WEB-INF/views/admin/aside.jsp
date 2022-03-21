@@ -23,7 +23,7 @@ font-size:20px;
 }
 
 
-.main-menu:hover,nav.main-menu.expanded {
+.main-menu:hover,nav.main-menu.expanded,#sub-menu {
 width:250px;
 overflow:visible;
 }
@@ -79,7 +79,7 @@ vertical-align:middle;
 font-size:18px;
 }
 
-.main-menu .nav-text {
+.nav-text {
 position:relative;
 display:table-cell;
 vertical-align:middle;
@@ -101,7 +101,31 @@ overflow-y:hidden;
 overflow-y:auto;
 overflow:visible;
 }
+ 
+.main-menu>ul {
+margin:7px 0;
+}
 
+.main-menu li {
+position:relative;
+display:block;
+width:250px;
+}
+
+.main-menu li>a {
+position:relative;
+display:table;
+border-collapse:collapse;
+border-spacing:0;
+color:#999;
+ font-family: arial;
+font-size: 14px;
+text-decoration:none;
+-webkit-transform:translateZ(0) scale(1,1);
+-webkit-transition:all .1s linear;
+transition:all .1s linear;
+  
+}
 a:hover,a:focus {
 text-decoration:none;
 }
@@ -135,7 +159,18 @@ height: 100%;
   font-weight: 300;
   src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
 }
-
+.main-menu > ul ul {
+    display: none;
+    top: 0;
+    left: 100%;
+background:#212121;
+border-right:1px solid #e5e5e5;
+	color:#fff;
+}
+.main-menu ul > li:hover ul {
+    display: block;
+    
+}
 </style>
 
 </head>
@@ -151,23 +186,25 @@ height: 100%;
                   
                 </li>
                 
-                <li class="has-subnav">
+                <li>
                     <a href="#">
                        <i class="fa fa-list fa-2x"></i>
                         <span class="nav-text">
                           	  관리자게시판
                         </span>
                     </a>
-                    			<li><a href='admin_newsboard_list'> 소식</a></li>
-								<li><a href='admin_eventboard_list'> 이벤트</a></li>
-								<li><a href='admin_seasonboard_list'> 시즌테마</a></li>
-								<li><a href='admin_member0_tboard_list'>회원 여행지</a></li>
-								<li><a href='admin_member0_rboard_list'> 회원 맛집</a></li>
-								<li><a href='admin_member1_tboard_list'> 관리자 여행지</a></li>
-								<li><a href='admin_member1_rboard_list'> 관리자 맛집</a></li>
-              	  </li>
-                
-            
+
+                    <ul class="sub-menu">
+                    			<li><a href='admin_newsboard_list'>  <i class="fa"></i><span class="nav-text"> 소식</span></a></li>
+								<li><a href='admin_eventboard_list'>  <i class="fa"></i><span class="nav-text"> 이벤트</span></a></li>
+								<li><a href='admin_seasonboard_list'>  <i class="fa"></i> <span class="nav-text">시즌테마</span></a></li>
+								<li><a href='admin_member0_tboard_list'>  <i class="fa"></i><span class="nav-text">회원 여행지</span></a></li>
+								<li><a href='admin_member0_rboard_list'>   <i class="fa"></i><span class="nav-text">회원 맛집</span></a></li>
+								<li><a href='admin_member1_tboard_list'>  <i class="fa"></i><span class="nav-text"> 관리자 여행지</span></a></li>
+								<li><a href='admin_member1_rboard_list'>  <i class="fa"></i><span class="nav-text"> 관리자 맛집</span></a></li>
+              	  </ul>
+
+            	</li>
       
                 
                 <li>
@@ -187,10 +224,10 @@ height: 100%;
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="ii">
                        <i class="fa fa-info fa-2x"></i>
                         <span class="nav-text">
-                            Documentation
+                            ii
                         </span>
                     </a>
                 </li>

@@ -54,14 +54,14 @@
 		  ]]>
 	</select>
 		<insert id="insertMember1_tboard">
-		INSERT INTO member1_tboard(m1tseq,subject, content, image1, image2, image3, image4, image5)
-		VALUES(member1_tboard_seq.NEXTVAL,#{subject}, #{content}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5})
+		INSERT INTO member1_tboard(m1tseq,subject, content, image1, image2, image3, image4, image5,area,address,phone)
+		VALUES(member1_tboard_seq.NEXTVAL,#{subject}, #{content}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5},#{area},#{address},#{phone})
 	</insert>
 
 	<!-- 정보 수정 -->
 	<update id="updateMember1_tboard">
 		UPDATE member1_tboard
-		SET subject=#{subject}, content=#{content}, image1=#{image1},image2=#{image2},image3=#{image3},image4=#{image4},image5=#{image5}
+		SET subject=#{subject}, content=#{content}, image1=#{image1},image2=#{image2},image3=#{image3},image4=#{image4},image5=#{image5},area=#{area},address=#{address},phone=#{phone}
 		WHERE m1tseq=#{m1tseq}
 	</update>
 

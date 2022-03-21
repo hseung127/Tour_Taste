@@ -103,7 +103,7 @@ public class MemberDAO {
 	
 	//회원 목록 조회
 	public List<MemberVO> listMember(String name){
-		return mybatis.selectOne("mappings.member-mapping.listMember", name);		
+		return mybatis.selectList("mappings.member-mapping.listMember", name);		
 	}
 	
 	

@@ -58,8 +58,8 @@ public class SeasonboardServiceImpl implements SeasonboardService {
 	}
 
 	@Override
-	public void seasonboardHit(SeasonboardVO vo) {
-		sDao.seasonboardHit(vo);
+	public void seasonboardHit(int sseq) {
+		sDao.seasonboardHit(sseq);
 		
 	}
 

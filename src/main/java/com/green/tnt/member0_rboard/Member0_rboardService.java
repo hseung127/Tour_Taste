@@ -18,5 +18,5 @@ public interface Member0_rboardService {
 
 	public void deletemember0_rboard(int m0rseq);
 	
-	public void member0_rboardHit(Member0_rboardVO vo);
+	public void member0_rboardHit(int m0rseq);
 }

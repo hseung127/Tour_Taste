@@ -9,7 +9,7 @@ function go() {
 /*
  *  소식 등록화면 출력
  */
-function go_wrt() {
+function go_wrt(pageNum,rowsPerPage) {
 	$('#admin_newsboardList').attr('action', 'admin_newsboard_write_form').submit();
 	$('#admin_eventboardList').attr('action', 'admin_eventboard_write_form').submit();
 	$('#admin_member1_rboardList').attr('action', 'admin_member1_rboard_write_form').submit();
@@ -109,30 +109,30 @@ function go_m1tsave() {
 /*
  * 소식 수정화면 요청
  */
-function go_nmod(nseq) {
+function go_nmod(pageNum, rowsPerPage,nseq) {
 	$("#ndetail_form")
-			.attr("action", "admin_newsboard_update_form?nseq=" + nseq)
+			.attr("action", "admin_newsboard_update_form?pageNum=" + pageNum+"&rowsPerPage="+rowsPerPage+"&nseq="+nseq)
 			.submit();
 }
 
-function go_emod(eseq) {
+function go_emod(pageNum, rowsPerPage,eseq) {
 	$("#edetail_form")
-			.attr("action", "admin_eventboard_update_form?eseq=" + eseq)
+			.attr("action", "admin_eventboard_update_form?pageNum=" + pageNum+"&rowsPerPage="+rowsPerPage+"&eseq=" + eseq)
 			.submit();
 }
-function go_smod(sseq) {
+function go_smod(pageNum, rowsPerPage,sseq) {
 	$("#sdetail_form")
-			.attr("action", "admin_seasonboard_update_form?sseq=" + sseq)
+			.attr("action", "admin_seasonboard_update_form?pageNum=" + pageNum+"&rowsPerPage="+rowsPerPage+"&sseq=" + sseq)
 			.submit();
 }
-function go_m1rmod(m1rseq) {
+function go_m1rmod(pageNum, rowsPerPage,m1rseq) {
 	$("#m1rdetail_form")
-			.attr("action", "admin_member1_rboard_update_form?m1rseq=" + m1rseq)
+			.attr("action", "admin_member1_rboard_update_form?pageNum=" + pageNum+"&rowsPerPage="+rowsPerPage+"&m1rseq=" + m1rseq)
 			.submit();
 }
-function go_m1tmod(m1tseq) {
+function go_m1tmod(pageNum, rowsPerPage,m1tseq) {
 	$("#m1tdetail_form")
-			.attr("action", "admin_member1_tboard_update_form?m1tseq=" + m1tseq)
+			.attr("action", "admin_member1_tboard_update_form?pageNum=" + pageNum+"&rowsPerPage="+rowsPerPage+"&m1tseq=" + m1tseq)
 			.submit();
 }
 
@@ -208,7 +208,7 @@ function go_m1tmod_save(m1tseq) {
 /*
  *  수정 취소하고 목록으로 이동함.
  */
-function go_mov() {
+function go_mov(pageNum,rowsPerPage) {
 	/*write*/
 	$("#nwrite_form").attr("action", "admin_newsboard_list").submit();
 	$('#m1rwrite_form').attr("action", "admin_member1_rboard_list").submit();
@@ -216,11 +216,12 @@ function go_mov() {
 	$('#ewrite_form').attr("action", "admin_eventboard_list").submit();
 	$('#swrite_form').attr("action", "admin_seasonboard_list").submit();	
 		/*update*/
-	$("#nupdate_form").attr("action", "admin_newsboard_list").submit();
-	$('#m1rupdate_form').attr("action", "admin_member1_rboard_list").submit();
-	$('#m1tupdate_form').attr("action", "admin_member1_tboard_list").submit();
-	$('#eupdate_form').attr("action", "admin_eventboard_list").submit();
-	$('#supdate_form').attr("action", "admin_seasonboard_list").submit();
+	$('#supdate_form').attr("action", "admin_seasonboard_list?pageNum="+pageNum+"&rowsPerPage="+rowsPerPage).submit();
+	$("#nupdate_form").attr("action", "admin_newsboard_list?pageNum="+pageNum+"&rowsPerPage="+rowsPerPage).submit();
+	$('#m1rupdate_form').attr("action", "admin_member1_rboard_list?pageNum="+pageNum+"&rowsPerPage="+rowsPerPage).submit();
+	$('#m1tupdate_form').attr("action", "admin_member1_tboard_list?pageNum="+pageNum+"&rowsPerPage="+rowsPerPage).submit();
+	$('#eupdate_form').attr("action", "admin_eventboard_list?pageNum="+pageNum+"&rowsPerPage="+rowsPerPage).submit();
+
 	
 	
 	
@@ -231,19 +232,18 @@ function go_mov() {
 /*
  * 상세보기에서 목록으로 이동
  */
-function go_list() {
-	$("#ndetail_form").attr("action", "admin_newsboard_list").submit();
-	
-	
-	$("#m0rdetail_form").attr("action", "admin_member0_rboard_list").submit();
-	$('#m0tdetail_form').attr("action", "admin_member0_tboard_list").submit();
-	$('#m1rdetail_form').attr("action", "admin_member1_rboard_list").submit();
-	$('#m1tdetail_form').attr("action", "admin_member1_tboard_list").submit();
-	$('#edetail_form').attr("action", "admin_eventboard_list").submit();
-	$('#sdetail_form').attr("action", "admin_seasonboard_list").submit();
-	$('#cdetail_form').attr("action", "admin_comments_list").submit();
+function go_list(pageNum,rowsPerPage) {
+	$("#ndetail_form").attr("action", "admin_newsboard_list?pageNum="+pageNum+"&rowsPerPage="+rowsPerPage).submit();
+	$("#m0rdetail_form").attr("action", "admin_member0_rboard_list?pageNum="+pageNum+"&rowsPerPage="+rowsPerPage).submit();
+	$('#m0tdetail_form').attr("action", "admin_member0_tboard_list?pageNum="+pageNum+"&rowsPerPage="+rowsPerPage).submit();
+	$('#m1rdetail_form').attr("action", "admin_member1_rboard_list?pageNum="+pageNum+"&rowsPerPage="+rowsPerPage).submit();
+	$('#m1tdetail_form').attr("action", "admin_member1_tboard_list?pageNum="+pageNum+"&rowsPerPage="+rowsPerPage).submit();
+	$('#edetail_form').attr("action", "admin_eventboard_list?pageNum="+pageNum+"&rowsPerPage="+rowsPerPage).submit();
+	$('#sdetail_form').attr("action", "admin_seasonboard_list?pageNum="+pageNum+"&rowsPerPage="+rowsPerPage).submit();
+	$('#cdetail_form').attr("action", "admin_comments_list?pageNum="+pageNum+"&rowsPerPage="+rowsPerPage).submit();
 
 }
+
 
 
 function go_delete() {
@@ -440,7 +440,7 @@ if (count == 0) {
 }
 }
 
-function go_sdelete(){
+function go_sdelete(pageNum,rowsPerPage){
 	var con = confirm("정말로 삭제하시겠습니까?");
 	var count = 0;
 if (document.sfrm.sseq.length == undefined) {
@@ -459,7 +459,7 @@ if (count == 0) {
 	alert("삭제할 항목을 선택해 주세요!");
 } else {
 	if(con){
-		 $("#admin_seasonboardList").attr("action", "admin_seasonboard_sdelete").submit();
+		 $("#admin_seasonboardList").attr("action", "admin_seasonboard_sdelete?pageNum="+pageNum+"&rowsPerPage="+rowsPerPage).submit();
 
 	}
 }

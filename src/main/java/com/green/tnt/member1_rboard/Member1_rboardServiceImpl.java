@@ -58,8 +58,8 @@ public class Member1_rboardServiceImpl implements Member1_rboardService {
 	}
 
 	@Override
-	public void member1_rboardHit(Member1_rboardVO vo) {
-		m1rDao.member1_rboardHit(vo);
+	public void member1_rboardHit(int m1rseq) {
+		m1rDao.member1_rboardHit(m1rseq);
 		
 	}
 

@@ -22,5 +22,5 @@ public interface Member1_rboardService {
 
 	public void deletemember1_rboard(int m1rseq);
 	
-	public void member1_rboardHit(Member1_rboardVO vo);
+	public void member1_rboardHit(int m1rseq);
 }

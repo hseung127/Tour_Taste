@@ -49,8 +49,8 @@ public class Member1_tboardDAO {
 		mybatis.delete("mappings.member1_tboard-mapping.deletemember1_tboard", m1tseq);
 
 	}
-	public void member1_tboardHit(Member1_tboardVO vo) {
-		mybatis.update("mappings.member1_tboard-mapping.member1_tboardHit",vo);
+	public void member1_tboardHit(int m1tseq) {
+		mybatis.update("mappings.member1_tboard-mapping.member1_tboardHit",m1tseq);
 	}
 		
 }

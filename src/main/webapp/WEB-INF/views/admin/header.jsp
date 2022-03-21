@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="css/admin.css">
 <script src="js/bootstrap/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap" rel="stylesheet">
 
 
 <style>
@@ -23,7 +24,7 @@
 
 </head>
 <body>
-<h1><a href="admin_index">Admin Setting</a></h1>
+<h1><a href="admin_index">TnT Admin</a></h1>
 
 </body>
 </html>
