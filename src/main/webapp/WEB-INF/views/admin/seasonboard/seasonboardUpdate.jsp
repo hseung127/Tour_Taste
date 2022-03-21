@@ -21,45 +21,66 @@
 <h1>시즌 수정</h1>  
 <form name="frm" id="supdate_form" method="post" enctype="multipart/form-data">
 <input type="hidden" name="sseq" value="${seasonboardVO.sseq}">
+		<input type="hidden" name="pageNum" value="${criteria.pageNum}">
+        <input type="hidden" name="rowsPerPage" value="${criteria.rowsPerPage}"> 
+        <input type="hidden" name="keyword" value="${criteria.keyword}">
+        
 <input type="hidden" name="code" >
 <input type="hidden" name="nonmakeImg" value="${seasonboardVO.image1}"> <!-- 기존 이미지 저장  -->
 <table id="list">
   <tr>
-    <th>제목</th>
     <td width="343" colspan="5">
       <input type="text" name="subject" id="subject" size="47" maxlength="100" value="${seasonboardVO.subject}">
     </td>
   </tr>
   <tr>
-    <th>내용</th>
     <td colspan="5">
+    본문 내용
       <textarea name="content" id="content" rows="8" cols="70" >${seasonboardVO.content}</textarea>
             <script>
 
-							var ckeditor_config = {
-								resize_enaleb : false,
-								enterMode : CKEDITOR.ENTER_BR,
-								shiftEnterMode : CKEDITOR.ENTER_P,
-								filebrowserUploadUrl : "ckUpload"
-							};
 
-							CKEDITOR.replace("content", ckeditor_config);
+							CKEDITOR.replace("content", {
+								height : '500px'});
 						</script>
     </td>
   </tr>
   <tr>
-    <th>이미지</th>
     <td colspan="5">
+    본문 이미지
       <img src="seasonboard_images/${seasonboardVO.image1}" width="200pt">     
       <br>
       <input type="file" name="seasonboard_image" id="seasonboard_image">
       <input type="hidden" name="image" value="${seasonboardVO.image1}">
     </td> 
+  </tr> 
+    <tr>
+    <td colspan="5">
+    배너 내용
+      <textarea name="b_content" id="b_content" rows="8" cols="70" >${seasonboardVO.b_content}</textarea>
+            <script>
+
+
+							CKEDITOR.replace("b_content", {
+								height : '200px'});
+						</script>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="5">
+    배너 이미지
+      <img src="seasonboard_images/${seasonboardVO.image1}" width="200pt">     
+      <br>
+      <input type="file" name="seasonboard_bannerimg" id="seasonboard_bannerimg">
+      <input type="hidden" name="image" value="${seasonboardVO.bannerimg }">
+    </td> 
   </tr>    
 </table>
+<input class="btn" type="button" value="취소" onClick="go_mov('${criteria.pageNum}', '${criteria.rowsPerPage}')">
 <input class="btn" type="button" value="등록" onClick="go_smod_save('${seasonboardVO.sseq}')">           
-<input class="btn" type="button" value="취소" onClick="go_mov()">
+
 </form> 
+
 </div>
 	<footer id="footer">
 	<div id="footer_box">

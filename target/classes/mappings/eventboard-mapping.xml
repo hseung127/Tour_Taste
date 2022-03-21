@@ -54,14 +54,14 @@
 	</select>
 	<!-- 추가 -->
 	<insert id="insertEventboard">
-		INSERT INTO eventboard(eseq,subject, content, image1, image2, image3, image4, image5)
-		VALUES(event_seq.NEXTVAL,#{subject}, #{content}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5})
+		INSERT INTO eventboard(eseq,subject, content, image1, image2, image3, image4, image5,start_date,end_date,homeimg,bighome_yn)
+		VALUES(event_seq.NEXTVAL,#{subject}, #{content}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5},#{start_date},#{end_date},#{homeimg},#{bighome_yn})
 	</insert>
 
 	<!-- 정보 수정 -->
 	<update id="updateEventboard">
 		UPDATE eventboard
-		SET subject=#{subject}, content=#{content}, image1=#{image1},image2=#{image2},image3=#{image3},image4=#{image4},image5=#{image5}
+		SET subject=#{subject}, content=#{content}, image1=#{image1},image2=#{image2},image3=#{image3},image4=#{image4},image5=#{image5},start_date=#{start_date},end_date=#{end_date},homeimg=#{homeimg},bighome_yn#{bighome_yn}
 		WHERE eseq=#{eseq}
 	</update>
 	<!-- 삭제 -->

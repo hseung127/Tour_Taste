@@ -23,5 +23,5 @@ public interface SeasonboardService {
 	
 	public void deleteSeasonboard(int sseq);
 	
-	public void seasonboardHit(SeasonboardVO vo);
+	public void seasonboardHit(int sseq);
 }

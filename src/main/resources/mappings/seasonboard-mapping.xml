@@ -56,14 +56,14 @@
 	</select>
 	<!-- 추가 -->
 	<insert id="insertSeasonboard">
-		INSERT INTO seasonboard(sseq,subject, content, image1, image2, image3, image4, image5)
-		VALUES(season_seq.NEXTVAL,#{subject}, #{content}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5})
+		INSERT INTO seasonboard(sseq,subject, content, image1, image2, image3, image4, image5,bannerimg,b_content)
+		VALUES(season_seq.NEXTVAL,#{subject}, #{content}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5},#{bannerimg},#{b_content})
 	</insert>
 
 	<!-- 정보 수정 -->
 	<update id="updateSeasonboard">
 		UPDATE seasonboard
-		SET subject=#{subject}, content=#{content}, image1=#{image1},image2=#{image2},image3=#{image3},image4=#{image4},image5=#{image5}
+		SET subject=#{subject}, content=#{content}, image1=#{image1},image2=#{image2},image3=#{image3},image4=#{image4},image5=#{image5},bannerimg=#{bannerimg},b_content=#{b_content}
 		WHERE sseq=#{sseq}
 	</update>
 	<!-- 소식 삭제 -->

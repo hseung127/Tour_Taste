@@ -30,7 +30,9 @@
 </div>
 <h1>관리자여행지 리스트</h1>
 <form name="m1tfrm" id="admin_member1_tboardList" method="post">
-
+		<input type="hidden" name="pageNum" value="${pageMaker.criteria.pageNum }">
+        <input type="hidden" name="rowsPerPage" value="${pageMaker.criteria.rowsPerPage }"> 
+        <input type="hidden" name="keyword" value="${pageMaker.criteria.keyword}">
 
 <table id="member1_tboardList">
    	<thead>
@@ -72,15 +74,12 @@
 </tbody>  
 </table>
 <div id="btnList">
+     		<input class="btn" type="button" name="btn_selectdelete" onClick="go_m1tdelete()" value="삭제"> 
 	        <input class="btn" type="button" name="btn_write" value="등록" onClick="go_wrt()">
-     		<input class="btn" type="button" name="btn_selectdelete" onClick="go_m1tdelete()" value="삭제">  
+ 
      		</div> 
 </form>
-	<form id="moveForm">
-		<input type="hidden" name="pageNum" value="${pageMaker.criteria.pageNum }">
-        <input type="hidden" name="rowsPerPage" value="${pageMaker.criteria.rowsPerPage }"> 
-        <input type="hidden" name="keyword" value="${pageMaker.criteria.rowsPerPage }"> 
-</form>	
+
 <div class="pageInfo_wrap">
 	<div class="pageInfo_area">
 		<ul class="pageInfo">

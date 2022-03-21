@@ -54,14 +54,14 @@
 	</select>
 	<!-- 추가 -->
 	<insert id="insertMember1_rboard">
-		INSERT INTO member1_rboard(m1rseq,subject, content, image1, image2, image3, image4, image5)
-		VALUES(member1_rboard_seq.NEXTVAL,#{subject}, #{content}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5})
+		INSERT INTO member1_rboard(m1rseq,subject, content, image1, image2, image3, image4, image5,kind,area,address,phone)
+		VALUES(member1_rboard_seq.NEXTVAL,#{subject}, #{content}, #{image1}, #{image2}, #{image3}, #{image4}, #{image5},#{kind},#{area},#{address},#{phone})
 	</insert>
 
 	<!-- 정보 수정 -->
 	<update id="updateMember1_rboard">
 		UPDATE member1_rboard
-		SET subject=#{subject}, content=#{content}, image1=#{image1},image2=#{image2},image3=#{image3},image4=#{image4},image5=#{image5}
+		SET subject=#{subject}, content=#{content}, image1=#{image1},image2=#{image2},image3=#{image3},image4=#{image4},image5=#{image5},kind=#{kind},area=#{area},address=#{address},phone=#{phone}
 		WHERE m1rseq=#{m1rseq}
 	</update>
 	<!-- 삭제 -->

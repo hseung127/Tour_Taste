@@ -64,7 +64,7 @@
 	<!-- 회원 전체목록 조회 -->
 
 
-	<select resultType="member" id="listMember">SELECT * FROM memberWHERE name
+	<select resultType="member" id="listMember">SELECT * FROM member WHERE name
 		LIKE '%'||#{name}||'%'ORDER BY name </select>
 		
 </mapper>

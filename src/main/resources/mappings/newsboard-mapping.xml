@@ -15,7 +15,7 @@
 		
 		<if test="keyword != null">
 		
-            where subject like '%'||#{keyword}||'%'
+           where subject like '%'||#{keyword}||'%' OR content like '%'||#{keyword}||'%'
             
         </if>
         
@@ -59,14 +59,14 @@
 	</update>
 	<!-- 추가 -->
 	<insert id="insertNewsboard">
-		INSERT INTO newsboard(nseq,subject, content, image)
-		VALUES(news_seq.NEXTVAL,#{subject}, #{content}, #{image})
+		INSERT INTO newsboard(nseq,subject, content, image1)
+		VALUES(news_seq.NEXTVAL,#{subject}, #{content}, #{image1})
 	</insert>
 
 	<!-- 정보 수정 -->
 	<update id="updateNewsboard">
 		UPDATE newsboard
-		SET subject=#{subject}, content=#{content}, image=#{image}
+		SET subject=#{subject}, content=#{content}, image1=#{image1}
 		WHERE nseq=#{nseq}
 	</update>
 	<!-- 삭제 -->

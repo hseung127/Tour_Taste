@@ -5,6 +5,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -25,6 +28,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.green.tnt.dto.CommentsVO;
 import com.green.tnt.dto.EventboardVO;
@@ -108,10 +113,15 @@ public class AdminController {
 	
 
 	
-	@RequestMapping(value = "/admin_chart_list")
-	public String adminMemberList(Model model) {
+	@RequestMapping(value = "/address")
+	public String address(Model model) {
 
-		return "admin/member/chart";
+		return "admin/address/address";
+	}
+	@RequestMapping(value = "/ii")
+	public String ii(Model model) {
+
+		return "admin/member/ii";
 	}
 
 	/**
@@ -159,13 +169,13 @@ public class AdminController {
 	
 
 	@PostMapping(value="/admin_newsboard_write")
-	public String adminNewsboardWrite(@RequestParam(value="newsboard_image") MultipartFile uploadFile,
+	public String adminNewsboardWrite(@RequestParam(value="newsboard_image")  MultipartFile uploadFile,
 								    NewsboardVO vo, HttpSession session) {
 			String fileName = "";
 			
 				fileName = uploadFile.getOriginalFilename();
 		
-				vo.setImage(fileName);
+				vo.setImage1(fileName);
 				
 			
 				String image_path = 
@@ -246,16 +256,17 @@ public class AdminController {
 
 
 	@RequestMapping(value="/admin_newsboard_detail")
-	public String adminNewsboardDetail(Model model,Criteria criteria,int nseq) {
+	public String adminNewsboardDetail(Model model,@ModelAttribute("criteria") Criteria criteria,int nseq) {
 
 		
 		NewsboardVO newsboard = newsboardService.getNewsboard(nseq);
 		newsboardService.newsboardHit(nseq);
 		
-		
-		
+		System.out.println("page"+criteria.getPageNum()+"rows"+criteria.getRowsPerPage());
 		model.addAttribute("newsboardVO", newsboard);
-		model.addAttribute("criteria",criteria);
+		model.addAttribute("pageNum",criteria.getPageNum());
+		model.addAttribute("rowsPerPage",criteria.getRowsPerPage());
+
 		return "admin/newsboard/newsboardDetail";
 	}
 	
@@ -279,7 +290,7 @@ public class AdminController {
 	@RequestMapping(value="/admin_newsboard_update")
 	public String adminNewsboardUpdate(@RequestParam(value="newsboard_image") MultipartFile uploadFile,
 					@RequestParam(value="nonmakeImg") String origImage,
-					NewsboardVO vo, HttpSession session,@ModelAttribute("criteria") Criteria criteria) {
+					NewsboardVO vo, HttpSession session,@ModelAttribute("criteria") Criteria criteria,RedirectAttributes rttr) {
 		
 		
 		UUID uid = UUID.randomUUID();
@@ -292,7 +303,7 @@ public class AdminController {
 			if (!uploadFile.isEmpty()) {  
 				fileName = uploadFile.getOriginalFilename();
 		
-				vo.setImage(fileName);
+				vo.setImage1(fileName);
 				
 			
 				String image_path = 
@@ -308,30 +319,38 @@ public class AdminController {
 				}
 			} else {
 		
-				vo.setImage(origImage);
+				vo.setImage1(origImage);
 			}
 			
 			
 			newsboardService.updateNewsboard(vo);
-			
+			rttr.addAttribute("pageNum",criteria.getPageNum());
+			rttr.addAttribute("rowsPerPage",criteria.getRowsPerPage());
 			return "redirect:admin_newsboard_list";
 		
 	}	
 
 	@PostMapping(value="admin_newsboard_delete")
-	public String adminNewsboardDelete(@RequestParam(value="nseq")int nseq){
-		
+	public String adminNewsboardDelete(@RequestParam(value="nseq")int nseq,
+			@ModelAttribute("criteria") Criteria criteria,RedirectAttributes rttr){
+			
+			
 			newsboardService.deleteNewsboard(nseq);
-
+			rttr.addAttribute("pageNum",criteria.getPageNum());
+			rttr.addAttribute("rowsPerPage",criteria.getRowsPerPage());
+			
+			System.out.println("criteriaPage="+criteria.getPageNum()+"rows="+criteria.getRowsPerPage());
 		return "redirect:admin_newsboard_list";
 	}
 	@PostMapping(value="admin_newsboard_ndelete")
-	public String NewsboarNdelete(@RequestParam(value="nseq") int[]nseq) {
+	public String NewsboarNdelete(@RequestParam(value="nseq") int[]nseq,
+			@ModelAttribute("criteria") Criteria criteria,RedirectAttributes rttr) {
 		
 		for(int i=0; i<nseq.length; i++) {
 			newsboardService.deleteNewsboard(nseq[i]);
 		}
-		
+		rttr.addAttribute("pageNum",criteria.getPageNum());
+		rttr.addAttribute("rowsPerPage",criteria.getRowsPerPage());
 		return "redirect:admin_newsboard_list";
 	}
 
@@ -362,34 +381,39 @@ public class AdminController {
 	
 	
 	@RequestMapping(value="/admin_member0_rboard_detail")
-	public String adminmember0_rboardDetail(Member0_rboardVO vo, Model model,Criteria criteria,int m0rseq) {
+	public String adminmember0_rboardDetail(Model model,@ModelAttribute("criteria")Criteria criteria,int m0rseq) {
 
-		
-		member0_rboardService.member0_rboardHit(vo);
-		
-		
 		Member0_rboardVO member0_rboard = member0_rboardService.getMember0_rboard(m0rseq);
+		member0_rboardService.member0_rboardHit(m0rseq);
 		
+		
+		System.out.println("page"+criteria.getPageNum()+"rows"+criteria.getRowsPerPage());
 		model.addAttribute("member0_rboardVO", member0_rboard);
-		model.addAttribute("criteria",criteria);
+		model.addAttribute("pageNum",criteria.getPageNum());
+		model.addAttribute("rowsPerPage",criteria.getRowsPerPage());
+
 		return "admin/member0_rboard/member0_rboardDetail";
 	}
 	
 	@PostMapping(value="admin_member0_rboard_delete")
-	public String adminmMember0_rboardDelete(@RequestParam(value="m0rseq")int m0rseq){
+	public String adminmMember0_rboardDelete(@RequestParam(value="m0rseq")int m0rseq,
+			@ModelAttribute("criteria") Criteria criteria,RedirectAttributes rttr){
 		
 		member0_rboardService.deletemember0_rboard(m0rseq);
-
+		rttr.addAttribute("pageNum",criteria.getPageNum());
+		rttr.addAttribute("rowsPerPage",criteria.getRowsPerPage());
 		return "redirect:admin_member0_rboard_list";
 	}
 	
 	@PostMapping(value="admin_member0_rboard_m0rdelete")
-	public String member0_rboardSdelete(@RequestParam(value="m0rseq") int[]m0rseq) {
+	public String member0_rboardSdelete(@RequestParam(value="m0rseq") int[]m0rseq	,
+			@ModelAttribute("criteria") Criteria criteria,RedirectAttributes rttr) {
 		
 		for(int i=0; i<m0rseq.length; i++) {
 			member0_rboardService.deletemember0_rboard(m0rseq[i]);
 		}
-		
+		rttr.addAttribute("pageNum",criteria.getPageNum());
+		rttr.addAttribute("rowsPerPage",criteria.getRowsPerPage());
 		return "redirect:admin_member0_rboard_list";
 	}
 	
@@ -416,33 +440,38 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/admin_member0_tboard_detail")
-	public String adminmember0_tboardDetail(Member0_tboardVO vo, Model model,Criteria criteria,int m0tseq) {
+	public String adminmember0_tboardDetail(Model model,@ModelAttribute("criteria")Criteria criteria,int m0tseq) {
 
-		
-		member0_tboardService.member0_tboardHit(vo);
-		
-		
 		Member0_tboardVO member0_tboard = member0_tboardService.getMember0_tboard(m0tseq);
+		member0_tboardService.member0_tboardHit(m0tseq);
 		
+		
+		System.out.println("page"+criteria.getPageNum()+"rows"+criteria.getRowsPerPage());
 		model.addAttribute("member0_tboardVO", member0_tboard);
-		model.addAttribute("criteria",criteria);
+		model.addAttribute("pageNum",criteria.getPageNum());
+		model.addAttribute("rowsPerPage",criteria.getRowsPerPage());
 		return "admin/member0_tboard/member0_tboardDetail";
 	}
 	@PostMapping(value="admin_member0_tboard_delete")
-	public String adminmMember0_tboardDelete(@RequestParam(value="m0tseq")int m0tseq){
+	public String adminmMember0_tboardDelete(@RequestParam(value="m0tseq")int m0tseq, 
+			@ModelAttribute("criteria") Criteria criteria,RedirectAttributes rttr){
 		
 		member0_tboardService.deletemember0_tboard(m0tseq);
-
+		rttr.addAttribute("pageNum",criteria.getPageNum());
+		rttr.addAttribute("rowsPerPage",criteria.getRowsPerPage());
 		return "redirect:admin_member0_tboard_list";
 	}
 	
 	@PostMapping(value="admin_member0_tboard_m0tdelete")
-	public String member0_tboardm0tdelete(@RequestParam(value="m0tseq") int[]m0tseq) {
+	public String member0_tboardm0tdelete(@RequestParam(value="m0tseq") int[]m0tseq	,
+			@ModelAttribute("criteria") Criteria criteria,RedirectAttributes rttr) {
 		
 		for(int i=0; i<m0tseq.length; i++) {
 			member0_tboardService.deletemember0_tboard(m0tseq[i]);
 		}
-		
+
+		rttr.addAttribute("pageNum",criteria.getPageNum());
+		rttr.addAttribute("rowsPerPage",criteria.getRowsPerPage());
 		return "redirect:admin_member0_tboard_list";
 	}
 	
@@ -469,17 +498,19 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/admin_member1_rboard_detail")
-	public String adminmember1_rboardDetail(Member1_rboardVO vo, Model model,Criteria criteria,int m1rseq) {
+	public String adminmember1_rboardDetail(Model model,@ModelAttribute("criteria")Criteria criteria,int m1rseq) {
 
+		Member1_rboardVO member1_rboard = member1_rboardService.getMember1_rboard(m1rseq);
+		member1_rboardService.member1_rboardHit(m1rseq);
 		
-		member1_rboardService.member1_rboardHit(vo);
 		
 		
-		Member1_rboardVO member1_rsboard = member1_rboardService.getMember1_rboard(m1rseq);
-		
-		model.addAttribute("member1_rboardVO", member1_rsboard);
-		model.addAttribute("criteria",criteria);
-		return "admin/member1_rsboard/member1_rboardDetail";
+		System.out.println("page"+criteria.getPageNum()+"rows"+criteria.getRowsPerPage());
+		model.addAttribute("member1_rboardVO", member1_rboard);
+		model.addAttribute("pageNum",criteria.getPageNum());
+		model.addAttribute("rowsPerPage",criteria.getRowsPerPage());
+
+		return "admin/member1_rboard/member1_rboardDetail";
 	}
 	
 	@PostMapping(value = "/admin_member1_rboard_write_form")
@@ -526,13 +557,13 @@ public class AdminController {
 
 
 	@PostMapping(value="/admin_member1_rboard_update_form")
-	public String adminmember1_rboardUpdateView(Member1_rboardVO vo, Model model,int m1rseq) {
+	public String adminmember1_rboardUpdateView(Member1_rboardVO vo, Model model,int m1rseq, Criteria criteria) {
 		
 		
 		Member1_rboardVO m1rboard = member1_rboardService.getMember1_rboard(m1rseq);
 		
 		model.addAttribute("member1_rboardVO", m1rboard);	
-		
+		model.addAttribute("criteria",criteria);
 		return "admin/member1_rboard/member1_rboardUpdate";
 	}
 	
@@ -540,7 +571,7 @@ public class AdminController {
 	@RequestMapping(value="/admin_member1_rboard_update")
 	public String adminMember1_rboardUpdate(@RequestParam(value="member1_rboard_image") MultipartFile uploadFile,
 					@RequestParam(value="nonmakeImg") String origImage,
-					Member1_rboardVO vo, HttpSession session) {
+					Member1_rboardVO vo, HttpSession session,@ModelAttribute("criteria") Criteria criteria,RedirectAttributes rttr) {
 	
 			String fileName = "";
 			
@@ -574,26 +605,31 @@ public class AdminController {
 				vo.setImage4(origImage);
 				vo.setImage5(origImage);
 			}
-			
-			
 			member1_rboardService.updateMember1_rboard(vo);
+			rttr.addAttribute("pageNum",criteria.getPageNum());
+			rttr.addAttribute("rowsPerPage",criteria.getRowsPerPage());
+			
 			
 			return "redirect:admin_member1_rboard_list";
 	}
 	@PostMapping(value="admin_member1_rboard_delete")
-	public String adminmMember1_rboardDelete(@RequestParam(value="m1rseq")int m1rseq){
+	public String adminmMember1_rboardDelete(@RequestParam(value="m1rseq")int m1rseq,
+			@ModelAttribute("criteria") Criteria criteria,RedirectAttributes rttr){
 		
 		member1_rboardService.deletemember1_rboard(m1rseq);
-
+		rttr.addAttribute("pageNum",criteria.getPageNum());
+		rttr.addAttribute("rowPerPage",criteria.getRowsPerPage());
 		return "redirect:admin_member1_rboard_list";
 	}
 	@PostMapping(value="admin_member1_rboard_m1rdelete")
-	public String member1_rboardSdelete(@RequestParam(value="m1rseq") int[]m1rseq) {
+	public String member1_rboardSdelete(@RequestParam(value="m1rseq") int[]m1rseq,
+			@ModelAttribute("criteria") Criteria criteria,RedirectAttributes rttr) {
 		
 		for(int i=0; i<m1rseq.length; i++) {
 			member1_rboardService.deletemember1_rboard(m1rseq[i]);
 		}
-		
+		rttr.addAttribute("pageNum",criteria.getPageNum());
+		rttr.addAttribute("rowsPerPage",criteria.getRowsPerPage());
 		return "redirect:admin_member1_rboard_list";
 	}
 	/*
@@ -619,13 +655,14 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/admin_member1_tboard_detail")
-	public String adminMember1_tboardDetail(Member1_tboardVO vo, Model model,int m1tseq) {
-		
-		member1_tboardService.member1_tboardHit(vo);
+	public String adminMember1_tboardDetail( Model model,int m1tseq,@ModelAttribute("criteria") Criteria criteria) {
 		Member1_tboardVO m1tBoard = member1_tboardService.getMember1_tboard(m1tseq);
+		member1_tboardService.member1_tboardHit(m1tseq);
 		
+		System.out.println("page"+criteria.getPageNum()+"rows"+criteria.getRowsPerPage());
 		model.addAttribute("member1_tboardVO", m1tBoard);
-		
+		model.addAttribute("pageNum",criteria.getPageNum());
+		model.addAttribute("rowsPerPage",criteria.getRowsPerPage());
 		
 		return "admin/member1_tboard/member1_tboardDetail";
 	}
@@ -673,13 +710,13 @@ public class AdminController {
 
 
 	@PostMapping(value="/admin_member1_tboard_update_form")
-	public String adminmember1_tboardUpdateView(Member1_tboardVO vo, Model model,int m1tseq) {
+	public String adminmember1_tboardUpdateView(Member1_tboardVO vo, Model model,int m1tseq,Criteria criteria) {
 		
 		
 		Member1_tboardVO m1tboard = member1_tboardService.getMember1_tboard(m1tseq);
 		
 		model.addAttribute("member1_tboardVO", m1tboard);	
-		
+		model.addAttribute("criteria",criteria);
 		return "admin/member1_tboard/member1_tboardUpdate";
 	}
 	
@@ -687,7 +724,7 @@ public class AdminController {
 	@RequestMapping(value="/admin_member1_tboard_update")
 	public String adminMember1_tboardUpdate(@RequestParam(value="member1_tboard_image") MultipartFile uploadFile,
 					@RequestParam(value="nonmakeImg") String origImage,
-					Member1_tboardVO vo, HttpSession session) {
+					Member1_tboardVO vo, HttpSession session,@ModelAttribute("criteria") Criteria criteria,RedirectAttributes rttr) {
 	
 			String fileName = "";
 			
@@ -724,25 +761,30 @@ public class AdminController {
 			
 			
 			member1_tboardService.updateMember1_tboard(vo);
-			
+			rttr.addAttribute("pageNum",criteria.getPageNum());
+			rttr.addAttribute("rowsPerPage",criteria.getRowsPerPage());
 			return "redirect:admin_member1_tboard_list";
 	}
 	
 	@PostMapping(value="admin_member1_tboard_delete")
-	public String adminmMember1_tboardDelete(@RequestParam(value="m1tseq")int m1tseq){
+	public String adminmMember1_tboardDelete(@RequestParam(value="m1tseq")int m1tseq, 
+			@ModelAttribute("criteria") Criteria criteria,RedirectAttributes rttr){
 		
 		member1_tboardService.deletemember1_tboard(m1tseq);
-
+		rttr.addAttribute("pageNum",criteria.getPageNum());
+		rttr.addAttribute("rowsPerPage",criteria.getRowsPerPage());
 		return "redirect:admin_member1_tboard_list";
 	}
 	
 	@PostMapping(value="admin_member1_tboard_m1tdelete")
-	public String member1_tboardSdelete(@RequestParam(value="m1tseq") int[]m1tseq) {
+	public String member1_tboardSdelete(@RequestParam(value="m1tseq") int[]m1tseq	,
+			@ModelAttribute("criteria") Criteria criteria,RedirectAttributes rttr) {
 		
 		for(int i=0; i<m1tseq.length; i++) {
 			member1_tboardService.deletemember1_tboard(m1tseq[i]);
 		}
-		
+		rttr.addAttribute("pageNum",criteria.getPageNum());
+		rttr.addAttribute("rowsPerPage",criteria.getRowsPerPage());
 		return "redirect:admin_member1_tboard_list";
 	}
 	
@@ -770,14 +812,15 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/admin_seasonboard_detail")
-	public String adminSeasonboardDetail(SeasonboardVO vo, Model model,int sseq) {
-		
-		
-		seasonboardService.seasonboardHit(vo);
-		
+	public String adminSeasonboardDetail(Model model,int sseq,@ModelAttribute("criteria")Criteria criteria) {
 		
 		SeasonboardVO sBoard = seasonboardService.getSeasonboard(sseq);
+		seasonboardService.seasonboardHit(sseq);
 		
+		
+		System.out.println("page"+criteria.getPageNum()+"rows"+criteria.getRowsPerPage());
+		model.addAttribute("pageNum",criteria.getPageNum());
+		model.addAttribute("rowsPerPage",criteria.getRowsPerPage());
 		model.addAttribute("seasonboardVO", sBoard);
 		
 		
@@ -827,13 +870,13 @@ public class AdminController {
 
 
 	@PostMapping(value="/admin_seasonboard_update_form")
-	public String adminSeasonboardUpdateView(SeasonboardVO vo, Model model,int sseq) {
+	public String adminSeasonboardUpdateView(SeasonboardVO vo, Model model,int sseq,Criteria criteria) {
 		
 		
 		SeasonboardVO sboard = seasonboardService.getSeasonboard(sseq);
 		
 		model.addAttribute("seasonboardVO", sboard);	
-		
+		model.addAttribute("criteria",criteria);
 		return "admin/seasonboard/seasonboardUpdate";
 	}
 	
@@ -841,7 +884,7 @@ public class AdminController {
 	@RequestMapping(value="/admin_seasonboard_update")
 	public String adminseasonboardUpdate(@RequestParam(value="seasonboard_image") MultipartFile uploadFile,
 					@RequestParam(value="nonmakeImg") String origImage,
-					SeasonboardVO vo, HttpSession session) {
+					SeasonboardVO vo, HttpSession session,@ModelAttribute("criteria") Criteria criteria,RedirectAttributes rttr) {
 	
 			String fileName = "";
 			
@@ -876,7 +919,8 @@ public class AdminController {
 				vo.setImage5(origImage);
 			}
 			
-			
+			rttr.addAttribute("pageNum",criteria.getPageNum());
+			rttr.addAttribute("rowsPerPage",criteria.getRowsPerPage());
 			seasonboardService.updateSeasonboard(vo);
 			
 			return "redirect:admin_seasonboard_list";
@@ -884,20 +928,25 @@ public class AdminController {
 	}	
 	
 	@PostMapping(value="admin_seasonboard_delete")
-	public String adminSeasonboardDelete(@RequestParam(value="sseq")int sseq){
+	public String adminSeasonboardDelete(@RequestParam(value="sseq")int sseq, 
+			@ModelAttribute("criteria") Criteria criteria,RedirectAttributes rttr){
 		
 		seasonboardService.deleteSeasonboard(sseq);
-
+		rttr.addAttribute("pageNum",criteria.getPageNum());
+		rttr.addAttribute("rowsPerPage",criteria.getRowsPerPage());
 		return "redirect:admin_seasonboard_list";
 	}
 	
 	@PostMapping(value="admin_seasonboard_sdelete")
-	public String seasonboardSdelete(@RequestParam(value="sseq") int[]sseq) {
+	public String seasonboardSdelete(@RequestParam(value="sseq") int[]sseq,
+			@ModelAttribute("criteria") Criteria criteria,RedirectAttributes rttr) {
+		
 		
 		for(int i=0; i<sseq.length; i++) {
 			seasonboardService.deleteSeasonboard(sseq[i]);
 		}
-		
+		rttr.addAttribute("pageNum",criteria.getPageNum());
+		rttr.addAttribute("rowsPerPage",criteria.getRowsPerPage());
 		return "redirect:admin_seasonboard_list";
 	}
 	/*
@@ -923,16 +972,17 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/admin_eventboard_detail")
-	public String admineventboardDetail(Model model,Criteria criteria,int eseq) {
+	public String admineventboardDetail(Model model,@ModelAttribute("criteria")Criteria criteria,int eseq) {
 
 		
 		EventboardVO eventboard = eventboardService.getEventboard(eseq);
 		eventboardService.eventboardHit(eseq);
 		
 		
-		
+		System.out.println("page"+criteria.getPageNum()+"rows"+criteria.getRowsPerPage());
 		model.addAttribute("eventboardVO", eventboard);
-		model.addAttribute("criteria",criteria);
+		model.addAttribute("pageNum",criteria.getPageNum());
+		model.addAttribute("rowsPerPage",criteria.getRowsPerPage());
 		return "admin/eventboard/eventboardDetail";
 	}
 	@PostMapping(value = "/admin_eventboard_write_form")
@@ -979,13 +1029,13 @@ public class AdminController {
 
 
 	@PostMapping(value="/admin_eventboard_update_form")
-	public String adminEVentboardUpdateView(EventboardVO vo, Model model,int eseq) {
+	public String adminEVentboardUpdateView(EventboardVO vo, Model model,int eseq,Criteria criteria) {
 		
 		
 		EventboardVO eboard = eventboardService.getEventboard(eseq);
 		
 		model.addAttribute("eventboardVO", eboard);	
-		
+		model.addAttribute("criteria",criteria);
 		return "admin/eventboard/eventboardUpdate";
 	}
 	
@@ -993,7 +1043,7 @@ public class AdminController {
 	@RequestMapping(value="/admin_eventboard_update")
 	public String adminEventboardUpdate(@RequestParam(value="eventboard_image") MultipartFile uploadFile,
 					@RequestParam(value="nonmakeImg") String origImage,
-					EventboardVO vo, HttpSession session) {
+					EventboardVO vo, HttpSession session,@ModelAttribute("criteria") Criteria criteria,RedirectAttributes rttr) {
 	
 			String fileName = "";
 			
@@ -1028,7 +1078,8 @@ public class AdminController {
 				vo.setImage5(origImage);
 			}
 			
-			
+			rttr.addAttribute("pageNum",criteria.getPageNum());
+			rttr.addAttribute("rowsPerPage",criteria.getRowsPerPage());
 			eventboardService.updateEventboard(vo);
 			
 			return "redirect:admin_eventboard_list";
@@ -1036,19 +1087,25 @@ public class AdminController {
 	}	
 	
 	@PostMapping(value="admin_eventboard_delete")
-	public String adminmeventboardDelete(@RequestParam(value="eseq")int eseq){
+	public String adminmeventboardDelete(@RequestParam(value="eseq")int eseq, 
+			@ModelAttribute("criteria") Criteria criteria,RedirectAttributes rttr){
 		
 		eventboardService.deleteEventboard(eseq);
+		rttr.addAttribute("pageNum",criteria.getPageNum());
+		rttr.addAttribute("rowPerPage",criteria.getRowsPerPage());
 
 		return "redirect:admin_eventboard_list";
 	}
 	@PostMapping(value="admin_eventboard_edelete")
-	public String eventboardSdelete(@RequestParam(value="eseq") int[]eseq) {
+	public String eventboardSdelete(@RequestParam(value="eseq") int[]eseq,
+			@ModelAttribute("criteria") Criteria criteria,RedirectAttributes rttr) {
 		
 		for(int i=0; i<eseq.length; i++) {
 			eventboardService.deleteEventboard(eseq[i]);
 		}
-		
+
+		rttr.addAttribute("pageNum",criteria.getPageNum());
+		rttr.addAttribute("rowsPerPage",criteria.getRowsPerPage());
 		return "redirect:admin_eventboard_list";
 	}
 

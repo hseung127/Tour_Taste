@@ -50,7 +50,7 @@ public class Member1_rboardDAO {
 		mybatis.delete("mappings.member1_rboard-mapping.deletemember1_rboard", m1rseq);
 
 	}
-	public void member1_rboardHit(Member1_rboardVO vo) {
-		mybatis.update("mappings.member1_rboard-mapping.member1_rboardHit",vo);
+	public void member1_rboardHit(int m1rseq) {
+		mybatis.update("mappings.member1_rboard-mapping.member1_rboardHit",m1rseq);
 	}
 }

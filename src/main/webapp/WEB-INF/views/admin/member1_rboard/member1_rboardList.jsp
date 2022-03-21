@@ -28,7 +28,9 @@
 </div>
 		<h1>관리자맛집 리스트</h1>	
 <form name="m1rfrm" id="admin_member1_rboardList" method="post">
-
+		<input type="hidden" name="pageNum" value="${pageMaker.criteria.pageNum }">
+        <input type="hidden" name="rowsPerPage" value="${pageMaker.criteria.rowsPerPage }"> 
+        <input type="hidden" name="keyword" value="${pageMaker.criteria.keyword}">
 <table id="member1_rboardList">
 	<thead>
     <tr>
@@ -68,15 +70,12 @@
 </tbody>
 </table>
 <div id="btnList">
+     		<input class="btn" type="button" name="btn_selectdelete" onClick="go_m1rdelete()" value="삭제"> 
 	        <input class="btn" type="button" name="btn_write" value="등록" onClick="go_wrt()">
-     		<input class="btn" type="button" name="btn_selectdelete" onClick="go_m1rdelete()" value="삭제">  
+ 
      		</div> 
 </form>
-<form id="moveForm">
-		<input type="hidden" name="pageNum" value="${pageMaker.criteria.pageNum }">
-        <input type="hidden" name="rowsPerPage" value="${pageMaker.criteria.rowsPerPage }"> 
-        <input type="hidden" name="keyword" value="${pageMaker.criteria.rowsPerPage }"> 
-</form>	
+
 <div class="pageInfo_wrap">
 	<div class="pageInfo_area">
 		<ul class="pageInfo">

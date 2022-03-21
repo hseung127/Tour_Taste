@@ -47,8 +47,8 @@ public class Member0_tboardServiceImpl implements Member0_tboardService {
 	}
 
 	@Override
-	public void member0_tboardHit(Member0_tboardVO vo) {
-		m0tDao.member0_tboardHit(vo);
+	public void member0_tboardHit(int m0tseq) {
+		m0tDao.member0_tboardHit(m0tseq);
 		
 	}
 

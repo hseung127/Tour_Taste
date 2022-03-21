@@ -25,6 +25,7 @@ public class Member0_tboardVO {
 	private int m0tseq;
 	private String subject;
 	private String content;
+	private String area;
 	private String image1;
 	private String image2;
 	private String image3;

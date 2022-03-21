@@ -375,6 +375,7 @@
 	                  	<div class="product-price" id="home-m1r-bookmark1" >&hearts;${homeM1rCountBookmark[1]}</div>
 	                  </c:otherwise>
                	  </c:choose>
+               	 
                 </div>
                 <div class="product-button">
                   <c:choose>

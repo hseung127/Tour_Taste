@@ -92,6 +92,7 @@
                           <div class="unit-body"><a class="address" onclick="location='mypage_form'" style="cursor: pointer;">마이 페이지</a></div>
                         </div>
                       </li>
+                      
                       <c:if test="${sessionScope.loginUser.user_type == 1}">
       		 				<li>
       		 		<a href="admin_index">관리자화면</a>

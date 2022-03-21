@@ -29,6 +29,10 @@
 </div>
 		<h1>시즌 리스트</h1>	
 <form name="sfrm" id="admin_seasonboardList" method="post">
+
+		<input type="hidden" name="pageNum" value="${pageMaker.criteria.pageNum }">
+        <input type="hidden" name="rowsPerPage" value="${pageMaker.criteria.rowsPerPage }"> 
+        <input type="hidden" name="keyword" value="${pageMaker.criteria.keyword}">
 <table id="seasonboardList">
 <thead>
     <tr>
@@ -67,17 +71,13 @@
 </c:choose>  
 </tbody>
 </table>
-<div id="btnList">
-	        <input class="btn" type="button" name="btn_write" value="등록" onClick="go_wrt()">
-     		<input class="btn" type="button" name="btn_selectdelete" onClick="go_sdelete()" value="삭제">  
+<div id="btnList">    
+     		<input class="btn" type="button" name="btn_selectdelete" onClick="go_sdelete('${criteria.pageNum}', '${criteria.rowsPerPage}')" value="삭제">  
+     		<input class="btn" type="button" name="btn_write" value="등록" onClick="go_wrt()">
      		</div> 
 </form>
 
-<form id="moveForm">
-		<input type="hidden" name="pageNum" value="${pageMaker.criteria.pageNum }">
-        <input type="hidden" name="rowsPerPage" value="${pageMaker.criteria.rowsPerPage }"> 
-        <input type="hidden" name="keyword" value="${pageMaker.criteria.rowsPerPage }"> 
-</form>	
+
 <div class="pageInfo_wrap">
 	<div class="pageInfo_area">
 		<ul class="pageInfo">

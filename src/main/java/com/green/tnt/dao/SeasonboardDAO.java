@@ -49,8 +49,8 @@ public class SeasonboardDAO {
 		mybatis.delete("mappings.seasonboard-mapping.deleteSeasonboard", sseq);
 
 	}
-	public void seasonboardHit(SeasonboardVO vo) {
-		mybatis.update("mappings.seasonboard-mapping.seasonboardHit",vo);
+	public void seasonboardHit(int sseq) {
+		mybatis.update("mappings.seasonboard-mapping.seasonboardHit",sseq);
 	}
 		
 }

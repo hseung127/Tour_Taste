@@ -35,8 +35,9 @@ public class SeasonboardVO {
 	private String image5;
 	private String id;
 	private String name;
-	private Timestamp regdate;
 	private String bannerimg;
+	private String b_content;
+    private Timestamp regdate;
 	private int hit;
 	
 	

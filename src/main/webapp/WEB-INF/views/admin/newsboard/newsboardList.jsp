@@ -38,7 +38,9 @@
     	<input class="btn" type="button" name="btn_search" value="검색" onClick="go_search()">
     </div> -->
    
-
+		<input type="hidden" name="pageNum" value="${pageMaker.criteria.pageNum}">
+        <input type="hidden" name="rowsPerPage" value="${pageMaker.criteria.rowsPerPage}"> 
+        <input type="hidden" name="keyword" value="${pageMaker.criteria.keyword}">
 		   		
 <table id="newsboardList">
 	<thead>
@@ -79,17 +81,13 @@
 
 </table>
 <div id="btnList">
-	        <input class="btn" type="button" name="btn_write" value="등록" onClick="go_wrt()">
      		<input class="btn" type="button" name="btn_selectdelete" onClick="go_ndelete()" value="삭제">  
+	        <input class="btn" type="button" name="btn_write" value="등록" onClick="go_wrt()">
+
      		</div> 
      		
 
 </form>
-	<form name="actionForm" method="get">
-		<input type="hidden" name="pageNum" value="${pageMaker.criteria.pageNum }">
-        <input type="hidden" name="rowsPerPage" value="${pageMaker.criteria.rowsPerPage}"> 
-        <input type="hidden" name="keyword" value="${pageMaker.criteria.keyword}">
-	</form>
 <div class="pageInfo_wrap">
 	<div class="pageInfo_area">
 		<ul class="pageInfo">

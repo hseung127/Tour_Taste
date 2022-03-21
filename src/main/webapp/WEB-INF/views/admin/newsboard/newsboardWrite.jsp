@@ -30,51 +30,41 @@
 		
 		<table id="list">
 			<tr>
-				<th>제목</th>
+				
 				<td width="343" colspan="5">
-				<input type="text" name="subject"id="subject" size="47" maxlength="100" value=""></td>
+				<input type="text" name="subject"id="subject" size="47" maxlength="100" value="" placeholder="제목을 입력해주세요."></td>
 			</tr>
 							
 			<tr>
 			
-				<th>내용</th>
+				
 				<td colspan="5"><textarea name="content" id="content" rows="8" cols="4000">
 						</textarea> 
 					
 						
 						<script>
 
-							var ckeditor_config = {
-								resize_enaleb : false,
-								enterMode : CKEDITOR.ENTER_BR,
-								shiftEnterMode : CKEDITOR.ENTER_P,
-								filebrowserUploadUrl : "/admin/newsboard/ckUpload"
-							};
+						
 
-							CKEDITOR.replace("content", ckeditor_config);
+							CKEDITOR.replace("content", {
+								height : '500px'} );
 						</script>
 						
 						</tr>
 			<tr>
-				<th>이미지</th>
+	
 				<td width="343" colspan="5">
 					<!--  [2] 파일 업로드를 하기 위한 input 태그는 타입 속성 값을 file로 지정해야 한다.  --> <input
 					type="file" name="newsboard_image" id="newsboard_image">
 				</td>
 			</tr>
 		</table>
-		<input class="btn" type="button" value="등록" onClick="go_nsave()">
 		<input class="btn" type="button" value="취소" onClick="go_mov()">
-		
+		<input class="btn" type="button" value="등록" onClick="go_nsave()">
 
 
 	</form>
 	</div>
-	<form name="hiddenNfm" method="post" autocomplete="off">
-		<input type="hidden" name="pageNum" value="${criteria.pageNum}">
-        <input type="hidden" name="rowsPerPage" value="${criteria.rowsPerPage}"> 
-        <input type="hidden" name="keyword" value="${criteria.rowsPerPage}">
-	</form>
 	<footer id="footer">
 		<div id="footer_box">
 			<%@ include file="../footer.jsp"%>

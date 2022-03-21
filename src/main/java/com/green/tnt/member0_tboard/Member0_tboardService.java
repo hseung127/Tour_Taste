@@ -18,5 +18,5 @@ public interface Member0_tboardService {
 
 	public void deletemember0_tboard(int m0tseq);
 	
-	public void member0_tboardHit(Member0_tboardVO vo);
+	public void member0_tboardHit(int m0tseq);
 }
