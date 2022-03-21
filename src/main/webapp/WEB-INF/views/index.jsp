@@ -79,7 +79,7 @@
                   <div class="services-terri-figure"><img src="images/member1_t/${homeM1tList[0].image1}"   alt="" style="width:370px;height:278px; object-fit: cover;"/>
                   </div>
                   <div class="services-terri-caption"><%-- <span class="services-terri-icon">${homeM1tList[0].area}</span> --%>
-                    <h5 class="services-terri-title">${homeM1tList[0].subject}<a href="worker_tDetail?m1tseq=${homeM1tList[0].m1tseq}"></a></h5>
+                    <h5 class="services-terri-title"><a href="worker_tDetail?m1tseq=${homeM1tList[0].m1tseq}">${homeM1tList[0].subject}</a></h5>
                   </div>
                 </article>
               </div>
