@@ -52,7 +52,8 @@
     <td colspan="5">
       <img src="newsboard_images/${newsboardVO.image1}" width="200pt">     
       <br>
-      <input type="file" name="newsboard_image" id="newsboard_image">
+      <input type="file" name="newsboard_image" id="newsboard_image"onchange="readURL(this);" class="oriImg">
+					<img id="blah" src="#" class="thumbImg"/>
       <input type="hidden" name="image" value="${newsboardVO.image1}">
     </td> 
   </tr>    

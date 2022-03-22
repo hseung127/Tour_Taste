@@ -7,8 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+td{
+text-align: center;
+}
+</style>
 </head>
-<body>
+<body onload="printClock()">
 	<header id="header">
 		<div id="header_box">
 			<%@ include file="../header.jsp"%>

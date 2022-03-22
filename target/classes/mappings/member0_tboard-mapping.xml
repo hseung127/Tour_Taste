@@ -22,7 +22,7 @@
 		<!-- 목록 조회 -->
 	<select id="listMember0_tboard" parameterType="String"
 		resultType="member0_tboard">
-		SELECT m0tseq, subject, name, regdate
+		SELECT m0tseq, subject, name, regdate,hit
 		FROM Member0_tboard
 		WHERE subject LIKE '%'||#{subject}||'%'
 		ORDER BY m0tseq DESC
@@ -40,8 +40,8 @@
 	<select id="listWithPaging" parameterType="hashMap"
 		resultType="member0_tboard">
 	<![CDATA[
-	SELECT m0tseq, subject, name, regdate
-	  FROM (SELECT row_number() over(ORDER BY m0tseq DESC) rn, m0tseq, subject, name,regdate
+	SELECT m0tseq, subject, name, regdate,hit
+	  FROM (SELECT row_number() over(ORDER BY m0tseq DESC) rn, m0tseq, subject, name,regdate,hit
 		  FROM member0_tboard
 		 WHERE 		  	 ]]>         
             <if test="keyword != null">

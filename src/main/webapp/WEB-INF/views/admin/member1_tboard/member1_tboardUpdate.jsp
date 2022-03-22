@@ -27,26 +27,30 @@
 <input type="hidden" name="code" >
 <input type="hidden" name="nonmakeImg" value="${member1_tboardVO.image1}"> <!-- 기존 이미지 저장  -->
 <table id="list">
-<td class="area_check">
+			
+<tr>
+<td class="area_check" id="area" name="area">
 			<p>지역 선택
-			<label><input type="radio" name="area" value="서울특별시">서울</label>
-			<label><input type="radio" name="area" value="인천광역시">인천</label>
-			<label><input type="radio" name="area" value="대전광역시">대전</label>
-			<label><input type="radio" name="area" value="대구광역시">대구</label>
-			<label><input type="radio" name="area" value="광주광역시">광주</label>
-			<label><input type="radio" name="area" value="부산광역시">부산</label>
-			<label><input type="radio" name="area" value="울산광역시">울산</label>
-			<label><input type="radio" name="area" value="세종특별자치시">세종</label>
-			<label><input type="radio" name="area" value="경기도">경기</label>
-			<label><input type="radio" name="area" value="강원도">강원</label>
-			<label><input type="radio" name="area" value="충청북도">충북</label>
-			<label><input type="radio" name="area" value="충천남도">충남</label>
-			<label><input type="radio" name="area" value="경상북도">경북</label>
-			<label><input type="radio" name="area" value="경산남도">경남</label>
-			<label><input type="radio" name="area" value="전라북도">전북</label>
-			<label><input type="radio" name="area" value="전라남도">전남</label>
-			<label><input type="radio" name="area" value="제주특별자치도">제주</label>
+			<label><input type="radio" name="area" value="서울특별시" value="01">서울</label>
+			<label><input type="radio" name="area" value="인천광역시"value="02">인천</label>
+			<label><input type="radio" name="area" value="대전광역시"value="03">대전</label>
+			<label><input type="radio" name="area" value="대구광역시" value="04">대구</label>
+			<label><input type="radio" name="area" value="광주광역시" value="05">광주</label>
+			<label><input type="radio" name="area" value="부산광역시" value="06">부산</label>
+			<label><input type="radio" name="area" value="울산광역시" value="07">울산</label>
+			<label><input type="radio" name="area" value="세종특별자치시" value="08">세종</label>
+			<label><input type="radio" name="area" value="경기도" value="09">경기</label>
+			<label><input type="radio" name="area" value="강원도" value="10">강원</label>
+			<label><input type="radio" name="area" value="충청북도"value="11">충북</label>
+			<label><input type="radio" name="area" value="충천남도"value="12">충남</label>
+			<label><input type="radio" name="area" value="경상북도"value="13">경북</label>
+			<label><input type="radio" name="area" value="경산남도"value="14">경남</label>
+			<label><input type="radio" name="area" value="전라북도" value="15">전북</label>
+			<label><input type="radio" name="area" value="전라남도"value="16">전남</label>
+			<label><input type="radio" name="area" value="제주특별자치도"value="17">제주</label>
 			</td> 
+			</tr>  
+<tr>
   <tr>
 
     <td>
@@ -80,7 +84,8 @@
     <td colspan="5">
       <img src="member1_tboard_images/${member1_tboardVO.image1}" width="200pt">     
       <br>
-      <input type="file" name="member1_tboard_image" id="member1_tboard_image">
+      <input type="file" name="member1_tboard_image" id="member1_tboard_image"onchange="readURL(this);" class="oriImg">
+					<img id="blah" src="#" class="thumbImg"/>
       <input type="hidden" name="image" value="${member1_tboardVO.image1}">
     </td> 
   </tr>    

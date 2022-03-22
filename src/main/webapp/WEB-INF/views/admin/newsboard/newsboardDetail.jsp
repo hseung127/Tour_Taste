@@ -31,18 +31,18 @@
         <td colspan="5">${newsboardVO.subject}</td>
     </tr>
 
-  <tr>
-  <th>이미지</th>
- 	 <td>
-     <img src="newsboard_images/${newsboardVO.image1}" width="200pt">    
-     </td>
- 	</tr>
+
      
     <tr>
     <th>내용</th>
         <td colspan="5">${newsboardVO.content}</td>
     </tr>
-    
+  <tr>
+  <th>이미지</th>
+ 	 <td>
+     <img src="newsboard_images/${newsboardVO.image1}" width="200pt">    
+     </td>
+ 	</tr>    
 
     
 

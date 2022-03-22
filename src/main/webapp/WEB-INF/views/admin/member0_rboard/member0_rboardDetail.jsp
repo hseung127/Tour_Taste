@@ -24,16 +24,17 @@
 		<input type="hidden" name="pageNum" value="${criteria.pageNum}">
         <input type="hidden" name="rowsPerPage" value="${criteria.rowsPerPage}"> 
         <input type="hidden" name="keyword" value="${criteria.keyword}">
-<table id="list">    
+<table id="list">
+    <tr>
+        <th align="center" >지역</th>
+        <td colspan="5">${member0_rboardVO.area}</td>
+    </tr>     
     <tr>
         <th align="center" >제목</th>
         <td colspan="5">${member0_rboardVO.subject}</td>
     </tr>
     
-     <tr>
-        <th align="center" >지역</th>
-        <td colspan="5">${member0_rboardVO.area}</td>
-    </tr>
+
      
     <tr>
         <th>상세설명</th>

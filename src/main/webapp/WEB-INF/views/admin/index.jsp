@@ -45,11 +45,13 @@ function addZeros(num, digit) { // 자릿수 맞춰주기
 			eventSources : // 한국 기념일ko.south_korea 추가 
 			[ { googleCalendarId : 'qkrdmlghks@kakao.com' } , 
 				 ] }); </script>
-				 <style>
-				 * {
+	<style>			 
+ * {
   box-sizing: border-box;
   outline: none;
 }
+
+
 
 :root {
   --bg-color: #f5f8ff;;
@@ -294,7 +296,7 @@ button {
   
   .right-content { padding: 10px 16px; }
   
-}
+}				
 				 </style>
 
 </head>
@@ -311,24 +313,17 @@ button {
 	</aside>
 	</section>
   <div class="page-content1">
-
+<a>${homeSeasonList[0].subject} </a>
     <div class="tasks-wrapper">
+    <a class="countlist">${newsboardList}</a>
+    
     <div class="header upcoming">소식 게시판</div>
-    <div>
+   
   			                    <ul class="list_board">
 			                        <li>
-			                            <a href="#" >제목</a>
-			                        </li>
-			                        <li>
-			                            <a href="#" >제목</a>
-			                        </li>
-			                        <li>
-			                            <a href="#" >제목</a>
-			                        </li>
-			                        <li>
-			                            <a href="#" >제목</a>
-			                        </li>
-			                    </ul>
+			                            <a href="news_detail?nseq=${homeNewsList[0].nseq}" ><em style="color:#a2660d">코로나바이러스감염증-19ㅣ</em> ${homeNewsList[0].subject}</a>
+			                        
+			                
       </div>
       <div class="header upcoming">이벤트 게시판</div>
     <div>
@@ -444,6 +439,7 @@ button {
     </div>
 
 </div>
+<div id='calendar' style="width:300px; height:300px"></div>
   <div class="right-bar">
 
     <div class="top-part" style=" color: #666; font-size: 15px; text-align: center;"
@@ -451,11 +447,50 @@ button {
       현재시간
     </div>
     <div class="right-content">
-   
+   <div id="map" style="width:225px;height:240px;"></div><a href="address" style="text-align: center;">지도 이동</a>
 
-  <div id='calendar'></div>
+  
     </div>
   </div>
   </div>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d084e07a8c1557f5ddba2b8502865d9&libraries=services"></script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch('서울 송파구 올림픽로 240', function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="width:100px;text-align:center;padding:6px 0;">롯데월드</div>'
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+});    
+</script>
 </body>
 </html>

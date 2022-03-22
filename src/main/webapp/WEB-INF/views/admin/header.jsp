@@ -24,7 +24,6 @@
 
 </head>
 <body>
-<h1><a href="admin_index">TnT Admin</a></h1>
 
 </body>
 </html>

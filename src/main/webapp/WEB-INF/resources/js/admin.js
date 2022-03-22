@@ -82,7 +82,11 @@ function go_m1rsave() {
 	} else if ($("#member1_rboard_image").val() == "") {
 		alert("이미지를 입력하세요!");
 		$("#member1_rboard_image").focus();
-	} else {
+	} else if (!$('input:radio[name=area]').is(':checked')) {
+		alert("지역을 선택해 주세요.");
+	}else if (!$('input:radio[name=kind]').is(':checked')) {
+		alert("음식종류를 선택해 주세요.");
+	}else {
 		// 주의: 이미지 파일을 전송하므로 enctype이 설정되어야 함.
 		$("#m1rwrite_form").attr("encoding", "multipart/form-data");
 		$("#m1rwrite_form").attr("action", "admin_member1_rboard_write").submit();
@@ -98,7 +102,9 @@ function go_m1tsave() {
 	} else if ($("#member1_tboard_image").val() == "") {
 		alert("이미지를 입력하세요!");
 		$("#member1_tboard_image").focus();
-	} else {
+	} else if (!$('input:radio[name=area]').is(':checked')) {
+		alert("지역을 선택해 주세요.");
+	}else {
 		// 주의: 이미지 파일을 전송하므로 enctype이 설정되어야 함.
 		$("#m1twrite_form").attr("encoding", "multipart/form-data");
 		$("#m1twrite_form").attr("action", "admin_member1_tboard_write").submit();
@@ -489,3 +495,17 @@ if (count == 0) {
 	}
 }
 }
+
+
+
+//파일미리보기 
+
+function readURL(input) {
+	if (input.files && input.files[0]) {
+	var reader = new FileReader();
+	reader.onload = function (e) {
+	$('#blah').attr('src', e.target.result);
+	}
+	reader.readAsDataURL(input.files[0]);
+	}
+	}

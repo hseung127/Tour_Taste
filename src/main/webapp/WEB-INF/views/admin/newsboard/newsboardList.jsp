@@ -7,8 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+td{
+text-align: center;
+}
+</style>
 </head>
-<body>
+<body onload="printclock()">
 	<header id="header">
 	<div id="header_box">
 		<%@ include file="../header.jsp" %> 
@@ -42,7 +47,7 @@
         <input type="hidden" name="rowsPerPage" value="${pageMaker.criteria.rowsPerPage}"> 
         <input type="hidden" name="keyword" value="${pageMaker.criteria.keyword}">
 		   		
-<table id="newsboardList">
+<table id="newsboardList" class="listbox">
 	<thead>
     <tr>
     

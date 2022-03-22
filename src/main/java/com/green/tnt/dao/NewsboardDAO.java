@@ -39,6 +39,10 @@ public class NewsboardDAO {
 		mybatis.insert("mappings.newsboard-mapping.insertNewsboard", vo);
 
 	}
+	
+	public void insertNewsboardImage(NewsboardVO vo) {
+		mybatis.insert("mappings.newsboard-mapping.insertNewsboardImage", vo);
+	}
 
 	public void updateNewsboard(NewsboardVO vo) {
 		mybatis.update("mappings.newsboard-mapping.updateNewsboard", vo);

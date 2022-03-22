@@ -17,6 +17,8 @@ public interface NewsboardService {
 	public List<NewsboardVO> getListWithPaging(Criteria criteria);
 
 	public void insertNewsboard(NewsboardVO vo);
+	
+	public void insertNewsboardImage(NewsboardVO vo);
 
 	public void updateNewsboard(NewsboardVO vo);
 
