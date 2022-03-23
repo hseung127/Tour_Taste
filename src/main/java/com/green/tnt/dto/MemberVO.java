@@ -2,13 +2,9 @@ package com.green.tnt.dto;
 
 import java.sql.Timestamp;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-@Getter
-@Setter
-@ToString
+@Data
 public class MemberVO{
 	private String id;
 	private String pwd;
@@ -20,4 +16,5 @@ public class MemberVO{
 	private String user_type;
 	private Timestamp regdate;	
 	private String salt;
+	private String member_info;
 }

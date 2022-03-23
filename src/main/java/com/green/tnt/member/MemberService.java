@@ -1,5 +1,6 @@
 package com.green.tnt.member;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -41,13 +42,15 @@ public interface MemberService {
 	
 	//회원 탈퇴
 	void deleteMember(MemberVO vo);
-
 	
 	//회원 목록 조회
 	List<MemberVO> listMember(String name);
 	
-	//카카오
-	String getReturnAccessToken(String code);
+	//카카오 사용자 토큰 얻기 
+	public String getAccessToken (String authorize_code);
+	
+	public MemberVO getUserInfo (String access_Token);
+
 
 	
 	public void signout(HttpSession session);

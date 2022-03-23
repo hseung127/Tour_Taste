@@ -1,6 +1,7 @@
 
 package com.green.tnt.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,6 +98,18 @@ public class MemberDAO {
 		mybatis.delete("mappings.member-mapping.deleteMember", vo);
 	}
 	
+	
+	// 정보 저장
+	public void insertKakao(HashMap<String, Object> userInfo) {
+		mybatis.insert("mappings.member-mapping.insertKakao",userInfo);
+	}
+
+	// 정보 확인
+	public MemberVO findKakao(HashMap<String, Object> userInfo) {
+		System.out.println("RN:"+userInfo.get("nickname"));
+		System.out.println("RE:"+userInfo.get("email"));
+		return mybatis.selectOne("mappings.member-mapping.findKakao", userInfo);
+	}
 
 	
 

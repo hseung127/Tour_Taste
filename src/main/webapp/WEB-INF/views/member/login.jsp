@@ -86,6 +86,9 @@
 			</div>
 			<div class="login_btn_box">
 	    		<input type="submit" value="로그인" class="login_btn"><br>
+   		        <a href="https://kauth.kakao.com/oauth/authorize?client_id=212d2c67f280df58011ee3c0a68d211f&redirect_uri=http://localhost:8181/biz/kakao_login&response_type=code">
+		            <img src="images/member/kakao_login.jpg" style="height: 40px;  width: 250px;  margin-bottom: 30px;">
+		        </a>
 	    	</div>
 		</form>
 	</div>

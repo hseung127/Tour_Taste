@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mappings.member-mapping">
+
+	
 	<!-- 전체 회원정보 조회 -->
 
 
@@ -24,6 +26,19 @@
 
 	<insert id="insertMember">INSERT INTO member(id, pwd, name, email,
 		salt)VALUES(#{id}, #{pwd}, #{name}, #{email}, #{salt}) </insert>
+		
+		
+	<!-- 카카오 회원 중복 정보찾기  -->
+	<select id="findKakao" parameterType="java.util.HashMap" resultType="member">
+		select * from member where id=#{email} and name=#{nickname}
+	</select>
+		
+	<!-- 카카오 회원 등록  -->
+
+	<insert id="insertKakao" parameterType="java.util.HashMap">
+		INSERT INTO member(id, name, member_info)
+		VALUES(#{email}, #{nickname}, '1')
+	</insert>
 
 	<!-- 아이디 중복 확인 -->
 

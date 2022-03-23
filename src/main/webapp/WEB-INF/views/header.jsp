@@ -63,42 +63,98 @@
 			             </div>
                       </li>
                       
-         			 <c:choose>
-                      <c:when test="${empty sessionScope.loginUser}">
-                      <li>
-                          <div class="unit unit-spacing-xs">
-                          <div class="unit-left"><img class="login-image" src="images/login-icon.png"/></div>
-                          <div class="unit-body"><a class="phone" href="login_form">로그인</a></div>
-                          </div>
-                      </li>
-                      <li>
-                        <div class="unit unit-spacing-xs">
-                          <div class="unit-left"><img class="signup-image" src="images/signup-icon.png"/></div>
-                          <div class="unit-body"><a class="address" onclick="location='contract_form'" style="cursor: pointer;">회원가입</a></div>
-                        </div>
-                      </li>
-                       </c:when>
-                       <c:otherwise>
-                       <li>
-                          <div class="unit unit-spacing-xs">
-                          <div class="unit-left"><img class="login-image" src="images/login-icon.png"/></div>
-	                          <div class="unit-body"><a class="phone" href="logout">로그아웃</a></div>
-                         </div>
-                      </li>
-                      <li>
-                        <div class="unit unit-spacing-xs">
-                          <div class="unit-left"><img class="signup-image" src="images/signup-icon.png"/></div>
-                          <div class="unit-body"><a class="address" onclick="location='mypage_form'" style="cursor: pointer;">마이 페이지</a></div>
-                        </div>
-                      </li>
-                      <c:if test="${sessionScope.loginUser.user_type == 1}">
-      		 				<li>
-      		 		<a href="admin_index">관리자화면</a>
-      		 				</li>
-      					 </c:if>
-                      </c:otherwise>
-					</c:choose> 
-                                       
+                   		<c:choose>
+							<c:when test="${empty sessionScope}">
+								<li>
+									<div class="unit unit-spacing-xs">
+										<div class="unit-left">
+											<img class="login-image" src="images/login-icon.png" />
+										</div>
+										<div class="unit-body">
+											<a class="phone" href="login_form">로그인</a>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="unit unit-spacing-xs">
+										<div class="unit-left">
+											<img class="signup-image" src="images/signup-icon.png" />
+										</div>
+										<div class="unit-body">
+											<a class="address" onclick="location='contract_form'"
+												style="cursor: pointer;">회원가입</a>
+										</div>
+									</div>
+								</li>
+							</c:when>
+							<c:otherwise>
+								<!--  로그인이 된 경우 -->
+								<c:choose>
+									<c:when test="${sessionScope.loginUser.user_type == 0}">
+										<c:if test="${sessionScope.loginUser.member_info == 0}">
+											<li>
+												<div class="unit unit-spacing-xs">
+													<div class="unit-left">
+														<img class="login-image" src="images/login-icon.png" />
+													</div>
+													<div class="unit-body">
+														<a class="phone" href="logout">회원 로그아웃</a>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="unit unit-spacing-xs">
+													<div class="unit-left">
+														<img class="signup-image" src="images/signup-icon.png" />
+													</div>
+													<div class="unit-body">
+														<a class="address" onclick="location='mypage_form'"
+															style="cursor: pointer;">마이 페이지</a>
+													</div>
+												</div>
+											</li>
+										</c:if>
+										<c:if test="${sessionScope.loginUser.member_info == 1}">
+											<li>
+												<div class="unit unit-spacing-xs">
+													<div class="unit-left">
+														<img class="login-image" src="images/login-icon.png" />
+													</div>
+													<div class="unit-body">
+														<a class="phone" href="logout">카카오 로그아웃</a>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="unit unit-spacing-xs">
+													<div class="unit-left">
+														<img class="signup-image" src="images/signup-icon.png" />
+													</div>
+													<div class="unit-body">
+														<a class="address" onclick="location='mypage_form'"
+															style="cursor: pointer;">마이 페이지</a>
+													</div>
+												</div>
+											</li>
+										</c:if>
+									</c:when>
+									<c:otherwise>
+											<li>
+												<div class="unit unit-spacing-xs">
+													<div class="unit-left">
+														<img class="login-image" src="images/login-icon.png" />
+													</div>
+													<div class="unit-body">
+														<a class="phone" href="logout">관리자 로그아웃</a>
+													</div>
+												</div>
+											</li>
+										<li><a href="admin_index">관리자화면</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:otherwise>
+						</c:choose>
+                 
                     </ul>  
                     
                     
@@ -132,13 +188,13 @@
                     <h5 class="ham-title">추천</h5>
                   
                     <ul class="ham-ul">
-                      <li class="ham-li"><a class="ham-ul-a" href="worker_tList">관리자 추천 관광지</a>
+                      <li class="ham-li"><a class="ham-ul-a" href="index">관리자 추천 관광지</a>
                       </li>
-                      <li class="ham-li"><a class="ham-ul-a" href="worker_rList">관리자 추천 맛집</a>
+                      <li class="ham-li"><a class="ham-ul-a" href="about-us">관리자 추천 맛집</a>
                       </li>
-                      <li class="ham-li"><a class="ham-ul-a" href="member_tList">회원 추천 관광지</a>
+                      <li class="ham-li"><a class="ham-ul-a" href="typography">회원 추천 관광지</a>
                       </li>
-                      <li class="ham-li"><a class="ham-ul-a" href="member_rList">회원 추천 맛집</a>
+                      <li class="ham-li"><a class="ham-ul-a" href="contacts">회원 추천 맛집</a>
                       </li>
                     </ul>
               

@@ -1,6 +1,7 @@
 package com.green.view;
 
 import java.io.PrintWriter;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -38,6 +39,8 @@ public class MemberController {
 	private MemberService memberService;
 	@Autowired
 	private MemberMailSendService mss;	
+	@Autowired
+	private HttpSession session;
 	
 	//약관동의 페이지 이동
 	@GetMapping(value="/contract_form")
@@ -250,36 +253,24 @@ public class MemberController {
 		return "redirect:/index";
 		
 	}
-	
-	
-
-	
-	
-
-	
-	
-	
-	//TODO
-		@RequestMapping(value="/kakao_login")
-	    public String kakaoLogin() {
-	        StringBuffer loginUrl = new StringBuffer();
-	        loginUrl.append("https://kauth.kakao.com/oauth/authorize?client_id=");
-	        loginUrl.append("212d2c67f280df58011ee3c0a68d211f"); 
-	        loginUrl.append("&redirect_uri=");
-	        loginUrl.append("http://localhost:8181/biz/index"); 
-	        loginUrl.append("&response_type=code");
-	        
-	        return "redirect:"+loginUrl.toString();
-	    }
-		
-		@RequestMapping("/KakaLoginOK/{email}")
-		public ModelAndView loginOK(@PathVariable String email, Model model, HttpSession session) {
 			
-			System.out.println("동작");
-			session.setAttribute("member", email);
-			ModelAndView mav = new ModelAndView("loginOK");
-			return mav;
-		}
+		
+	@GetMapping(value="/kakao_login")
+	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, MemberVO vo, Model model) throws Exception {
+		
+		String access_Token = memberService.getAccessToken(code);
+		MemberVO userInfo = memberService.getUserInfo(access_Token);
+		        
+		//session객체에 담긴 정보를 초기화
+        session.invalidate();
+    	
+        model.addAttribute("loginUser", userInfo);
+    	
+		return "redirect:/index";
+    
+	}
+	
+	
 }
 
 
